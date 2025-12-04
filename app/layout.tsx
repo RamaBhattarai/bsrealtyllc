@@ -23,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-1 p-5">
           {children}
         </main>
+        
         <Footer />
       </body>
     </html>
