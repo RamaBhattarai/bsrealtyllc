@@ -13,15 +13,17 @@ const arvo = Arvo({
   variable: "--font-arvo",
 });
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} font-sans`} suppressHydrationWarning={true}>
+      <body className={`${lato.variable} font-sans min-h-screen flex flex-col`} suppressHydrationWarning={true}>
         <Navbar />
-        <main className="p-5">
+        <main className="flex-1 p-5">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );
