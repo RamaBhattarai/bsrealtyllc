@@ -1,7 +1,6 @@
 "use client"; // client component to use links
 
 import Link from "next/link";
-<<<<<<< HEAD
 import Image from "next/image"; // Add this import
 
 export default function Navbar() {
@@ -55,14 +54,3 @@ export default function Navbar() {
     </nav>
   );
 }
-=======
-
-export default function Navbar() {
-  return (
-    <nav className="p-2 border-b border-gray-300">
-      <Link href="/" className="mr-2">Home</Link>
-      <Link href="/about">About</Link>
-    </nav>
-  );
-}
->>>>>>> 687ea3826827044a2f9a388371c67475543bb124
