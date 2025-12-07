@@ -1,5 +1,3 @@
-"use client"; // client component to use links
-
 import Link from "next/link";
 import Image from "next/image"; // Add this import
 
@@ -15,13 +13,13 @@ export default function Navbar() {
               alt="BS Realty LLC"
               width={250} 
               height={100} 
-              className="h-15 w-auto" 
+              className="h-16 w-auto" 
             />
           </Link>
         </div>
         
         {/* Menu items on the right */}
-        <ul className="flex space-x-9 mr-15">
+        <ul className="flex space-x-9 mr-16">
           <li>
             <Link href="/" className="font-medium relative text-[#444444] hover:text-gray-600 transition-all duration-200 transform hover:scale-105 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-green-600 after:transition-all after:duration-300">Home</Link>
           </li>

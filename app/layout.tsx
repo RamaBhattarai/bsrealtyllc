@@ -18,9 +18,9 @@ import Footer from "./components/Footer";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} font-sans min-h-screen flex flex-col`} suppressHydrationWarning={true}>
+      <body className={`${lato.variable} font-sans min-h-screen`} suppressHydrationWarning={true}>
         <Navbar />
-        <main className="flex-1 p-5">
+        <main className="flex-1">
           {children}
         </main>
         {/* // changed by rama */}
