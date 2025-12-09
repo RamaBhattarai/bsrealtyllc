@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import BlurText from './BlurText';
 import { FaHome, FaMoneyBillWave, FaCalculator, FaTools, FaTruck, FaBriefcase } from 'react-icons/fa';
+import Link from 'next/link';
 
 const services = [
   {
@@ -71,7 +72,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
         {/* Glassmorphism Card */}
         <div className="relative backdrop-blur-sm bg-white/80 border border-white/20 rounded-2xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
           {/* Icon */}
-          <div className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-300 text-green-600 group-hover:text-green-700">
+          <div className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-300 text-blue-600 group-hover:text-blue-700">
             <IconComponent />
           </div>
 
@@ -161,9 +162,11 @@ export default function Services() {
         >
           <div className="inline-flex flex-col sm:flex-row items-center gap-4">
             <span className="text-gray-600">Ready to get started?</span>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300">
-              Contact Us Today
-            </button>
+            <Link href="/contact">
+              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                Contact Us Today
+              </button>
+            </Link>
           </div>
         </motion.div>
       </div>

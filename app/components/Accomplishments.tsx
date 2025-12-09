@@ -26,7 +26,7 @@ export default function Accomplishments() {
             delay={100}
             animateBy="words"
             direction="top"
-            className="text-3xl md:text-4xl font-bold text-[#715A5A]-500 mb-12 align-items-center justify-center"
+            className="text-3xl md:text-4xl font-bold text-black-500 mb-12 align-items-center justify-center"
           />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -38,8 +38,8 @@ export default function Accomplishments() {
               className="text-center"
             >
               <FaUsers className="text-4xl text-[#878787] mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-[##878787]-500 mb-2">32</div>
-              <div className="text-[#C5C7BC]-700 text-lg">Happy Clients</div>
+              <div className="text-5xl md:text-4xl font-bold text-black-500 mb-2">32</div>
+              <div className="text-black-500 text-lg">Happy Clients</div>
             </motion.div>
 
             <motion.div
@@ -50,8 +50,8 @@ export default function Accomplishments() {
               className="text-center"
             >
               <FaHandshake className="text-4xl text-[#878787] mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-[#715A5A]-500 mb-2">41</div>
-              <div className="text-gray-700 text-lg">Transactions</div>
+              <div className="text-5xl md:text-4xl font-bold text-black-500 mb-2">41</div>
+              <div className="text-black-500 text-lg">Transactions</div>
             </motion.div>
 
             <motion.div
@@ -62,8 +62,8 @@ export default function Accomplishments() {
               className="text-center"
             >
               <FaBullseye className="text-4xl text-[#878787] mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-[#715A5A]-500 mb-2">63</div>
-              <div className="text-gray-700 text-lg">Active Leads</div>
+              <div className="text-5xl md:text-4xl font-bold text-black-500 mb-2">63</div>
+              <div className="text-black-500 text-lg">Active Leads</div>
             </motion.div>
 
             <motion.div
@@ -74,8 +74,8 @@ export default function Accomplishments() {
               className="text-center"
             >
               <FaUserFriends className="text-4xl text-[#878787] mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-[#715A5A]-500 mb-2">21</div>
-              <div className="text-gray-700 text-lg">Hard Workers</div>
+              <div className="text-5xl md:text-4xl font-bold text-black-500 mb-2">21</div>
+              <div className="text-black-500 text-lg">Hard Workers</div>
             </motion.div>
           </div>
         </motion.div>

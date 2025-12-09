@@ -93,21 +93,21 @@ export default function Courses() {
               {/* Icon */}
               <div className="flex justify-center mb-6">
                 <motion.div
-                  className="p-4 bg-green-100 rounded-full group-hover:bg-green-200 transition-colors duration-300"
+                  className="p-4 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300"
                   whileHover={{
                     scale: 1.1,
                     rotate: 5,
                     transition: { duration: 0.3 }
                   }}
                 >
-                  <course.icon className="text-3xl text-green-500 group-hover:text-green-700 transition-colors duration-300" />
+                  <course.icon className="text-3xl text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
                 </motion.div>
               </div>
 
               {/* Title and Price */}
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-gray-600 mb-2">{course.title}</h3>
-                <div className="text-3xl font-bold text-green-600">{course.price}</div>
+                <div className="text-3xl font-bold text-blue-600">{course.price}</div>
                 {course.balance && (
                   <div className="text-sm text-gray-500 mt-2">Bal</div>
                 )}
