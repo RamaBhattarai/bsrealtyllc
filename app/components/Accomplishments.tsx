@@ -6,7 +6,7 @@ import { FaUsers, FaHandshake, FaBullseye, FaUserFriends } from 'react-icons/fa'
 
 export default function Accomplishments() {
   return (
-    <section className="py-20 bg-gradient-to-br from-white via-gray-100 to-gray-200 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05),transparent_50%)]"></div>
@@ -26,7 +26,7 @@ export default function Accomplishments() {
             delay={100}
             animateBy="words"
             direction="top"
-            className="text-3xl md:text-4xl font-bold text-black-500 mb-12 align-items-center justify-center"
+            className="text-3xl md:text-4xl font-bold text-black mb-12 align-items-center justify-center"
           />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -37,9 +37,9 @@ export default function Accomplishments() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <FaUsers className="text-4xl text-[#878787] mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-black-500 mb-2">32</div>
-              <div className="text-black-500 text-lg">Happy Clients</div>
+              <FaUsers className="text-4xl text-blue-500 mb-4 mx-auto" />
+              <div className="text-5xl md:text-4xl font-bold text-black mb-2">32</div>
+              <div className="text-black text-lg">Happy Clients</div>
             </motion.div>
 
             <motion.div
@@ -49,9 +49,9 @@ export default function Accomplishments() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <FaHandshake className="text-4xl text-[#878787] mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-black-500 mb-2">41</div>
-              <div className="text-black-500 text-lg">Transactions</div>
+              <FaHandshake className="text-4xl text-blue-500 mb-4 mx-auto" />
+              <div className="text-5xl md:text-4xl font-bold text-black mb-2">41</div>
+              <div className="text-black text-lg">Transactions</div>
             </motion.div>
 
             <motion.div
@@ -61,9 +61,9 @@ export default function Accomplishments() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <FaBullseye className="text-4xl text-[#878787] mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-black-500 mb-2">63</div>
-              <div className="text-black-500 text-lg">Active Leads</div>
+              <FaBullseye className="text-4xl text-blue-500 mb-4 mx-auto" />
+              <div className="text-5xl md:text-4xl font-bold text-black mb-2">63</div>
+              <div className="text-black text-lg">Active Leads</div>
             </motion.div>
 
             <motion.div
@@ -73,9 +73,9 @@ export default function Accomplishments() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <FaUserFriends className="text-4xl text-[#878787] mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-black-500 mb-2">21</div>
-              <div className="text-black-500 text-lg">Hard Workers</div>
+              <FaUserFriends className="text-4xl text-blue-500 mb-4 mx-auto" />
+              <div className="text-5xl md:text-4xl font-bold text-black mb-2">21</div>
+              <div className="text-black text-lg">Hard Workers</div>
             </motion.div>
           </div>
         </motion.div>
