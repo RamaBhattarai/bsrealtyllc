@@ -176,7 +176,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="py-20 bg-white-700 min-h-screen">
+    <div className="py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
