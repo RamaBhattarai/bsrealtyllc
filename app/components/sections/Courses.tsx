@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import BlurText from './BlurText';
-import TextType from './TextType';
+import BlurText from './../BlurText';
+import TextType from './../TextType';
 import { FaGraduationCap, FaBriefcase, FaChartLine } from 'react-icons/fa';
 
 const courses = [

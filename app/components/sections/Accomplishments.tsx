@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import BlurText from './BlurText';
+import BlurText from './../BlurText';
 import { FaUsers, FaHandshake, FaBullseye, FaUserFriends } from 'react-icons/fa';
 
 export default function Accomplishments() {

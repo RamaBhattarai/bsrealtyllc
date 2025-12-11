@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import BlurText from './BlurText';
+import BlurText from './../BlurText';
 import { FaHome, FaMoneyBillWave, FaCalculator, FaTools, FaTruck, FaBriefcase } from 'react-icons/fa';
 import Link from 'next/link';
 

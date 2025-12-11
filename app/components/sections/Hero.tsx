@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
 
 const heroSlides = [
   {
@@ -61,63 +62,87 @@ const heroSlides = [
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900/20 via-blue-900/30 to-indigo-900/20">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={heroSlides[currentSlide].backgroundImage}
-          alt="Hero Background"
-          fill
-          className="object-cover brightness-110 contrast-105 saturate-110"
-          priority
-        />
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-slate-900/10 to-blue-900/20"></div>
-      </div>
+      {/* Background Image with Infinite Loop */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8 }}
+          className="absolute inset-0 z-0"
+        >
+          <Image
+            src={heroSlides[currentSlide].backgroundImage}
+            alt="Hero Background"
+            fill
+            className="object-cover brightness-110 contrast-105 saturate-110"
+            priority
+          />
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-slate-900/10 to-blue-900/20"></div>
+        </motion.div>
+      </AnimatePresence>
 
-      {/* Slider Container */}
+      {/* Slider Container with Infinite Loop */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
         <div className="relative overflow-hidden">
-          <div
-            className="flex transition-transform duration-1000 ease-in-out"
-            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-          >
-            {heroSlides.map((slide) => (
-              <div key={slide.id} className="w-full flex-shrink-0">
-                {/* Glassmorphism Content */}
-                <div className="backdrop-blur-md bg-white/15 border border-white/30 rounded-3xl p-8 md:p-12 shadow-2xl max-w-4xl mx-auto">
-                  <div className="text-center">
-                    {/* Location */}
-                    <h2 className="text-xl md:text-2xl font-light text-white/90 mb-4 tracking-wide">
-                      {slide.location}
-                    </h2>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className="w-full"
+            >
+              {/* Glassmorphism Content */}
+              <div className="backdrop-blur-md bg-white/15 border border-white/30 rounded-3xl p-8 md:p-12 shadow-2xl max-w-4xl mx-auto">
+                <div className="text-center">
+                  {/* Location */}
+                  <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-xl md:text-2xl font-light text-white/90 mb-4 tracking-wide"
+                  >
+                    {heroSlides[currentSlide].location}
+                  </motion.h2>
 
-                    {/* Address */}
-                    <h1 className="text-4xl md:text-4xl font-bold text-white mb-8 tracking-tight leading-tight">
-                      {slide.address}
-                    </h1>
+                  {/* Address */}
+                  <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="text-4xl md:text-4xl font-bold text-white mb-8 tracking-tight leading-tight"
+                  >
+                    {heroSlides[currentSlide].address}
+                  </motion.h1>
 
-                    {/* Features */}
-                    
-                    {/* Status and Price */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8">
-                      <span className={`inline-flex items-center px-8 py-4 rounded-full backdrop-blur-sm border text-xl font-semibold shadow-lg ${
-                        slide.status === 'Sold'
-                          ? 'bg-green-500/30 border-green-400/40 text-green-100'
-                          : slide.status === 'Pending'
-                          ? 'bg-yellow-500/30 border-yellow-400/40 text-yellow-100'
-                          : 'bg-blue-500/30 border-blue-400/40 text-blue-100'
-                      }`}>
-                        {slide.status}
-                      </span>
-                      <span className="text-4xl md:text-4xl font-bold text-white drop-shadow-lg">
-                        {slide.price}
-                      </span>
-                    </div>
-                  </div>
+                  {/* Status and Price */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8"
+                  >
+                    <span className={`inline-flex items-center px-8 py-4 rounded-full backdrop-blur-sm border text-xl font-semibold shadow-lg ${
+                      heroSlides[currentSlide].status === 'Sold'
+                        ? 'bg-green-500/30 border-green-400/40 text-green-100'
+                        : heroSlides[currentSlide].status === 'Pending'
+                        ? 'bg-yellow-500/30 border-yellow-400/40 text-yellow-100'
+                        : 'bg-blue-500/30 border-blue-400/40 text-blue-100'
+                    }`}>
+                      {heroSlides[currentSlide].status}
+                    </span>
+                    <span className="text-4xl md:text-4xl font-bold text-white drop-shadow-lg">
+                      {heroSlides[currentSlide].price}
+                    </span>
+                  </motion.div>
                 </div>
               </div>
-            ))}
-          </div>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Navigation Arrows */}
           <button
