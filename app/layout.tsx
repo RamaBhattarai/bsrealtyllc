@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Lato, Arvo } from "next/font/google";
+import type { Metadata } from "next";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -15,6 +16,11 @@ const arvo = Arvo({
 import TopBanner from "./components/TopBanner";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
+export const metadata: Metadata = {
+  title: "BS Realty Mortgage Services",
+  description: "Comprehensive real estate and mortgage solutions",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
