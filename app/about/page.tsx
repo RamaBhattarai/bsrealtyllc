@@ -34,9 +34,9 @@ export default function AboutPage() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <>
+    <div className="-mt-16">
       {/* Hero Section */}
-      <section className="relative py-32 bg-gray-900 overflow-hidden">
+      <section className="relative pt-48 pb-32 bg-gray-900 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <Image 
             src="/realestate.jpg" 
@@ -163,6 +163,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

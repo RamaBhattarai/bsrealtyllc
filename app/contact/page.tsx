@@ -187,7 +187,7 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-            Contact <span className="text-blue-600">Us</span>
+            Contact <span className="text-green-600">Us</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Get in touch with our team. We're here to help you with all your real estate needs.
@@ -295,7 +295,7 @@ export default function Contact() {
                     className="space-y-2"
                   >
                     <label className="flex items-center text-gray-700 font-semibold text-sm">
-                      <FaUser className="mr-2 text-blue-600" />
+                      <FaUser className="mr-2 text-green-600" />
                       Your Name *
                     </label>
                     <input
@@ -319,7 +319,7 @@ export default function Contact() {
                     className="space-y-2"
                   >
                     <label className="flex items-center text-gray-700 font-semibold text-sm">
-                      <FaEnvelope className="mr-2 text-blue-600" />
+                      <FaEnvelope className="mr-2 text-green-600" />
                       Your Email *
                     </label>
                     <input
@@ -346,7 +346,7 @@ export default function Contact() {
                     className="space-y-2"
                   >
                     <label className="flex items-center text-gray-700 font-semibold text-sm">
-                      <FaPhone className="mr-2 text-blue-600" />
+                      <FaPhone className="mr-2 text-green-600" />
                       Your Phone *
                     </label>
                     <input
@@ -370,7 +370,7 @@ export default function Contact() {
                     className="space-y-2"
                   >
                     <label className="flex items-center text-gray-700 font-semibold text-sm">
-                      <FaEnvelope className="mr-2 text-blue-600" />
+                      <FaEnvelope className="mr-2 text-green-600" />
                       Subject *
                     </label>
                     <input
@@ -396,7 +396,7 @@ export default function Contact() {
                   className="space-y-2"
                 >
                   <label className="flex items-center text-gray-700 font-semibold text-sm">
-                    <FaEnvelope className="mr-2 text-blue-600" />
+                    <FaEnvelope className="mr-2 text-green-600" />
                     Message *
                   </label>
                   <textarea
@@ -441,7 +441,7 @@ export default function Contact() {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`bg-blue-600 text-white px-10 py-3 rounded-full font-semibold text-base shadow-lg transition-all duration-300 flex items-center justify-center mx-auto ${
+                    className={`bg-green-600 text-white px-10 py-3 rounded-full font-semibold text-base shadow-lg transition-all duration-300 flex items-center justify-center mx-auto ${
                       isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl hover:scale-105'
                     }`}
                     whileHover={!isSubmitting ? { scale: 1.05 } : {}}

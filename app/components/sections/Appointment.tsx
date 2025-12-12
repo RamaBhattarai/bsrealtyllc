@@ -57,7 +57,7 @@ export default function Appointment() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-            Make an <span className="text-blue-600">Appointment</span>
+            Make an <span className="text-green-500">Appointment</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Schedule a consultation with our expert team. We're here to help you achieve your real estate and financial goals.
@@ -85,7 +85,7 @@ export default function Appointment() {
                 className="space-y-2"
               >
                 <label className="flex items-center text-gray-700 font-semibold text-sm">
-                  <FaUser className="mr-2 text-blue-600" />
+                  <FaUser className="mr-2 text-green-700" />
                   Your Name
                 </label>
                 <input
@@ -107,7 +107,7 @@ export default function Appointment() {
                 className="space-y-2"
               >
                 <label className="flex items-center text-gray-700 font-semibold text-sm">
-                  <FaEnvelope className="mr-2 text-blue-600" />
+                  <FaEnvelope className="mr-2 text-green-700" />
                   Your Email
                 </label>
                 <input
@@ -129,7 +129,7 @@ export default function Appointment() {
                 className="space-y-2"
               >
                 <label className="flex items-center text-gray-700 font-semibold text-sm">
-                  <FaPhone className="mr-2 text-blue-600" />
+                  <FaPhone className="mr-2 text-green-700" />
                   Your Phone
                 </label>
                 <input
@@ -151,7 +151,7 @@ export default function Appointment() {
                 className="space-y-2"
               >
                 <label className="flex items-center text-gray-700 font-semibold text-sm">
-                  <FaList className="mr-2 text-blue-600" />
+                  <FaList className="mr-2 text-green-700" />
                   Select Category
                 </label>
                 <select
@@ -179,7 +179,7 @@ export default function Appointment() {
             >
               <div className="space-y-2">
                 <label className="flex items-center text-gray-700 font-semibold text-sm">
-                  <FaCalendarAlt className="mr-2 text-blue-600" />
+                  <FaCalendarAlt className="mr-2 text-green-700" />
                   Preferred Date
                 </label>
                 <input
@@ -194,7 +194,7 @@ export default function Appointment() {
 
               <div className="space-y-2">
                 <label className="flex items-center text-gray-700 font-semibold text-sm">
-                  <FaClock className="mr-2 text-blue-600" />
+                  <FaClock className="mr-2 text-green-700" />
                   Preferred Time
                 </label>
                 <input
@@ -217,7 +217,7 @@ export default function Appointment() {
               className="space-y-2"
             >
               <label className="flex items-center text-gray-700 font-semibold text-sm">
-                <FaComments className="mr-2 text-blue-600" />
+                <FaComments className="mr-2 text-green-700" />
                 Appointment Preference
               </label>
               <select
@@ -243,7 +243,7 @@ export default function Appointment() {
               className="space-y-2"
             >
               <label className="flex items-center text-gray-700 font-semibold text-sm">
-                <FaComments className="mr-2 text-blue-600" />
+                <FaComments className="mr-2 text-green-700" />
                 Message (Optional)
               </label>
               <textarea
@@ -266,7 +266,7 @@ export default function Appointment() {
             >
               <motion.button
                 type="submit"
-                className="bg-blue-600 text-white px-10 py-3 rounded-full font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center mx-auto"
+                className="bg-green-600 text-white px-10 py-3 rounded-full font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center mx-auto"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

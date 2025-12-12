@@ -2,11 +2,12 @@
 
 import { motion } from 'framer-motion';
 import BlurText from './../BlurText';
-import { FaUsers, FaHandshake, FaBullseye, FaUserFriends } from 'react-icons/fa';
+import Counter from '../Counter';
+import { Users, FileCheck, Target, Briefcase } from 'lucide-react';
 
 export default function Accomplishments() {
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden">
+    <section className="py-20 bg-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05),transparent_50%)]"></div>
@@ -21,12 +22,13 @@ export default function Accomplishments() {
           viewport={{ once: true }}
           className="text-center"
         >
+          <span className="text-green-500 font-semibold text-lg uppercase tracking-wider block mb-4">Our Track Record</span>
           <BlurText
             text="Our Accomplishments"
             delay={100}
             animateBy="words"
             direction="top"
-            className="text-3xl md:text-4xl font-bold text-black mb-12 align-items-center justify-center"
+            className="text-4xl md:text-5xl font-bold text-black mb-16 align-items-center justify-center"
           />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -37,9 +39,11 @@ export default function Accomplishments() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <FaUsers className="text-4xl text-blue-500 mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-black mb-2">32</div>
-              <div className="text-black text-lg">Happy Clients</div>
+              <div className="w-16 h-16 bg-emerald-600/20 border border-emerald-500/50 rounded-lg flex items-center justify-center mb-6 mx-auto">
+                <Users className="w-8 h-8 text-emerald-500" />
+              </div>
+              <Counter end={32} duration={2000} className="text-5xl md:text-4xl font-bold text-black mb-2" />
+              <div className="text-gray-600 text-lg">Happy Clients</div>
             </motion.div>
 
             <motion.div
@@ -49,9 +53,12 @@ export default function Accomplishments() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <FaHandshake className="text-4xl text-blue-500 mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-black mb-2">41</div>
-              <div className="text-black text-lg">Transactions</div>
+              <div className="w-16 h-16 bg-emerald-600/20 border border-emerald-500/50 rounded-lg flex items-center justify-center mb-6 mx-auto">
+                <FileCheck className="w-8 h-8 text-emerald-500" />
+              </div>
+              <Counter end={41} duration={2000} className="text-5xl md:text-4xl font-bold text-black mb-2" />
+              
+              <div className="text-gray-600 text-lg">Transactions</div>
             </motion.div>
 
             <motion.div
@@ -61,9 +68,11 @@ export default function Accomplishments() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <FaBullseye className="text-4xl text-blue-500 mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-black mb-2">63</div>
-              <div className="text-black text-lg">Active Leads</div>
+              <div className="w-16 h-16 bg-emerald-600/20 border border-emerald-500/50 rounded-lg flex items-center justify-center mb-6 mx-auto">
+                <Target className="w-8 h-8 text-emerald-500" />
+              </div>
+              <Counter end={63} duration={2000} className="text-5xl md:text-4xl font-bold text-black mb-2" />
+              <div className="text-gray-600 text-lg">Active Leads</div>
             </motion.div>
 
             <motion.div
@@ -73,9 +82,11 @@ export default function Accomplishments() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <FaUserFriends className="text-4xl text-blue-500 mb-4 mx-auto" />
-              <div className="text-5xl md:text-4xl font-bold text-black mb-2">21</div>
-              <div className="text-black text-lg">Hard Workers</div>
+              <div className="w-16 h-16 bg-emerald-600/20 border border-emerald-500/50 rounded-lg flex items-center justify-center mb-6 mx-auto">
+                <Briefcase className="w-8 h-8 text-emerald-500" />
+              </div>
+              <Counter end={21} duration={2000} className="text-5xl md:text-4xl font-bold text-black mb-2" />
+              <div className="text-gray-600 text-lg">Hard Workers</div>
             </motion.div>
           </div>
         </motion.div>

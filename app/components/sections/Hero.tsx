@@ -61,7 +61,7 @@ const heroSlides = [
   };
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900/20 via-blue-900/30 to-indigo-900/20">
+    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900/20 via-blue-900/30 to-indigo-900/20 -mt-20 md:-mt-24">
       {/* Background Image with Infinite Loop */}
       <AnimatePresence mode="wait">
         <motion.div

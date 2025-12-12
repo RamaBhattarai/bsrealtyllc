@@ -3,25 +3,25 @@
 import { motion } from 'framer-motion';
 import BlurText from './../BlurText';
 import TextType from './../TextType';
-import { FaGraduationCap, FaBriefcase, FaChartLine } from 'react-icons/fa';
+import { GraduationCap, Briefcase, TrendingUp } from 'lucide-react';
 
 const courses = [
   {
-    icon: FaGraduationCap,
+    icon: GraduationCap,
     title: 'Photo Licensing Exam Prep',
     price: '$149',
     description: 'We offer expert prelicensing exam preparation and counseling for aspiring real estate professionals and mortgage loan officers. Our courses are designed to help you succeed in your licensing exams and provide comprehensive guidance to ensure you are fully equipped for a successful career in the real estate and mortgage industries.',
     balance: '50/65'
   },
   {
-    icon: FaBriefcase,
+    icon: Briefcase,
     title: 'Business Counseling',
     price: '$139',
     description: 'We offer comprehensive business counseling services, including business establishment, tax preparation, bookkeeping, payroll, and financial reporting. Our goal is to help individuals and businesses stay financially organized and compliant, allowing them to focus on growth and success.',
     balance: '35/42'
   },
   {
-    icon: FaChartLine,
+    icon: TrendingUp,
     title: 'Investment Strategies',
     price: '$99',
     description: 'We offer specialized training to help individuals in varieties of investment strategies, such as stocks, forex, ETFs, bonds, notes, money market, REITs, MLPs, real estate, and more. Our courses are designed for beginners and experienced investors alike, providing the knowledge and tools needed to make informed decisions in the financial markets.',
@@ -92,22 +92,15 @@ export default function Courses() {
             >
               {/* Icon */}
               <div className="flex justify-center mb-6">
-                <motion.div
-                  className="p-4 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300"
-                  whileHover={{
-                    scale: 1.1,
-                    rotate: 5,
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <course.icon className="text-3xl text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
-                </motion.div>
+                <div className="w-16 h-16 bg-emerald-600/20 border border-emerald-500/50 rounded-lg flex items-center justify-center group-hover:bg-emerald-600/30 transition-all duration-300">
+                  <course.icon className="w-8 h-8 text-emerald-500 group-hover:text-emerald-600 transition-colors duration-300" />
+                </div>
               </div>
 
               {/* Title and Price */}
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-gray-600 mb-2">{course.title}</h3>
-                <div className="text-3xl font-bold text-blue-600">{course.price}</div>
+                <div className="text-3xl font-bold text-green-600">{course.price}</div>
                 {course.balance && (
                   <div className="text-sm text-gray-500 mt-2">Bal</div>
                 )}
