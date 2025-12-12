@@ -2,15 +2,15 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { FaHome, FaMoneyBillWave, FaCalculator, FaTools, FaTruck, FaBriefcase, FaArrowRight } from 'react-icons/fa';
-import BlurText from '../components/BlurText';
+import { Home, DollarSign, Calculator, Wrench, Truck, Briefcase, ArrowRight } from 'lucide-react';
+
 
 const services = [
   {
     id: 1,
     title: "Real Estate Services",
     description: "We provide comprehensive real estate services for buying, selling and renting residential and commercial properties. Our expert team helps you find the perfect property and ensures a smooth transaction from start to finish.",
-    icon: FaHome,
+    icon: Home,
     features: ["Property Search", "Market Analysis", "Negotiation Support", "Closing Assistance"],
     color: "from-blue-500 to-blue-600"
   },
@@ -18,7 +18,7 @@ const services = [
     id: 2,
     title: "Mortgage Solutions",
     description: "We offer tailored mortgage solutions to fit your financial needs. Whether you're a first-time homebuyer or refinancing, we provide access to a variety of loan products and guide you through the loan approval process.",
-    icon: FaMoneyBillWave,
+    icon: DollarSign,
     features: ["First-Time Buyer Programs", "Refinancing", "Investment Loans", "Pre-Approval"],
     color: "from-green-500 to-green-600"
   },
@@ -26,7 +26,7 @@ const services = [
     id: 3,
     title: "Tax & Accounting",
     description: "Our comprehensive tax & accounting services are designed to help individuals and businesses stay financially organized, compliant, and positioned for growth. If you need assistance with tax planning, bookkeeping, payroll, or financial reporting, our expert team provides solutions.",
-    icon: FaCalculator,
+    icon: Calculator,
     features: ["Tax Preparation", "Bookkeeping", "Payroll Services", "Financial Reporting"],
     color: "from-purple-500 to-purple-600"
   },
@@ -34,7 +34,7 @@ const services = [
     id: 4,
     title: "Home Improvement",
     description: "Our home improvement services cover everything from plumbing, electrical, and HVAC maintenance to renovations and repairs. We ensure your home is well-maintained and meets your comfort and safety standards.",
-    icon: FaTools,
+    icon: Wrench,
     features: ["Plumbing & Electrical", "HVAC Maintenance", "Renovations", "Repairs"],
     color: "from-orange-500 to-orange-600"
   },
@@ -42,7 +42,7 @@ const services = [
     id: 5,
     title: "Utility Setup & Moving",
     description: "To make your move as seamless as possible, we help you set up essential utilities such as electricity, water, gas, and internet in your new property including relocation services, so you can settle in without any hassle.",
-    icon: FaTruck,
+    icon: Truck,
     features: ["Utility Setup", "Internet & Cable", "Moving Coordination", "New Home Setup"],
     color: "from-teal-500 to-teal-600"
   },
@@ -50,7 +50,7 @@ const services = [
     id: 6,
     title: "Consulting Services",
     description: "We offer expert consulting services for real estate, mortgage, tax, accounting, investments, market trends, and financing options. Our team provides personalized advice to help you make informed decisions.",
-    icon: FaBriefcase,
+    icon: Briefcase,
     features: ["Investment Strategy", "Market Analysis", "Financial Planning", "Property Consulting"],
     color: "from-indigo-500 to-indigo-600"
   }
@@ -74,8 +74,10 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
         {/* Glassmorphism Card */}
         <div className="relative backdrop-blur-sm bg-white/80 border border-white/20 rounded-2xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-2">
           {/* Icon */}
-          <div className={`text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300 text-blue-600 group-hover:text-purple-600`}>
-            <IconComponent />
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 bg-emerald-600/20 border border-emerald-500/50 rounded-lg flex items-center justify-center group-hover:bg-emerald-600/30 transition-all duration-300">
+              <IconComponent className="w-8 h-8 text-emerald-500 group-hover:text-emerald-600 transition-colors duration-300" />
+            </div>
           </div>
 
           {/* Title */}
@@ -104,7 +106,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
             className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300"
           >
             Learn More
-            <FaArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4" />
           </motion.button>
 
           {/* Hover Effect Line */}
@@ -167,7 +169,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-purple-600">
+      <section className="py-20 bg-gradient-to-br from-blue-400 to-purple-700">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
