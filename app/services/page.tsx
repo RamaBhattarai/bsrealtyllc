@@ -56,6 +56,10 @@ const services = [
   }
 ];
 
+function slugify(title: string) {
+  return title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+}
+
 const ServiceCard = ({ service, index }: { service: typeof services[0], index: number }) => {
   const IconComponent = service.icon;
 
@@ -82,7 +86,9 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
 
           {/* Title */}
           <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
-            {service.title}
+            <Link href={`/services/${slugify(service.title)}`} className="hover:text-green-600">
+              {service.title}
+            </Link>
           </h3>
 
           {/* Description */}

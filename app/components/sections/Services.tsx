@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import BlurText from './../BlurText';
 import { FaHome, FaMoneyBillWave, FaCalculator, FaTools, FaTruck, FaBriefcase, FaArrowRight } from 'react-icons/fa';
 import Link from 'next/link';
 
@@ -102,7 +101,9 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
 
           {/* Title */}
           <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors duration-300">
-            {service.title}
+            <Link href={`/services/${service.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-')}`} className="hover:text-green-600 transition-colors">
+              {service.title}
+            </Link>
           </h3>
 
           {/* Description */}

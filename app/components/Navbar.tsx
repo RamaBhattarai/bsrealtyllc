@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +24,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/blog", label: "Blog" },
+    // { href: "/blog", label: "Blog" },
     { href: "/services", label: "Services" },
     { href: "/properties", label: "Properties" },
     { href: "/teams", label: "Teams" },
@@ -36,11 +36,11 @@ export default function Navbar() {
   const underlineClass = "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 group-hover:after:w-full after:bg-gradient-to-r after:from-green-500 after:to-green-600 after:transition-all after:duration-300";
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
+    <nav className={`fixed w-full z-50 transition-all duration-300 md:top-[36px] top-0 ${
       scrolled 
         ? "bg-white shadow-lg" 
         : "bg-white/95 backdrop-blur-sm shadow-md"
-    }`} style={{ top: 'var(--topbanner-height, 0)' }}>
+    }`}>
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo and Title */}
@@ -71,17 +71,32 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
+
+            {/* Get Started hover dropdown */}
+            <li className="relative group">
+              <button className={`${navLinkClass} px-3 py-2 text-sm xl:text-base flex items-center gap-1`} aria-haspopup="true">
+                Get Started <FaChevronDown className="text-sm transition-transform group-hover:-rotate-180" />
+              </button>
+
+              {/* Invisible hover extender to keep dropdown visible */}
+              <div className="absolute top-full left-0 right-0 h-3 group-hover:block hidden" />
+
+              <div className="opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-150 absolute right-0 top-full pt-3 w-56 bg-white rounded-md shadow-lg z-50">
+                <ul className="py-2">
+                  <li>
+                    <Link href="/property-inquiry" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Property Inquiry</Link>
+                  </li>
+                  <li>
+                    <Link href="/get-mortgage-quote" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Get Mortgage Quote</Link>
+                  </li>
+                  <li>
+                    <Link href="/insurance-quote" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Get Insurance Quote</Link>
+                  </li>
+                </ul>
+              </div>
+            </li>
           </ul>
 
-          {/* CTA Button - Desktop */}
-          <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="/get-started"
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2.5 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
-            >
-              Get Started
-            </Link>
-          </div>
 
           {/* Mobile Menu Button */}
           <button

@@ -36,6 +36,7 @@
       {
         "listitem": "off"
       }
-    ]
+    ],
+    "disown-opener": "off"
   }
 }
