@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { FaUser, FaEnvelope, FaPhone, FaPaperPlane, FaMapMarkerAlt, FaPhoneAlt, FaEnvelopeOpen } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaPaperPlane } from 'react-icons/fa';
 import { useEffect } from 'react';
 
 declare global {
@@ -190,100 +190,134 @@ export default function Contact() {
             Contact <span className="text-green-600">Us</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Get in touch with our team. We're here to help you with all your real estate needs.
+            Get in touch with our nationwide team. We're here to help you with all your real estate needs across the country.
           </p>
         </motion.div>
 
-        {/* Google Map - Full Width */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-12"
-        >
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.123456789012!2d-82.12345678901234!3d33.987654321098765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8c1234567890%3A0x1234567890abcdef!2s2338%20Bundoran%20Dr%2C%20Grovetown%2C%20GA%2030813!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-            width="100%"
-            height="400"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="BS Realty LLC Location"
-            className="w-full h-80 md:h-96 lg:h-[400px]"
-          ></iframe>
-          <div className="p-4 bg-gray-50 border-t">
-            <a
-              href="https://www.google.com/maps/place/2338+Bundoran+Dr,+Grovetown,+GA+30813"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 font-semibold flex items-center justify-center"
-            >
-              <FaMapMarkerAlt className="mr-2" />
-              View larger map
-            </a>
-          </div>
-        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Contact Information */}
+
+        {/* Contact Section with Animated Character */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center">
+          {/* Animated Character */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="lg:col-span-1 space-y-8"
+            className="flex flex-col items-center justify-center text-center lg:text-left lg:col-span-1"
           >
-            {/* Address */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <div className="flex items-start space-x-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <FaMapMarkerAlt className="text-blue-600 text-xl" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Address</h3>
-                  <p className="text-gray-600">2338 Bundoran Drive<br />Grovetown, GA 30813</p>
-                </div>
-              </div>
-            </div>
+            {/* Character Illustration */}
+            <motion.div
+              animate={{
+                y: [0, -10, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="relative mb-6"
+            >
+              {/* Speech Bubble */}
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 1, duration: 0.5 }}
+                className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-white rounded-2xl px-4 py-2 shadow-lg border-2 border-green-200"
+              >
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
+                <p className="text-green-600 font-bold text-sm whitespace-nowrap">Contact Us!</p>
+              </motion.div>
 
-            {/* Call Us */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <div className="flex items-start space-x-4">
-                <div className="bg-green-100 p-3 rounded-full">
-                  <FaPhoneAlt className="text-green-600 text-xl" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Call Us</h3>
-                  <p className="text-gray-600">+1 (706) 261-8948</p>
-                </div>
-              </div>
-            </div>
+              {/* Character SVG - Boy with Hat */}
+              <svg
+                width="220"
+                height="280"
+                viewBox="0 0 220 280"
+                className="drop-shadow-xl"
+              >
+                {/* Shadow */}
+                <ellipse cx="110" cy="270" rx="45" ry="10" fill="rgba(0,0,0,0.15)" />
 
-            {/* Email Us */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <div className="flex items-start space-x-4">
-                <div className="bg-purple-100 p-3 rounded-full">
-                  <FaEnvelopeOpen className="text-purple-600 text-xl" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Email Us</h3>
-                  <p className="text-gray-600">bsrealtyllc@gmail.com</p>
-                </div>
-              </div>
-            </div>
+                {/* Hat */}
+                <ellipse cx="110" cy="55" rx="45" ry="15" fill="#1F2937" />
+                <rect x="65" y="40" width="90" height="25" rx="45" fill="#1F2937" />
+
+                {/* Head */}
+                <circle cx="110" cy="90" r="40" fill="#FBBF24" />
+
+                {/* Face */}
+                <circle cx="100" cy="82" r="3" fill="#374151" /> {/* Left eye */}
+                <circle cx="120" cy="82" r="3" fill="#374151" /> {/* Right eye */}
+                <path d="M105 95 Q110 100 115 95" stroke="#374151" strokeWidth="2" fill="none" /> {/* Smile */}
+
+                {/* Hair */}
+                <path d="M70 70 Q75 60 85 65 Q95 55 105 60 Q115 55 125 60 Q135 65 145 70" fill="#1F2937" />
+
+                {/* Body - Shirt */}
+                <rect x="80" y="130" width="60" height="90" rx="30" fill="#3B82F6" />
+
+                {/* Shirt Collar */}
+                <path d="M95 130 Q110 140 125 130" fill="#1F2937" />
+
+                {/* Arms */}
+                <rect x="45" y="145" width="30" height="12" rx="6" fill="#FBBF24" /> {/* Left arm */}
+                <rect x="145" y="145" width="30" height="12" rx="6" fill="#FBBF24" /> {/* Right arm */}
+
+                {/* Pointing Hand */}
+                <motion.g
+                  animate={{
+                    rotate: [0, 8, 0, -8, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{ transformOrigin: '165px 150px' }}
+                >
+                  <rect x="145" y="145" width="25" height="10" rx="5" fill="#FBBF24" />
+                  <rect x="165" y="140" width="10" height="20" rx="5" fill="#FBBF24" />
+                  <circle cx="170" cy="162" r="4" fill="#FBBF24" />
+                </motion.g>
+
+                {/* Pants */}
+                <rect x="95" y="220" width="15" height="50" rx="7" fill="#1F2937" /> {/* Left leg */}
+                <rect x="110" y="220" width="15" height="50" rx="7" fill="#1F2937" /> {/* Right leg */}
+
+                {/* Shoes */}
+                <ellipse cx="102" cy="275" rx="10" ry="5" fill="#374151" />
+                <ellipse cx="117" cy="275" rx="10" ry="5" fill="#374151" />
+
+                {/* Belt */}
+                <rect x="85" y="210" width="50" height="8" rx="4" fill="#374151" />
+                <circle cx="95" cy="214" r="2" fill="#D97706" />
+                <circle cx="110" cy="214" r="2" fill="#D97706" />
+                <circle cx="125" cy="214" r="2" fill="#D97706" />
+              </svg>
+            </motion.div>
+
+            {/* Character Description */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 0.5 }}
+              className="text-center"
+            >
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">Ready to Help!</h3>
+              <p className="text-gray-600">Our nationwide team is here for all your real estate needs</p>
+            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="lg:col-span-2"
+            className="w-full lg:max-w-4xl lg:col-span-2"
           >
-            <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10">
+            <div className="bg-white rounded-3xl shadow-2xl p-10 md:p-12 lg:p-14">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name and Email */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -294,7 +328,7 @@ export default function Contact() {
                     viewport={{ once: true }}
                     className="space-y-2"
                   >
-                    <label className="flex items-center text-gray-700 font-semibold text-sm">
+                    <label className="flex items-center text-gray-700 font-semibold text-base">
                       <FaUser className="mr-2 text-green-600" />
                       Your Name *
                     </label>
@@ -303,7 +337,7 @@ export default function Contact() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm ${
+                      className={`w-full px-2 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-base ${
                         errors.name ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="Enter your full name"
@@ -318,7 +352,7 @@ export default function Contact() {
                     viewport={{ once: true }}
                     className="space-y-2"
                   >
-                    <label className="flex items-center text-gray-700 font-semibold text-sm">
+                    <label className="flex items-center text-gray-700 font-semibold text-base">
                       <FaEnvelope className="mr-2 text-green-600" />
                       Your Email *
                     </label>
@@ -327,7 +361,7 @@ export default function Contact() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm ${
+                      className={`w-full px-2 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-base ${
                         errors.email ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="your@email.com"
@@ -345,7 +379,7 @@ export default function Contact() {
                     viewport={{ once: true }}
                     className="space-y-2"
                   >
-                    <label className="flex items-center text-gray-700 font-semibold text-sm">
+                    <label className="flex items-center text-gray-700 font-semibold text-base">
                       <FaPhone className="mr-2 text-green-600" />
                       Your Phone *
                     </label>
@@ -354,7 +388,7 @@ export default function Contact() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm ${
+                      className={`w-full px-2 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-base ${
                         errors.phone ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="(555) 123-4567"
@@ -369,8 +403,8 @@ export default function Contact() {
                     viewport={{ once: true }}
                     className="space-y-2"
                   >
-                    <label className="flex items-center text-gray-700 font-semibold text-sm">
-                      <FaEnvelope className="mr-2 text-green-600" />
+                    <label className="flex items-center text-gray-700 font-semibold text-base">
+                      <FaPaperPlane className="mr-2 text-green-600" />
                       Subject *
                     </label>
                     <input
@@ -378,7 +412,7 @@ export default function Contact() {
                       name="subject"
                       value={formData.subject}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm ${
+                      className={`w-full px-2 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-base ${
                         errors.subject ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="What's this about?"
@@ -395,7 +429,7 @@ export default function Contact() {
                   viewport={{ once: true }}
                   className="space-y-2"
                 >
-                  <label className="flex items-center text-gray-700 font-semibold text-sm">
+                  <label className="flex items-center text-gray-700 font-semibold text-base">
                     <FaEnvelope className="mr-2 text-green-600" />
                     Message *
                   </label>
@@ -403,8 +437,8 @@ export default function Contact() {
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    rows={5}
-                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none resize-none text-sm ${
+                    rows={6}
+                    className={`w-full px-2 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none resize-none text-base ${
                       errors.message ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder="Tell us how we can help you..."
@@ -441,7 +475,7 @@ export default function Contact() {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`bg-green-600 text-white px-10 py-3 rounded-full font-semibold text-base shadow-lg transition-all duration-300 flex items-center justify-center mx-auto ${
+                    className={`bg-green-600 text-white px-12 py-4 rounded-full font-semibold text-lg shadow-lg transition-all duration-300 flex items-center justify-center mx-auto ${
                       isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl hover:scale-105'
                     }`}
                     whileHover={!isSubmitting ? { scale: 1.05 } : {}}

@@ -40,11 +40,11 @@ const services = [
   },
   {
     id: 5,
-    title: "Utility Setup & Moving",
-    description: "We help you set up essential utilities such as electricity, water, gas, and internet in your new property with relocation services.",
+    title: "Insurance P & C",
+    description: "We provide personalized auto, home, and commercial property insurance solutions designed to protect what matters most. Our licensed agents help you compare coverage options and secure the right protection at competitive rates.",
     icon: FaTruck,
     color: "from-teal-500 to-teal-600",
-    features: ["Utilities Setup", "Relocation", "Hassle-Free Service"]
+    features: ["Utility Setup", "Internet & Cable", "Moving Coordination", "New Home Setup"]
   },
   {
     id: 6,

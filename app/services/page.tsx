@@ -40,8 +40,8 @@ const services = [
   },
   {
     id: 5,
-    title: "Utility Setup & Moving",
-    description: "To make your move as seamless as possible, we help you set up essential utilities such as electricity, water, gas, and internet in your new property including relocation services, so you can settle in without any hassle.",
+    title: "Insurance P & C",
+    description: "We provide personalized auto, home, and commercial property insurance solutions designed to protect what matters most. Our licensed agents help you compare coverage options and secure the right protection at competitive rates.",
     icon: Truck,
     features: ["Utility Setup", "Internet & Cable", "Moving Coordination", "New Home Setup"],
     color: "from-teal-500 to-teal-600"
@@ -132,8 +132,8 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen -mt-16">
       {/* Header Section */}
-      <section className="pt-20 pb-16 bg-[#0f1729]">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="pt-45 pb-16 bg-[#0f1729]">
+        <div className="max-w-7xl mx-auto px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -142,7 +142,7 @@ export default function ServicesPage() {
             className="text-center mb-12"
           >
             <span className="text-green-500 font-semibold text-lg">What We Offer</span>
-            <h1 className="text-5xl md:text-6xl font-bold text-white my-4">
+            <h1 className="text-5xl md:text-6xl font-bold text-white my-6">
               Our Services
             </h1>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">

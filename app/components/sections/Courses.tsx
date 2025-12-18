@@ -8,7 +8,7 @@ import { GraduationCap, Briefcase, TrendingUp } from 'lucide-react';
 const courses = [
   {
     icon: GraduationCap,
-    title: 'Photo Licensing Exam Prep',
+    title: 'Licensing Exam Prep',
     price: '$149',
     description: 'We offer expert prelicensing exam preparation and counseling for aspiring real estate professionals and mortgage loan officers. Our courses are designed to help you succeed in your licensing exams and provide comprehensive guidance to ensure you are fully equipped for a successful career in the real estate and mortgage industries.',
     balance: '50/65'
@@ -107,7 +107,7 @@ export default function Courses() {
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 leading-relaxed text-center">
+              <p className="text-gray-600 leading-relaxed text-align-left">
                 {course.description}
               </p>
 

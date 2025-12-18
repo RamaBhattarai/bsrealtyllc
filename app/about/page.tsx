@@ -53,7 +53,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="text-blue-400 font-semibold text-sm uppercase tracking-wider mb-4 block">
+            <span className="text-green-400 font-semibold text-sm uppercase tracking-wider mb-4 block">
               About Us
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -84,7 +84,7 @@ export default function AboutPage() {
                   height={400}
                   className="rounded-2xl shadow-2xl w-full"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-xl">
+                <div className="absolute -bottom-6 -right-6 bg-green-600 text-white p-6 rounded-2xl shadow-xl">
                   <div className="text-4xl font-bold">10+</div>
                   <div className="text-sm">Years Experience</div>
                 </div>
@@ -97,7 +97,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="space-y-6"
             >
-              <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">
+              <span className="text-green-600 font-semibold text-sm uppercase tracking-wider">
                 Our Story
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
@@ -132,7 +132,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-2xl mx-auto mb-16"
           >
-            <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-4 block">
+            <span className="text-green-600 font-semibold text-sm uppercase tracking-wider mb-4 block">
               Our Values
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">What Drives Us</h2>
@@ -150,8 +150,8 @@ export default function AboutPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mx-auto mb-4">
-                    <IconComponent className="w-8 h-8 text-blue-600" />
+                  <div className="w-16 h-16 rounded-2xl bg-green-200 flex items-center justify-center mx-auto mb-4">
+                    <IconComponent className="w-8 h-8 text-green-700" />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
                     {value.title}

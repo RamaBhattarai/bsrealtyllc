@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
+import TextType from '../TextType';
 
 const heroSlides = [
   {
@@ -11,7 +12,7 @@ const heroSlides = [
     address: "33620 Columbine Dr.",
     status: "Sold",
     price: "$ 472,000",
-    backgroundImage: "/realestate2.jpg"
+    backgroundImage: "/images/hero/hero1.png"
   },
   {
     id: 2,
@@ -19,7 +20,7 @@ const heroSlides = [
     address: "1250 Preserve Park Dr",
     status: "For Sale",
     price: "$ 485,000",
-    backgroundImage: "/realestate.jpg"
+    backgroundImage: "/images/hero/hero2.png"
   },
   {
     id: 3,
@@ -27,7 +28,7 @@ const heroSlides = [
     address: "1785 Riverside Pkwy",
     status: "Pending",
     price: "$ 395,000",
-    backgroundImage: "/realestate.jpg"
+    backgroundImage: "/images/hero/hero3.png"
   },
   {
     id: 4,
@@ -35,7 +36,7 @@ const heroSlides = [
     address: "2450 Rose Garden Way",
     status: "Sold",
     price: "$ 650,000",
-    backgroundImage: "/realestate.jpg"
+    backgroundImage: "/images/hero/hero2.png"
   }
 ];export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -61,123 +62,116 @@ const heroSlides = [
   };
 
   return (
-    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900/20 via-blue-900/30 to-indigo-900/20 -mt-20 md:-mt-24">
+    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Background Image with Infinite Loop */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="sync">
         <motion.div
           key={currentSlide}
-          initial={{ opacity: 0, scale: 1.1 }}
+          initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
           className="absolute inset-0 z-0"
         >
           <Image
             src={heroSlides[currentSlide].backgroundImage}
             alt="Hero Background"
             fill
-            className="object-cover brightness-110 contrast-105 saturate-110"
+            className="object-cover object-center"
             priority
+            quality={90}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
           />
           {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-slate-900/10 to-blue-900/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/25"></div>
         </motion.div>
       </AnimatePresence>
 
-      {/* Slider Container with Infinite Loop */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
-        <div className="relative overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="w-full"
+      {/* Hero Content - Centered and Fixed */}
+      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 py-20 md:py-20">
+        {/* Main Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="text-center mb-6"
+        >
+          <TextType
+            text="A to Z Solution in Your Real Estate Journey"
+            typingSpeed={100}
+            pauseDuration={3000}
+            showCursor={true}
+            cursorCharacter="|"
+            cursorClassName="animate-pulse"
+            className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-4xl mx-auto inline-block"
+            style={{
+              color: '#F4F4F4',
+              textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 4px 8px rgba(0,0,0,0.7), 0 8px 16px rgba(0,0,0,0.5), 0 0 20px rgba(19,171,196,0.5)',
+              WebkitTextStroke: '1px rgba(19,171,196,0.3)',
+              filter: 'brightness(1.2) contrast(1.1)'
+            }}
+            startOnVisible={true}
+            loop={true}
+          />
+        </motion.div>
+
+        {/* Property Search */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="w-full max-w-sm md:max-w-md lg:max-w-lg"
+        >
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search properties..."
+              className="w-full px-6 py-4 text-base md:text-lg bg-white/95 backdrop-blur-md border-0 rounded-full shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-400/50 focus:bg-white transition-all duration-300 placeholder-gray-500"
+            />
+            <button
+              type="submit"
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-green-600 hover:bg-green-700 rounded-full flex items-center justify-center text-white transition-colors duration-300 shadow-lg"
             >
-              {/* Glassmorphism Content */}
-              <div className="backdrop-blur-md bg-white/15 border border-white/30 rounded-3xl p-8 md:p-12 shadow-2xl max-w-4xl mx-auto">
-                <div className="text-center">
-                  {/* Location */}
-                  <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="text-xl md:text-2xl font-light text-white/90 mb-4 tracking-wide"
-                  >
-                    {heroSlides[currentSlide].location}
-                  </motion.h2>
-
-                  {/* Address */}
-                  <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-4xl md:text-4xl font-bold text-white mb-8 tracking-tight leading-tight"
-                  >
-                    {heroSlides[currentSlide].address}
-                  </motion.h1>
-
-                  {/* Status and Price */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8"
-                  >
-                    <span className={`inline-flex items-center px-8 py-4 rounded-full backdrop-blur-sm border text-xl font-semibold shadow-lg ${
-                      heroSlides[currentSlide].status === 'Sold'
-                        ? 'bg-green-500/30 border-green-400/40 text-green-100'
-                        : heroSlides[currentSlide].status === 'Pending'
-                        ? 'bg-yellow-500/30 border-yellow-400/40 text-yellow-100'
-                        : 'bg-blue-500/30 border-blue-400/40 text-blue-100'
-                    }`}>
-                      {heroSlides[currentSlide].status}
-                    </span>
-                    <span className="text-4xl md:text-4xl font-bold text-white drop-shadow-lg">
-                      {heroSlides[currentSlide].price}
-                    </span>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 shadow-lg hover:scale-110"
-          >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 shadow-lg hover:scale-110"
-          >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
-          {/* Dots Indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-4">
-            {heroSlides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                  index === currentSlide
-                    ? 'bg-white scale-125 shadow-lg'
-                    : 'bg-white/50 hover:bg-white/75 hover:scale-110'
-                }`}
-              />
-            ))}
+              <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
           </div>
-        </div>
+        </motion.div>
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-14 md:h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 shadow-lg hover:scale-110"
+      >
+        <svg className="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-14 md:h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 shadow-lg hover:scale-110"
+      >
+        <svg className="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      {/* Dots Indicator */}
+      <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-30 flex space-x-2 md:space-x-4">
+        {heroSlides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 ${
+              index === currentSlide
+                ? 'bg-white scale-125 shadow-lg'
+                : 'bg-white/50 hover:bg-white/75 hover:scale-110'
+            }`}
+          />
+        ))}
       </div>
 
     

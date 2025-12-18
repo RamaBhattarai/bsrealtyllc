@@ -5,9 +5,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
-    { title: "Company", links: [{ label: "About Us", href: "/about" }, { label: "Services", href: "/services" }, { label: "Teams", href: "/teams" }] },
+    { title: "Company", links: [{ label: "About Us", href: "/about" }, { label: "Services", href: "/services" }, { label: "Join Our Team", href: "/joins" }] },
     { title: "Products", links: [{ label: "Properties", href: "/properties" }, { label: "Solutions", href: "/solutions" }, { label: "Get Started", href: "/get-started" }] },
-    { title: "Resources", links: [{ label: "Blog", href: "/blog" }, { label: "Contact", href: "/contact" }, { label: "FAQ", href: "#" }] },
+    { title: "Contact", links: [{ label: "Call Us", href: "tel:+17062618948" }, { label: "Email Us", href: "mailto:bsrealtyllc@gmail.com" }, { label: "Open 24/7", href: "#" }] },
   ];
 
   const socialLinks = [
@@ -26,9 +26,9 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-4 hover:opacity-80 transition-opacity">
               <Image
-                src="/logo-bsrealtyllc.png"
+                src="/images/logo/logo_bbg.png"
                 alt="BS Realty LLC"
-                width={180}
+                width={200}
                 height={60}
                 className="h-12 w-auto"
               />
@@ -74,33 +74,7 @@ export default function Footer() {
             </div>
           ))}
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-white font-semibold text-lg mb-6 relative inline-block">
-              Contact
-              <span className="absolute left-0 bottom-0 w-12 h-0.5 bg-gradient-to-r from-green-500 to-green-600 rounded-full"></span>
-            </h4>
-            <ul className="space-y-4 mt-8 text-gray-400 text-sm">
-              <li className="flex items-start space-x-3 hover:text-green-400 transition-colors">
-                <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
-                </svg>
-                <span>+1 (706) 261-8948</span>
-              </li>
-              <li className="flex items-start space-x-3 hover:text-green-400 transition-colors">
-                <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                </svg>
-                <span>bsrealtyllc@gmail.com</span>
-              </li>
-              <li className="flex items-start space-x-3 hover:text-green-400 transition-colors">
-                <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
-                </svg>
-                <span>Mon-Sat: 11AM - 6PM</span>
-              </li>
-            </ul>
-          </div>
+
         </div>
 
         {/* Divider */}

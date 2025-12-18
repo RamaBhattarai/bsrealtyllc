@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { FaPhone, FaEnvelope, FaFacebook, FaInstagram, FaTwitter, FaHome } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaFacebook, FaInstagram, FaTwitter, FaHome, FaCalculator, FaBuilding, FaHeadset } from 'react-icons/fa';
 
 export default function TopBanner() {
   const [visible, setVisible] = useState(true);
@@ -32,7 +32,7 @@ export default function TopBanner() {
       {visible && (
         <div
           ref={bannerRef}
-          className="fixed top-0 left-0 right-0 w-full bg-[#343434] text-white py-2 px-4 z-[60] hidden md:block"
+          className="fixed top-0 left-0 right-0 w-full bg-[#1B3C53] text-white py-2 px-4 z-[60] hidden md:block"
         >
           <div className="max-w-7xl mx-auto flex items-center justify-between text-sm">
             {/* Left Section: Contact Info */}
@@ -42,7 +42,7 @@ export default function TopBanner() {
                 className="flex items-center gap-2 hover:text-green-400 transition-colors"
               >
                 <FaPhone className="w-4 h-4" />
-                <span>+1 (706) 261-8948</span>
+                <span>Call Us</span>
               </a>
 
               <a
@@ -50,14 +50,17 @@ export default function TopBanner() {
                 className="flex items-center gap-2 hover:text-green-400 transition-colors"
               >
                 <FaEnvelope className="w-4 h-4" />
-                <span>bsrealtyllc@gmail.com</span>
+                <span>Email Us</span>
               </a>
             </div>
 
             {/* Center Section: Marquee Text */}
             <div className="flex-1 mx-6 overflow-hidden">
-              <div className="animate-marquee whitespace-nowrap text-gray-300">
-                <FaHome className="inline mr-2" /> Welcome to BS Realty LLC - Your Trusted Real Estate Partner | Competitive Mortgage Rates | Expert Property Management | Call Now for Free Consultation | Serving Georgia & Beyond
+              <div className="animate-marquee whitespace-nowrap text-white">
+                <FaHome className="inline mr-2" /> Welcome to BS Realty LLC - Your Trusted Real Estate Partner | 
+                <FaCalculator className="inline mx-2" /> Competitive Mortgage Rates | 
+                <FaBuilding className="inline mx-2" /> Expert Property Management | 
+                <FaHeadset className="inline mx-2" /> Call Now for Free Consultation 
               </div>
             </div>
 
