@@ -154,9 +154,14 @@ export default function Team() {
               If you're passionate about real estate and helping clients achieve their dreams, 
               we'd love to hear from you.
             </p>
-            <Button asChild size="lg">
-              <Link href="/contact">Contact Us</Link>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg">
+                <Link href="/become-agent">Become an Agent</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/job-listings">Apply for a Job</Link>
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>

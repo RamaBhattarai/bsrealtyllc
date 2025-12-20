@@ -16,6 +16,8 @@ export default function Navbar() {
   const [homeImprovementDropdownOpen, setHomeImprovementDropdownOpen] = useState(false);
   const [taxAccountingDropdownOpen, setTaxAccountingDropdownOpen] = useState(false);
   const [onlineCoursesDropdownOpen, setOnlineCoursesDropdownOpen] = useState(false);
+  const [joinTeamDropdownOpen, setJoinTeamDropdownOpen] = useState(false);
+  const [mobileJoinTeamDropdownOpen, setMobileJoinTeamDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -38,6 +40,8 @@ export default function Navbar() {
       setHomeImprovementDropdownOpen(false);
       setTaxAccountingDropdownOpen(false);
       setOnlineCoursesDropdownOpen(false);
+      setJoinTeamDropdownOpen(false);
+      setMobileJoinTeamDropdownOpen(false);
     }
   };
 
@@ -263,14 +267,25 @@ export default function Navbar() {
               </div>
             </li>
 
-            {/* Join Our Team */}
-            <li>
-              <Link
-                href="/join"
-                className={`${navLinkClass} ${underlineClass} px-3 py-2 text-sm xl:text-base`}
-              >
-                Join Our Team
-              </Link>
+            {/* Join Our Team dropdown */}
+            <li className="relative group">
+              <button className={`${navLinkClass} px-3 py-2 text-sm xl:text-base flex items-center gap-1`} aria-haspopup="true">
+                Join Our Team <FaChevronDown className="text-sm transition-transform group-hover:-rotate-180" />
+              </button>
+
+              {/* Invisible hover extender to keep dropdown visible */}
+              <div className="absolute top-full left-0 right-0 h-3 group-hover:block hidden" />
+
+              <div className="opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-150 absolute left-0 top-full pt-3 w-56 bg-white rounded-md shadow-lg z-50">
+                <ul className="py-2">
+                  <li>
+                    <Link href="/job-listings" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Apply for a Job</Link>
+                  </li>
+                  <li>
+                    <Link href="/become-agent" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Become an Agent</Link>
+                  </li>
+                </ul>
+              </div>
             </li>
 
             {/* Contact Us */}
@@ -338,7 +353,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? ((mobileDropdownOpen || solutionsDropdownOpen || residentialDropdownOpen || mortgagesDropdownOpen || insuranceDropdownOpen || commercialDropdownOpen || homeImprovementDropdownOpen || taxAccountingDropdownOpen || onlineCoursesDropdownOpen) ? "max-h-[1200px] opacity-100" : "max-h-96 opacity-100") : "max-h-0 opacity-0"
+          isOpen ? ((mobileDropdownOpen || solutionsDropdownOpen || residentialDropdownOpen || mortgagesDropdownOpen || insuranceDropdownOpen || commercialDropdownOpen || homeImprovementDropdownOpen || taxAccountingDropdownOpen || onlineCoursesDropdownOpen || mobileJoinTeamDropdownOpen) ? "max-h-[1200px] opacity-100" : "max-h-96 opacity-100") : "max-h-0 opacity-0"
         }`}
       >
         <div className="bg-white border-t border-gray-100 shadow-xl">
@@ -544,15 +559,45 @@ export default function Navbar() {
               </div>
             </li>
 
-            {/* Join Our Team */}
-            <li>
-              <Link
-                href="/join"
-                className="block px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-all duration-200"
-                onClick={() => setIsOpen(false)}
+            {/* Join Our Team Mobile Dropdown */}
+            <li className="pt-2 mt-2">
+              <button
+                onClick={() => setMobileJoinTeamDropdownOpen(!mobileJoinTeamDropdownOpen)}
+                className="w-full text-left px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-all duration-200 flex items-center justify-between"
               >
                 Join Our Team
-              </Link>
+                <FaChevronDown className={`text-sm transition-transform duration-200 ${mobileJoinTeamDropdownOpen ? '-rotate-180' : ''}`} />
+              </button>
+              
+              {/* Join Team Mobile Dropdown */}
+              <div className={`overflow-hidden transition-all duration-200 ease-in-out ${mobileJoinTeamDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <ul className="bg-gray-50 py-1">
+                  <li>
+                    <Link
+                      href="/job-listings"
+                      className="block px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
+                      onClick={() => {
+                        setIsOpen(false);
+                        setMobileJoinTeamDropdownOpen(false);
+                      }}
+                    >
+                      Apply for a Job
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/become-agent"
+                      className="block px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
+                      onClick={() => {
+                        setIsOpen(false);
+                        setMobileJoinTeamDropdownOpen(false);
+                      }}
+                    >
+                      Become an Agent
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </li>
 
             {/* Contact Us */}
