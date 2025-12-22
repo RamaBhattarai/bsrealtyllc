@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { FaUser, FaUserTie, FaUserShield, FaArrowLeft, FaSpinner } from 'react-icons/fa'
 import { useLogin } from '../../lib/hooks/auth'
 import toast from 'react-hot-toast'
 
-export default function LoginPage() {
+function LoginForm() {
   const [selectedRole, setSelectedRole] = useState<'agent' | 'client' | 'admin' | null>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -17,19 +17,19 @@ export default function LoginPage() {
   // Show success message from registration redirect
   useEffect(() => {
     if (hasProcessedRedirect.current) return
-    
+
     const message = searchParams.get('message')
     const role = searchParams.get('role')
-    
+
     if (message) {
       toast.success(message)
       hasProcessedRedirect.current = true
     }
-    
+
     if (role && (role === 'agent' || role === 'client' || role === 'admin')) {
       setSelectedRole(role)
     }
-    
+
     // Clean up the URL after processing
     if (message || role) {
       router.replace('/login', { scroll: false })
@@ -236,7 +236,7 @@ export default function LoginPage() {
                   onClick={() => setSelectedRole(option.id as 'agent' | 'client' | 'admin')}
                   className="w-full flex items-center p-4 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-md transition-all duration-200 group"
                 >
-                  <div className={`flex-shrink-0 w-12 h-12 rounded-lg ${option.color} flex items-center justify-center mr-4`}>
+                  <div className={`shrink-0 w-12 h-12 rounded-lg ${option.color} flex items-center justify-center mr-4`}>
                     <IconComponent className="h-6 w-6 text-white" />
                   </div>
                   <div className="flex-1 text-left">
@@ -265,5 +265,24 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   )
 }
