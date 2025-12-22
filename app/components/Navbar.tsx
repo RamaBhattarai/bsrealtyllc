@@ -313,7 +313,7 @@ export default function Navbar() {
                     <Link href="/property-inquiry" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Property Inquiry</Link>
                   </li>
                   <li>
-                    <Link href="/get-mortgage-quote" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Get Mortgage Quote</Link>
+                    <Link href="https://www.loanfactory.com/balkhadka" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Get Mortgage Quote</Link>
                   </li>
                   <li>
                     <Link href="/insurance-quote" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Get Insurance Quote</Link>
@@ -636,7 +636,9 @@ export default function Navbar() {
                   </li>
                   <li>
                     <Link
-                      href="/get-mortgage-quote"
+                      href="https://www.loanfactory.com/balkhadka"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="block px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
                       onClick={() => {
                         setIsOpen(false);

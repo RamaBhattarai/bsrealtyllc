@@ -16,151 +16,306 @@ export interface Job {
 export const jobs: Job[] = [
   {
     id: 1,
-    title: "Real Estate Agent",
-    slug: "real-estate-agent",
-    description: "We are looking for a motivated Real Estate Agent to join our team. You will help clients buy, sell, and rent properties in the local market. This role involves property showings, negotiations, and providing excellent customer service.",
+    slug: 'front-end-engineer',
+    title: 'Front-End Engineer',
+    location: 'Remote / On-site',
+    type: 'Full-time',
+    salary: '$80,000 - $120,000',
+    description: 'We are seeking a skilled Front-End Engineer to join our development team. You will be responsible for creating responsive, user-friendly web interfaces using modern technologies. This role involves collaborating with designers and back-end developers to deliver exceptional user experiences.',
     requirements: [
-      "Valid real estate license",
-      "Strong communication skills",
-      "Knowledge of local real estate market",
-      "Ability to work independently and as part of a team",
-      "Experience in customer service"
+      '3+ years of experience in front-end development',
+      'Proficiency in HTML, CSS, and JavaScript',
+      'Experience with React, Vue.js, or Angular',
+      'Knowledge of responsive design principles',
+      'Understanding of web performance optimization'
     ],
-    experience: "1-3 years",
-    location: "Remote/On-site",
-    type: "Full-time",
-    salary: "Commission-based + bonuses",
+    experience: '3+ years',
     qualifications: [
-      "Bachelor's degree in Business, Real Estate, or related field preferred",
-      "Active real estate license in good standing",
-      "Clean driving record and reliable transportation",
-      "Proficiency in MLS and real estate software"
+      'Bachelor\'s degree in Computer Science or related field',
+      'Strong portfolio demonstrating front-end projects',
+      'Experience with version control systems (Git)',
+      'Knowledge of testing frameworks (Jest, Cypress)',
+      'Familiarity with build tools (Webpack, Vite)'
     ],
     softSkills: [
-      "Excellent communication and interpersonal skills",
-      "Strong negotiation and persuasion abilities",
-      "Customer service orientation",
-      "Time management and organizational skills",
-      "Adaptability and problem-solving mindset"
+      'Strong problem-solving abilities',
+      'Excellent communication skills',
+      'Ability to work in a team environment',
+      'Attention to detail',
+      'Continuous learning mindset'
     ],
     whatWeOffer: [
-      "Competitive commission structure with bonuses",
-      "Comprehensive training and mentorship program",
-      "Marketing support and lead generation",
-      "Flexible work schedule",
-      "Professional development opportunities"
+      'Competitive salary and benefits package',
+      'Flexible work arrangements (remote/hybrid options)',
+      'Professional development opportunities',
+      'Modern tech stack and tools',
+      'Collaborative and innovative work environment'
     ]
   },
   {
     id: 2,
-    title: "Mortgage Loan Officer",
-    slug: "mortgage-loan-officer",
-    description: "Join our mortgage team as a Loan Officer. You will assist clients in finding the best mortgage solutions, guide them through the application process, and ensure smooth loan approvals.",
+    slug: 'back-end-engineer',
+    title: 'Back-End Engineer',
+    location: 'Remote / On-site',
+    type: 'Full-time',
+    salary: '$90,000 - $130,000',
+    description: 'Join our back-end development team to build robust, scalable server-side applications. You will design and implement APIs, databases, and server logic that power our platform. This role offers the opportunity to work with cutting-edge technologies and solve complex technical challenges.',
     requirements: [
-      "Mortgage license preferred",
-      "Financial background",
-      "Excellent interpersonal skills",
-      "Detail-oriented",
-      "Ability to meet sales targets"
+      '4+ years of experience in back-end development',
+      'Proficiency in server-side languages (Node.js, Python, Java)',
+      'Experience with databases (SQL and NoSQL)',
+      'Knowledge of RESTful API design',
+      'Understanding of cloud platforms (AWS, Azure, GCP)'
     ],
-    experience: "2+ years",
-    location: "On-site",
-    type: "Full-time",
-    salary: "Base salary + commission",
+    experience: '4+ years',
     qualifications: [
-      "Mortgage loan originator license (NMLS)",
-      "Bachelor's degree in Finance, Business, or related field",
-      "Strong understanding of mortgage products and lending regulations",
-      "Experience with mortgage origination software"
+      'Bachelor\'s degree in Computer Science or related field',
+      'Experience with containerization (Docker, Kubernetes)',
+      'Knowledge of message queues and caching systems',
+      'Understanding of security best practices',
+      'Experience with CI/CD pipelines'
     ],
     softSkills: [
-      "Exceptional customer service skills",
-      "Strong analytical and problem-solving abilities",
-      "Effective communication and presentation skills",
-      "Relationship building and networking",
-      "Attention to detail and accuracy"
+      'Analytical thinking',
+      'Problem-solving skills',
+      'Team collaboration',
+      'Mentoring abilities',
+      'Adaptability to new technologies'
     ],
     whatWeOffer: [
-      "Competitive base salary plus commission",
-      "Comprehensive benefits package",
-      "Ongoing training and certification support",
-      "Modern office environment with state-of-the-art tools",
-      "Career advancement opportunities"
+      'Competitive salary with performance bonuses',
+      'Flexible remote work options',
+      'Comprehensive health and retirement benefits',
+      'Continuous learning and certification support',
+      'Opportunity to work on cutting-edge technologies'
     ]
   },
   {
     id: 3,
-    title: "Tax Accountant",
-    slug: "tax-accountant",
-    description: "We need a skilled Tax Accountant to handle tax preparation, planning, and compliance for our clients. You will work on individual and business tax returns, provide financial advice, and ensure accuracy in all filings.",
+    slug: 'software-architect',
+    title: 'Software Architect',
+    location: 'Remote / On-site',
+    type: 'Full-time',
+    salary: '$120,000 - $160,000',
+    description: 'We are looking for an experienced Software Architect to design and oversee the technical architecture of our applications. You will work closely with development teams to ensure scalable, maintainable, and high-performance solutions. This leadership role involves making strategic technical decisions and mentoring junior developers.',
     requirements: [
-      "CPA certification",
-      "Experience with tax software",
-      "Knowledge of tax laws and regulations",
-      "Strong analytical skills",
-      "Attention to detail"
+      '7+ years of software development experience',
+      '5+ years in software architecture or senior development roles',
+      'Deep knowledge of system design and architecture patterns',
+      'Experience with multiple programming languages and frameworks',
+      'Strong understanding of cloud architecture'
     ],
-    experience: "3+ years",
-    location: "On-site",
-    type: "Full-time",
-    salary: "$60,000 - $80,000",
+    experience: '7+ years of software development experience with at least 5 years in architecture or senior technical roles.',
     qualifications: [
-      "CPA (Certified Public Accountant) designation",
-      "Bachelor's degree in Accounting, Finance, or related field",
-      "Experience with tax preparation software (TurboTax, TaxAct, etc.)",
-      "Knowledge of federal and state tax regulations"
+      'Master\'s degree in Computer Science or related field preferred',
+      'Experience with enterprise-scale applications',
+      'Knowledge of design patterns and best practices',
+      'Familiarity with DevOps practices',
+      'Leadership and mentoring experience'
     ],
     softSkills: [
-      "Meticulous attention to detail",
-      "Strong analytical and problem-solving skills",
-      "Excellent communication and client service",
-      "Time management and organizational abilities",
-      "Ethical judgment and integrity"
+      'Strategic thinking',
+      'Leadership skills',
+      'Communication and presentation abilities',
+      'Problem-solving expertise',
+      'Vision and planning capabilities'
     ],
     whatWeOffer: [
-      "Competitive salary with performance bonuses",
-      "Health, dental, and vision insurance",
-      "Professional development and CPA exam reimbursement",
-      "Flexible work arrangements",
-      "Retirement savings plan with company match"
+      'Highly competitive compensation package',
+      'Equity participation opportunities',
+      'Flexible work schedule and location',
+      'Executive-level benefits and perks',
+      'Leadership development programs'
     ]
   },
   {
     id: 4,
-    title: "Home Improvement Contractor",
-    slug: "home-improvement-contractor",
-    description: "As a Home Improvement Contractor, you will oversee renovation projects, coordinate with subcontractors, and ensure high-quality work for our clients' properties.",
+    slug: 'project-manager',
+    title: 'Project Manager',
+    location: 'Remote / On-site',
+    type: 'Full-time',
+    salary: '$85,000 - $115,000',
+    description: 'Lead cross-functional teams in delivering complex software projects on time and within budget. As a Project Manager, you will coordinate between stakeholders, developers, and designers to ensure successful project outcomes. This role requires strong organizational skills and the ability to manage multiple priorities.',
     requirements: [
-      "Contractor license",
-      "Experience in home renovations",
-      "Project management skills",
-      "Knowledge of building codes",
-      "Customer service orientation"
+      '5+ years of project management experience',
+      'Experience in software development projects',
+      'Knowledge of project management methodologies (Agile, Scrum, Kanban)',
+      'Proficiency with project management tools',
+      'Strong stakeholder management skills'
     ],
-    experience: "5+ years",
-    location: "On-site",
-    type: "Contract",
-    salary: "Project-based",
+    experience: '5+ years ',
     qualifications: [
-      "Valid contractor's license in applicable jurisdictions",
-      "OSHA safety certifications",
-      "Experience with construction management software",
-      "Knowledge of local building codes and regulations",
-      "Insurance coverage (liability, workers' comp)"
+      'PMP or similar certification preferred',
+      'Experience with Agile methodologies',
+      'Knowledge of risk management and mitigation',
+      'Understanding of software development lifecycle',
+      'Budget and resource management experience'
     ],
     softSkills: [
-      "Strong leadership and team management",
-      "Excellent project coordination skills",
-      "Customer-focused service mentality",
-      "Problem-solving and decision-making abilities",
-      "Effective communication with clients and subcontractors"
+      'Leadership and team management',
+      'Communication skills',
+      'Problem-solving abilities',
+      'Time management',
+      'Conflict resolution'
     ],
     whatWeOffer: [
-      "Competitive project-based compensation",
-      "Project management support and resources",
-      "Marketing assistance and client referrals",
-      "Training and certification opportunities",
-      "Long-term partnership potential"
+      'Competitive salary and bonus structure',
+      'Professional certification reimbursement',
+      'Flexible work arrangements',
+      'Comprehensive benefits package',
+      'Career advancement opportunities'
+    ]
+  },
+  {
+    id: 5,
+    slug: 'ui-ux-designer',
+    title: 'UI/UX Designer',
+    location: 'Remote / On-site',
+    type: 'Full-time',
+    salary: '$70,000 - $100,000',
+    description: 'Create intuitive and visually appealing user interfaces that provide exceptional user experiences. You will work closely with product managers and developers to design user-centered solutions. This role involves user research, prototyping, and collaborating on design systems.',
+    requirements: [
+      '3+ years of UI/UX design experience',
+      'Proficiency in design tools (Figma, Sketch, Adobe XD)',
+      'Strong portfolio demonstrating design skills',
+      'Understanding of user-centered design principles',
+      'Knowledge of design systems and component libraries'
+    ],
+    experience: '3+ years of professional UI/UX design experience with a strong portfolio of work.',
+    qualifications: [
+      'Degree in Design, HCI, or related field',
+      'Experience with user research and usability testing',
+      'Knowledge of accessibility standards',
+      'Understanding of front-end development basics',
+      'Experience with prototyping tools'
+    ],
+    softSkills: [
+      'Creative thinking',
+      'Attention to detail',
+      'Communication skills',
+      'Empathy for users',
+      'Collaborative mindset'
+    ],
+    whatWeOffer: [
+      'Creative and collaborative work environment',
+      'Latest design tools and software',
+      'Professional development budget',
+      'Flexible work hours',
+      'Portfolio development support'
+    ]
+  },
+  {
+    id: 6,
+    slug: 'qa-engineer',
+    title: 'QA Engineer',
+    location: 'Remote / On-site',
+    type: 'Full-time',
+    salary: '$75,000 - $105,000',
+    description: 'Ensure the quality and reliability of our software products through comprehensive testing strategies. You will develop and execute test plans, identify bugs, and work with development teams to resolve issues. This role involves both manual and automated testing approaches.',
+    requirements: [
+      '3+ years of QA or software testing experience',
+      'Experience with manual and automated testing',
+      'Knowledge of testing methodologies and best practices',
+      'Familiarity with testing tools and frameworks',
+      'Understanding of software development lifecycle'
+    ],
+    experience: '3+ years of quality assurance or software testing experience.',
+    qualifications: [
+      'ISTQB or similar certification preferred',
+      'Experience with test automation tools (Selenium, Cypress)',
+      'Knowledge of API testing',
+      'Understanding of performance testing',
+      'Experience with bug tracking systems'
+    ],
+    softSkills: [
+      'Analytical thinking',
+      'Attention to detail',
+      'Problem-solving skills',
+      'Communication abilities',
+      'Quality-focused mindset'
+    ],
+    whatWeOffer: [
+      'Competitive salary and benefits',
+      'Certification and training opportunities',
+      'Flexible work environment',
+      'Modern testing tools and technologies',
+      'Career growth in quality assurance'
+    ]
+  },
+  {
+    id: 7,
+    slug: 'front-desk-representative',
+    title: 'Front Desk Representative',
+    location: 'On-site',
+    type: 'Full-time',
+    salary: '$35,000 - $45,000',
+    description: 'Provide excellent customer service as the first point of contact for our clients. You will greet visitors, manage appointments, handle phone calls, and assist with administrative tasks. This role requires strong interpersonal skills and attention to detail.',
+    requirements: [
+      'High school diploma or equivalent',
+      '1+ years of customer service experience',
+      'Excellent communication and interpersonal skills',
+      'Proficiency with office software and phone systems',
+      'Professional appearance and demeanor'
+    ],
+    experience: '1+ years of customer service or administrative experience preferred.',
+    qualifications: [
+      'Associate degree in business or related field preferred',
+      'Experience with customer relationship management systems',
+      'Multilingual abilities a plus',
+      'Knowledge of basic office procedures',
+      'Typing speed of 50+ WPM'
+    ],
+    softSkills: [
+      'Customer service orientation',
+      'Professional communication',
+      'Organizational skills',
+      'Multitasking abilities',
+      'Problem-solving skills'
+    ],
+    whatWeOffer: [
+      'Competitive hourly wage and benefits',
+      'Stable work environment',
+      'Training and development opportunities',
+      'Team-oriented workplace',
+      'Work-life balance'
+    ]
+  },
+  {
+    id: 8,
+    slug: 'sales-agent',
+    title: 'Sales Agent',
+    location: 'Remote / On-site',
+    type: 'Full-time',
+    salary: '$50,000 - $80,000 + Commission',
+    description: 'Drive business growth by identifying and pursuing sales opportunities. You will prospect new clients, build relationships, and close deals. This commission-based role offers unlimited earning potential and the opportunity to work with a variety of products and services.',
+    requirements: [
+      '2+ years of sales experience',
+      'Strong communication and persuasion skills',
+      'Self-motivated and goal-oriented',
+      'Experience with CRM software',
+      'Track record of meeting or exceeding sales targets'
+    ],
+    experience: '2+ years of sales experience, preferably in a commission-based environment.',
+    qualifications: [
+      'Bachelor\'s degree in Business or related field preferred',
+      'Experience in real estate or financial services sales',
+      'Knowledge of sales methodologies and techniques',
+      'Understanding of customer relationship management',
+      'Licensing in relevant areas (if applicable)'
+    ],
+    softSkills: [
+      'Persuasive communication',
+      'Relationship building',
+      'Resilience and determination',
+      'Time management',
+      'Negotiation skills'
+    ],
+    whatWeOffer: [
+      'Uncapped commission potential',
+      'Base salary plus performance bonuses',
+      'Comprehensive sales training',
+      'Lead generation and marketing support',
+      'Career advancement opportunities'
     ]
   }
 ];

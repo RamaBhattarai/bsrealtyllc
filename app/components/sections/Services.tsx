@@ -48,11 +48,11 @@ const services = [
   },
   {
     id: 6,
-    title: "Consulting Services",
-    description: "We offer expert consulting services for real estate, mortgage, tax, accounting, and investments to help you make informed decisions.",
+    title: "Online Courses",
+    description: "We offer flexible and practical online courses designed for individuals and professionals seeking knowledge and certification in real estate, mortgage, insurance, and related financial services. Ourcourses are structured to be easy to follow, industry-relevant, and accessible anytime, anywhere.",
     icon: FaBriefcase,
     color: "from-indigo-500 to-indigo-600",
-    features: ["Strategic Advice", "Market Insights", "Financial Planning"]
+    features: ["Real Estate Classes", "Mortgage Classes", "Insurance Classes", "Other Professional Services & Training"]
   }
 ];
 

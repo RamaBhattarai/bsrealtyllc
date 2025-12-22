@@ -1,11 +1,23 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { FaUser, FaUserTie, FaArrowLeft } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
+import { FaUser, FaUserTie, FaArrowLeft, FaSpinner } from 'react-icons/fa'
+import { useRegister } from '../../lib/hooks/auth'
 
 export default function RegisterPage() {
   const [selectedRole, setSelectedRole] = useState<'agent' | 'client' | null>(null)
+  const router = useRouter()
+  const registerMutation = useRegister()
+
+  // Handle navigation after successful registration
+  useEffect(() => {
+    if (registerMutation.status === 'success') {
+      // Redirect to login page with role pre-selected
+      router.push(`/login?message=Registration successful! Please log in.&role=${selectedRole}`)
+    }
+  }, [registerMutation.status, router, selectedRole])
 
   const registerOptions = [
     {
@@ -26,10 +38,24 @@ export default function RegisterPage() {
     }
   ]
 
-  const handleRegister = (role: string, formData: any) => {
-    // TODO: Integrate with backend registration
-    console.log(`Registering as ${role} with data:`, formData)
-    alert(`Registration functionality for ${role} will be implemented with backend integration`)
+  const handleRegister = async (role: string, formData: any) => {
+    try {
+      await registerMutation.mutateAsync({
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        phone: formData.phone,
+        password: formData.password,
+        role: role as 'agent' | 'client',
+        ...(role === 'agent' && {
+          licenseNumber: formData.licenseNumber,
+          brokerage: formData.brokerage
+        })
+      })
+      // The mutation will handle success/error states
+    } catch (error) {
+      // Error handling is done in the mutation
+      console.error('Registration failed:', error)
+    }
   }
 
   if (selectedRole) {
@@ -204,9 +230,17 @@ export default function RegisterPage() {
               <div>
                 <button
                   type="submit"
-                  className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${roleData.color} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors`}
+                  disabled={registerMutation.isPending}
+                  className={`w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${roleData.color} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
-                  Create {roleData.title.replace(' Registration', '')} Account
+                  {registerMutation.isPending ? (
+                    <>
+                      <FaSpinner className="animate-spin mr-2" />
+                      Creating Account...
+                    </>
+                  ) : (
+                    `Create ${roleData.title.replace(' Registration', '')} Account`
+                  )}
                 </button>
               </div>
             </form>

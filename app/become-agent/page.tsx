@@ -22,6 +22,8 @@ export default function BecomeAgentPage() {
     phone: '',
     // Step 2: Professional Background
     licenseStatus: '',
+    licenseNumber: '',
+    licensedStates: '',
     yearsExperience: '',
     currentBrokerage: '',
     // Step 3: Expertise & Motivation
@@ -68,8 +70,8 @@ export default function BecomeAgentPage() {
     } else if (step === 1) {
       if (!formData.licenseStatus) newErrors.licenseStatus = 'Please select license status';
       if (!formData.yearsExperience) newErrors.yearsExperience = 'Years of experience is required';
-    } else if (step === 2) {
       if (formData.areasOfExpertise.length === 0) newErrors.areasOfExpertise = 'Please select at least one area of expertise';
+    } else if (step === 2) {
       if (!formData.whyBecomeAgent.trim()) newErrors.whyBecomeAgent = 'This field is required';
     } else if (step === 3) {
       if (!formData.resume) newErrors.resume = 'Resume upload is required';
@@ -116,7 +118,7 @@ export default function BecomeAgentPage() {
             Join BS Realty LLC as a sponsored agent. We're looking for motivated real estate professionals nationwide who are ready to take their career to the next level. Fill out this application to start the sponsorship process.
           </p>
           <p className="text-sm text-gray-500">
-            Questions? Contact us at (706) 261-8948 or bsrealtyllc@gmail.com
+            Questions? Contact us.....
           </p>
         </div>
 
@@ -314,9 +316,37 @@ export default function BecomeAgentPage() {
                     {errors.licenseStatus && <p className="text-red-500 text-sm mt-1">{errors.licenseStatus}</p>}
                   </div>
 
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        License Number
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.licenseNumber}
+                        onChange={(e) => handleInputChange('licenseNumber', e.target.value)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        placeholder="Your license number"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        Licensed States
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.licensedStates}
+                        onChange={(e) => handleInputChange('licensedStates', e.target.value)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        placeholder="e.g., CA, NY, FL"
+                      />
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Years of Real Estate Experience <span className="text-red-500">*</span>
+                      Years of Experience <span className="text-red-500">*</span>
                     </label>
                     <select
                       value={formData.yearsExperience}
@@ -347,6 +377,33 @@ export default function BecomeAgentPage() {
                       placeholder="Current brokerage name"
                     />
                   </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                      Areas of Expertise (Check all that apply) <span className="text-red-500">*</span>
+                    </label>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {[
+                        'Real Estate',
+                        'Mortgage',
+                        'Tax & Accounting',
+                        'Insurance',
+                        'Home Improvement',
+                        'Others'
+                      ].map((expertise) => (
+                        <label key={expertise} className="flex items-center">
+                          <input
+                            type="checkbox"
+                            checked={formData.areasOfExpertise.includes(expertise)}
+                            onChange={() => handleCheckboxChange('areasOfExpertise', expertise)}
+                            className="mr-2 text-green-600 focus:ring-green-500"
+                          />
+                          {expertise}
+                        </label>
+                      ))}
+                    </div>
+                    {errors.areasOfExpertise && <p className="text-red-500 text-sm mt-1">{errors.areasOfExpertise}</p>}
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -364,37 +421,6 @@ export default function BecomeAgentPage() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-8">Expertise & Motivation</h3>
 
                 <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Areas of Expertise (Check all that apply) <span className="text-red-500">*</span>
-                    </label>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                      {[
-                        'Residential Sales',
-                        'Commercial Real Estate',
-                        'Property Management',
-                        'Investment Properties',
-                        'First-time Homebuyers',
-                        'Luxury Homes',
-                        'Relocation Services',
-                        'Market Analysis',
-                        'Negotiation',
-                        'Other'
-                      ].map((expertise) => (
-                        <label key={expertise} className="flex items-center">
-                          <input
-                            type="checkbox"
-                            checked={formData.areasOfExpertise.includes(expertise)}
-                            onChange={() => handleCheckboxChange('areasOfExpertise', expertise)}
-                            className="mr-2 text-green-600 focus:ring-green-500"
-                          />
-                          {expertise}
-                        </label>
-                      ))}
-                    </div>
-                    {errors.areasOfExpertise && <p className="text-red-500 text-sm mt-1">{errors.areasOfExpertise}</p>}
-                  </div>
-
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-3">
                       Why do you want to become a sponsored agent with BS Realty LLC? <span className="text-red-500">*</span>

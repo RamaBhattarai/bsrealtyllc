@@ -59,7 +59,6 @@ export default function TopBanner() {
               <div className="animate-marquee whitespace-nowrap text-white">
                 <FaHome className="inline mr-2" /> Welcome to BS Realty LLC - Your Trusted Real Estate Partner | 
                 <FaCalculator className="inline mx-2" /> Competitive Mortgage Rates | 
-                <FaBuilding className="inline mx-2" /> Expert Property Management | 
                 <FaHeadset className="inline mx-2" /> Call Now for Free Consultation 
               </div>
             </div>

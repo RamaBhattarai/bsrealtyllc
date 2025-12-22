@@ -1,11 +1,56 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { FaUser, FaUserTie, FaUserShield, FaArrowLeft } from 'react-icons/fa'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { FaUser, FaUserTie, FaUserShield, FaArrowLeft, FaSpinner } from 'react-icons/fa'
+import { useLogin } from '../../lib/hooks/auth'
+import toast from 'react-hot-toast'
 
 export default function LoginPage() {
   const [selectedRole, setSelectedRole] = useState<'agent' | 'client' | 'admin' | null>(null)
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const loginMutation = useLogin()
+  const hasProcessedRedirect = useRef(false)
+
+  // Show success message from registration redirect
+  useEffect(() => {
+    if (hasProcessedRedirect.current) return
+    
+    const message = searchParams.get('message')
+    const role = searchParams.get('role')
+    
+    if (message) {
+      toast.success(message)
+      hasProcessedRedirect.current = true
+    }
+    
+    if (role && (role === 'agent' || role === 'client' || role === 'admin')) {
+      setSelectedRole(role)
+    }
+    
+    // Clean up the URL after processing
+    if (message || role) {
+      router.replace('/login', { scroll: false })
+    }
+  }, [searchParams, router])
+
+  // Handle navigation after successful login
+  useEffect(() => {
+    if (loginMutation.isSuccess && loginMutation.data?.success) {
+      const user = loginMutation.data.user
+      if (user) {
+        if (user.role === 'admin') {
+          router.push('/admin/dashboard')
+        } else if (user.role === 'agent') {
+          router.push('/agent/dashboard')
+        } else {
+          router.push('/client/dashboard')
+        }
+      }
+    }
+  }, [loginMutation.isSuccess, loginMutation.data, router])
 
   const loginOptions = [
     {
@@ -37,10 +82,14 @@ export default function LoginPage() {
     }
   ]
 
-  const handleLogin = (role: string, email: string, password: string) => {
-    // TODO: Integrate with backend authentication
-    console.log(`Logging in as ${role} with email: ${email}`)
-    alert(`Login functionality for ${role} will be implemented with backend integration`)
+  const handleLogin = async (role: 'agent' | 'client' | 'admin', email: string, password: string) => {
+    try {
+      await loginMutation.mutateAsync({ email, password, role })
+      // The mutation will handle success/error states
+    } catch (error) {
+      // Error handling is done in the mutation
+      console.error('Login failed:', error)
+    }
   }
 
   if (selectedRole) {
@@ -72,7 +121,7 @@ export default function LoginPage() {
               const formData = new FormData(e.target as HTMLFormElement)
               const email = formData.get('email') as string
               const password = formData.get('password') as string
-              handleLogin(selectedRole, email, password)
+              handleLogin(selectedRole as 'agent' | 'client' | 'admin', email, password)
             }}>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -131,9 +180,17 @@ export default function LoginPage() {
               <div>
                 <button
                   type="submit"
-                  className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${roleData.color} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors`}
+                  disabled={loginMutation.isPending}
+                  className={`w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${roleData.color} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
-                  Sign in as {roleData.title.replace(' Login', '')}
+                  {loginMutation.isPending ? (
+                    <>
+                      <FaSpinner className="animate-spin mr-2" />
+                      Signing in...
+                    </>
+                  ) : (
+                    `Sign in as ${roleData.title.replace(' Login', '')}`
+                  )}
                 </button>
               </div>
             </form>

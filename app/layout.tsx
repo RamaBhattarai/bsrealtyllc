@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Lato, Arvo } from "next/font/google";
 import type { Metadata } from "next";
+import { Providers } from "./providers";
+import { Toaster } from "react-hot-toast";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -26,12 +28,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${lato.variable} font-sans min-h-screen`} suppressHydrationWarning={true}>
-        <TopBanner />
-        <Navbar />
-        <main className="flex-1" style={{ paddingTop: 'calc(var(--topbanner-height, 0px) + 64px)' }}>
-          {children}
-        </main>
-        <Footer />
+        <Providers>
+          <TopBanner />
+          <Navbar />
+          <main className="flex-1" style={{ paddingTop: 'calc(var(--topbanner-height, 0px) + 64px)' }}>
+            {children}
+          </main>
+          <Footer />
+        </Providers>
+        <Toaster position="top-right" />
       </body>
     </html>
   );
