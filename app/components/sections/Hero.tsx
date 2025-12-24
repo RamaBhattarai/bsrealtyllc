@@ -83,7 +83,7 @@ const heroSlides = [
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
           />
           {/* Overlay for better text readability - stronger on mobile */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/40 md:from-black/30 md:via-black/10 md:to-black/25"></div>
+          <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/40 md:from-black/30 md:via-black/10 md:to-black/25"></div>
         </motion.div>
       </AnimatePresence>
 
@@ -178,3 +178,4 @@ const heroSlides = [
     </section>
   );
 }
+

@@ -69,3 +69,4 @@ export function slugify(title: string): string {
 export function getServiceBySlug(slug: string): ServiceItem | undefined {
   return services.find((service) => slugify(service.title) === slug);
 }
+

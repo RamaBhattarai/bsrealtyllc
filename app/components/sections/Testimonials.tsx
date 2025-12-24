@@ -55,7 +55,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
+    <section className="py-20 bg-linear-to-br from-black via-gray-900 to-black relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]"></div>
@@ -149,3 +149,4 @@ export default function Testimonials() {
     </section>
   );
 }
+

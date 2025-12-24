@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaUser, FaEnvelope, FaPhone, FaPaperPlane } from 'react-icons/fa';
 import { useEffect } from 'react';
+import { useSubmitContact } from '../../hooks/useContact';
+import type { ContactFormData } from '../../lib/api/contact.api';
 
 declare global {
   interface Window {
@@ -32,9 +34,10 @@ export default function Contact() {
     recaptcha: ''
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [recaptchaToken, setRecaptchaToken] = useState('');
+
+  // React Query mutation hook for contact submission
+  const submitContactMutation = useSubmitContact();
 
   // Define reCAPTCHA callback functions
   useEffect(() => {
@@ -146,37 +149,39 @@ export default function Contact() {
       return;
     }
 
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
+    // Prepare data for backend API
+    const submitData: ContactFormData = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      subject: formData.subject.trim(),
+      message: formData.message.trim(),
+      recaptchaToken: recaptchaToken
+    };
 
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      // Here you would send the data to your backend
-      console.log('Contact form data:', { ...formData, recaptchaToken });
-
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      });
-      setRecaptchaToken('');
-      if (window.grecaptcha) {
-        window.grecaptcha.reset();
+    // Submit using React Query mutation
+    submitContactMutation.mutate(submitData, {
+      onSuccess: () => {
+        // Reset form on success
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+        setRecaptchaToken('');
+        
+        // Reset reCAPTCHA
+        if (window.grecaptcha) {
+          window.grecaptcha.reset();
+        }
       }
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
+    });
   };
 
   return (
-    <div className="py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50 min-h-screen">
+    <div className="py-20 bg-linear-to-br from-blue-50 via-white to-indigo-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -337,7 +342,7 @@ export default function Contact() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={`w-full px-2 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-base ${
+                      className={`w-full px-4 py-3 bg-white! border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-300 outline-none text-base text-gray-900! placeholder:text-gray-500! ${
                         errors.name ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="Enter your full name"
@@ -361,7 +366,7 @@ export default function Contact() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={`w-full px-2 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-base ${
+                      className={`w-full px-4 py-3 bg-white! border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-300 outline-none text-base text-gray-900! placeholder:text-gray-500! ${
                         errors.email ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="your@email.com"
@@ -388,7 +393,7 @@ export default function Contact() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className={`w-full px-2 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-base ${
+                      className={`w-full px-4 py-3 bg-white! border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-300 outline-none text-base text-gray-900! placeholder:text-gray-500! ${
                         errors.phone ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="(555) 123-4567"
@@ -412,7 +417,7 @@ export default function Contact() {
                       name="subject"
                       value={formData.subject}
                       onChange={handleInputChange}
-                      className={`w-full px-2 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-base ${
+                      className={`w-full px-4 py-3 bg-white! border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-300 outline-none text-base text-gray-900! placeholder:text-gray-500! ${
                         errors.subject ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="What's this about?"
@@ -438,7 +443,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleInputChange}
                     rows={6}
-                    className={`w-full px-2 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none resize-none text-base ${
+                    className={`w-full px-4 py-3 bg-white! border rounded-xl focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-300 outline-none resize-none text-base text-gray-900! placeholder:text-gray-500! ${
                       errors.message ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder="Tell us how we can help you..."
@@ -474,20 +479,20 @@ export default function Contact() {
                 >
                   <motion.button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={submitContactMutation.isPending}
                     className={`bg-green-600 text-white px-12 py-4 rounded-full font-semibold text-lg shadow-lg transition-all duration-300 flex items-center justify-center mx-auto ${
-                      isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl hover:scale-105'
+                      submitContactMutation.isPending ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl hover:scale-105'
                     }`}
-                    whileHover={!isSubmitting ? { scale: 1.05 } : {}}
-                    whileTap={!isSubmitting ? { scale: 0.95 } : {}}
+                    whileHover={!submitContactMutation.isPending ? { scale: 1.05 } : {}}
+                    whileTap={!submitContactMutation.isPending ? { scale: 0.95 } : {}}
                   >
                     <FaPaperPlane className="mr-2" />
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {submitContactMutation.isPending ? 'Sending...' : 'Send Message'}
                   </motion.button>
                 </motion.div>
 
                 {/* Status Messages */}
-                {submitStatus === 'success' && (
+                {submitContactMutation.isSuccess && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -497,13 +502,15 @@ export default function Contact() {
                   </motion.div>
                 )}
 
-                {submitStatus === 'error' && (
+                {submitContactMutation.isError && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     className="text-center p-4 bg-red-50 border border-red-200 rounded-xl"
                   >
-                    <p className="text-red-800 font-semibold">Failed to send message. Please try again.</p>
+                    <p className="text-red-800 font-semibold">
+                      {submitContactMutation.error?.message || 'Failed to send message. Please try again.'}
+                    </p>
                   </motion.div>
                 )}
               </form>
@@ -514,3 +521,4 @@ export default function Contact() {
     </div>
   );
 }
+

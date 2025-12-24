@@ -235,7 +235,7 @@ export default function InsuranceQuote() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 pt-32 pb-12">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-green-50 pt-32 pb-12">
       <div className="max-w-3xl mx-auto px-6">
         {/* Header */}
         <div className="mb-8">
@@ -305,7 +305,7 @@ export default function InsuranceQuote() {
                   placeholder="Enter your full name"
                   value={formData.fullName}
                   onChange={(e) => handleInputChange('fullName', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                   required
                 />
                 {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
@@ -321,7 +321,7 @@ export default function InsuranceQuote() {
                   type="date"
                   value={formData.dateOfBirth}
                   onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 text-gray-900 dark:text-gray-100"
                   required
                 />
                 {errors.dateOfBirth && <p className="text-red-500 text-sm mt-1">{errors.dateOfBirth}</p>}
@@ -341,9 +341,9 @@ export default function InsuranceQuote() {
                         value={option}
                         checked={formData.gender === option}
                         onChange={(e) => handleInputChange('gender', e.target.value)}
-                        className="w-4 h-4 text-blue-600"
+                        className="w-4 h-4 text-primary focus:ring-ring"
                       />
-                      <span className="ml-2 text-gray-700">{option}</span>
+                      <span className="ml-2 text-foreground">{option}</span>
                     </label>
                   ))}
                 </div>
@@ -1155,3 +1155,4 @@ export default function InsuranceQuote() {
     </div>
   );
 }
+

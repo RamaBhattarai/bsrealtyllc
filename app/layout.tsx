@@ -3,6 +3,7 @@ import { Lato, Arvo } from "next/font/google";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
 import { Toaster } from "react-hot-toast";
+import ClientLayout from "./ClientLayout";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -15,9 +16,6 @@ const arvo = Arvo({
   weight: ["400", "700"],
   variable: "--font-arvo",
 });
-import TopBanner from "./components/TopBanner";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "BS Realty Mortgage Services",
@@ -29,15 +27,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${lato.variable} font-sans min-h-screen`} suppressHydrationWarning={true}>
         <Providers>
-          <TopBanner />
-          <Navbar />
-          <main className="flex-1" style={{ paddingTop: 'calc(var(--topbanner-height, 0px) + 64px)' }}>
-            {children}
-          </main>
-          <Footer />
+          <ClientLayout>{children}</ClientLayout>
         </Providers>
         <Toaster position="top-right" />
       </body>
     </html>
   );
 }
+

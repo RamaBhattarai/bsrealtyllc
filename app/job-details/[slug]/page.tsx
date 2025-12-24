@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { MapPin, Clock, DollarSign, ArrowRight, CheckCircle } from 'lucide-react';
-import { jobs } from '@/lib/jobsData';
+import { jobs } from '../../../lib/jobsData';
 import { useParams } from 'next/navigation';
 
 export default function JobDetailsPage() {
@@ -56,7 +56,7 @@ export default function JobDetailsPage() {
       </section>
 
       {/* Breadcrumb */}
-      <section className="bg-gradient-to-r from-gray-50 to-gray-100 py-6 pt-8">
+      <section className="bg-linear-to-r from-gray-50 to-gray-100 py-6 pt-8">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Link href="/" className="hover:text-gray-900 transition-colors">Home</Link>
@@ -69,7 +69,7 @@ export default function JobDetailsPage() {
       </section>
 
       {/* Job Details */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      <section className="py-20 bg-linear-to-br from-gray-50 via-white to-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content - Left Side */}
@@ -113,7 +113,7 @@ export default function JobDetailsPage() {
                   <ul className="space-y-3">
                     {job.requirements.map((req: string, idx: number) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
                         <span className="text-gray-600">{req}</span>
                       </li>
                     ))}
@@ -132,7 +132,7 @@ export default function JobDetailsPage() {
                   <ul className="space-y-3">
                     {job.qualifications.map((qual: string, idx: number) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
                         <span className="text-gray-600">{qual}</span>
                       </li>
                     ))}
@@ -145,7 +145,7 @@ export default function JobDetailsPage() {
                   <ul className="space-y-3">
                     {job.softSkills.map((skill: string, idx: number) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
                         <span className="text-gray-600">{skill}</span>
                       </li>
                     ))}
@@ -158,7 +158,7 @@ export default function JobDetailsPage() {
                   <ul className="space-y-3">
                     {job.whatWeOffer.map((offer: string, idx: number) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
                         <span className="text-gray-600">{offer}</span>
                       </li>
                     ))}
@@ -168,7 +168,7 @@ export default function JobDetailsPage() {
                 {/* Important Note */}
                 <div className="mb-8 p-6 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg">
                   <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0">
+                    <div className="shrink-0">
                       <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                       </svg>
@@ -188,7 +188,7 @@ export default function JobDetailsPage() {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                      className="w-full bg-linear-to-r from-blue-600 to-purple-600 text-white font-bold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                       Apply for this Job
                     </motion.button>
@@ -209,7 +209,7 @@ export default function JobDetailsPage() {
                   className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100"
                 >
                   <div className="text-center mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-linear-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                       <span className="text-2xl font-bold text-white">
                         {job.title.charAt(0)}
                       </span>
@@ -244,7 +244,7 @@ export default function JobDetailsPage() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold px-6 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 mb-4"
+                      className="w-full bg-linear-to-r from-blue-600 to-purple-600 text-white font-bold px-6 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 mb-4"
                     >
                       Apply Now
                     </motion.button>

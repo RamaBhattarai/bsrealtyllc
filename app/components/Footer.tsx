@@ -17,7 +17,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100">
+    <footer className="bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100">
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 lg:px-8 py-16">
         {/* Top Section: Logo and Description */}
@@ -57,7 +57,7 @@ export default function Footer() {
             <div key={section.title}>
               <h4 className="text-white font-semibold text-lg mb-6 relative inline-block">
                 {section.title}
-                <span className="absolute left-0 bottom-0 w-12 h-0.5 bg-gradient-to-r from-green-500 to-green-600 rounded-full"></span>
+                <span className="absolute left-0 bottom-0 w-12 h-0.5 bg-linear-to-r from-green-500 to-green-600 rounded-full"></span>
               </h4>
               <ul className="space-y-3 mt-8">
                 {section.links.map((link) => (
@@ -78,7 +78,7 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent my-12"></div>
+        <div className="h-px bg-linear-to-r from-transparent via-gray-700 to-transparent my-12"></div>
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
@@ -93,3 +93,4 @@ export default function Footer() {
     </footer>
   );
 }
+

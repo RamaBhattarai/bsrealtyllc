@@ -69,7 +69,7 @@ export default function Team() {
               >
                 <div className="overflow-hidden bg-white rounded-2xl border-0 shadow-xl">
                   <div className="grid md:grid-cols-5 gap-0">
-                    <div className="md:col-span-2 bg-gradient-to-br from-blue-600 to-blue-800 p-12 flex items-center justify-center">
+                    <div className="md:col-span-2 bg-linear-to-br from-blue-600 to-blue-800 p-12 flex items-center justify-center">
                       <div className="text-center">
                         <div className="w-32 h-32 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-6">
                           <span className="text-5xl font-bold text-white">
@@ -168,3 +168,4 @@ export default function Team() {
     </>
   );
 }
+

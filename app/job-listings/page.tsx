@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { MapPin, Clock, DollarSign, ArrowRight } from 'lucide-react';
-import { jobs } from '@/lib/jobsData';
+import { jobs } from '../../lib/jobsData';
 
 export default function JobListingsPage() {
   return (
@@ -30,7 +30,7 @@ export default function JobListingsPage() {
       </section>
 
       {/* Breadcrumb */}
-      <section className="bg-gradient-to-r from-gray-50 to-gray-100 py-6 pt-8">
+      <section className="bg-linear-to-r from-gray-50 to-gray-100 py-6 pt-8">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Link href="/" className="hover:text-gray-900 transition-colors">Home</Link>
@@ -41,7 +41,7 @@ export default function JobListingsPage() {
       </section>
 
       {/* Job Listings */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      <section className="py-20 bg-linear-to-br from-gray-50 via-white to-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {jobs.map((job, index) => (
@@ -55,13 +55,13 @@ export default function JobListingsPage() {
               >
                 <div className="relative h-full">
                   {/* Card Background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-linear-to-br from-blue-500 to-purple-600 rounded-2xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
 
                   {/* Card */}
                   <div className="relative backdrop-blur-sm bg-white/80 border border-white/20 rounded-2xl p-8 h-full shadow-lg hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-2">
                     {/* Job Title */}
                     <Link href={`/job-details/${job.slug}`}>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300 cursor-pointer">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-transparent group-hover:bg-linear-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300 cursor-pointer">
                         {job.title}
                       </h3>
                     </Link>
@@ -118,7 +118,7 @@ export default function JobListingsPage() {
 
                     {/* Hover Effect Line */}
                     <motion.div
-                      className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-b-2xl"
+                      className="absolute bottom-0 left-0 h-1 bg-linear-to-r from-blue-500 to-purple-600 rounded-b-2xl"
                       initial={{ width: 0 }}
                       whileHover={{ width: '100%' }}
                       transition={{ duration: 0.3 }}
@@ -133,7 +133,7 @@ export default function JobListingsPage() {
 
      
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-400 to-purple-700">
+      <section className="py-20 bg-linear-to-br from-blue-400 to-purple-700">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -162,3 +162,4 @@ export default function JobListingsPage() {
     </div>
   );
 }
+

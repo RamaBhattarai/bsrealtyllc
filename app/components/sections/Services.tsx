@@ -81,13 +81,13 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
     >
       <div className="relative h-full">
         {/* Gradient Background */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${service.color} rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300 blur-xl`}></div>
+        <div className={`absolute inset-0 bg-linear-to-br ${service.color} rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300 blur-xl`}></div>
 
         {/* Card */}
         <div className="relative bg-white border border-gray-200 rounded-2xl p-8 h-full shadow-md hover:shadow-2xl transition-all duration-300 transform group-hover:scale-105 group-hover:-translate-y-1">
           {/* Top Section with Icon and Badge */}
           <div className="flex items-start justify-between mb-6">
-            <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
+            <div className={`w-16 h-16 rounded-xl bg-linear-to-br ${service.color} flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
               <IconComponent className="w-8 h-8 text-white" />
             </div>
             <motion.div
@@ -120,7 +120,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
           >
             {service.features.map((feature, i) => (
               <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
-                <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.color}`}></div>
+                <div className={`w-1.5 h-1.5 rounded-full bg-linear-to-r ${service.color}`}></div>
                 {feature}
               </li>
             ))}
@@ -128,7 +128,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
 
           {/* Bottom Accent Line */}
           <motion.div
-            className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${service.color} rounded-b-2xl`}
+            className={`absolute bottom-0 left-0 h-1 bg-linear-to-r ${service.color} rounded-b-2xl`}
             initial={{ width: 0 }}
             animate={{ width: isHovered ? '100%' : 0 }}
             transition={{ duration: 0.3 }}
@@ -145,7 +145,7 @@ export default function Services() {
   };
 
   return (
-    <section className="pt-12 pb-24 md:pt-24 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
+    <section className="pt-12 pb-24 md:pt-24 bg-linear-to-b from-white via-gray-50 to-white relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-green-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 translate-x-1/2 translate-y-1/2"></div>
@@ -165,7 +165,7 @@ export default function Services() {
             </span>
           </div>
           <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Our <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Services</span>
+            Our <span className="bg-linear-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Services</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             We provide comprehensive real estate solutions tailored to your needs, ensuring a seamless experience from start to finish with expert guidance at every step.
@@ -187,13 +187,13 @@ export default function Services() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-8 border border-green-200">
+          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-6 bg-linear-to-r from-green-50 to-blue-50 rounded-2xl p-8 border border-green-200">
             <div className="flex-1">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Ready to get started?</h3>
               <p className="text-gray-600">Let our experts help you find the perfect solution.</p>
             </div>
             <Link href="/contact">
-              <button className="whitespace-nowrap bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2">
+              <button className="whitespace-nowrap bg-linear-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2">
                 Contact Us Today
                 <FaArrowRight className="w-4 h-4" />
               </button>
@@ -204,3 +204,4 @@ export default function Services() {
     </section>
   );
 }
+

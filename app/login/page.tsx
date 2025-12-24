@@ -38,11 +38,11 @@ function LoginForm() {
 
   // Handle navigation after successful login
   useEffect(() => {
-    if (loginMutation.isSuccess && loginMutation.data?.success) {
+    if (loginMutation.isSuccess && loginMutation.data?.token) {
       const user = loginMutation.data.user
       if (user) {
         if (user.role === 'admin') {
-          router.push('/admin/dashboard')
+          router.push('/dashboard')
         } else if (user.role === 'agent') {
           router.push('/agent/dashboard')
         } else {
@@ -124,7 +124,7 @@ function LoginForm() {
               handleLogin(selectedRole as 'agent' | 'client' | 'admin', email, password)
             }}>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="email" className="block text-sm font-medium text-foreground">
                   Email address
                 </label>
                 <div className="mt-1">
@@ -134,14 +134,14 @@ function LoginForm() {
                     type="email"
                     autoComplete="email"
                     required
-                    className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 sm:text-sm ${roleData.formColor}`}
+                    className={`appearance-none block w-full px-3 py-2 bg-white dark:bg-gray-800 border rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 sm:text-sm text-gray-900 dark:text-gray-100 ${roleData.formColor.replace('border-', 'border-').replace('focus:border-', 'focus:border-').replace('focus:ring-', 'focus:ring-')}`}
                     placeholder="Enter your email"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="password" className="block text-sm font-medium text-foreground">
                   Password
                 </label>
                 <div className="mt-1">
@@ -151,7 +151,7 @@ function LoginForm() {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 sm:text-sm ${roleData.formColor}`}
+                    className={`appearance-none block w-full px-3 py-2 bg-white dark:bg-gray-800 border rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 sm:text-sm text-gray-900 dark:text-gray-100 ${roleData.formColor.replace('border-', 'border-').replace('focus:border-', 'focus:border-').replace('focus:ring-', 'focus:ring-')}`}
                     placeholder="Enter your password"
                   />
                 </div>
@@ -163,9 +163,9 @@ function LoginForm() {
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-primary focus:ring-ring border-border rounded"
                   />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-foreground">
                     Remember me
                   </label>
                 </div>
@@ -247,7 +247,7 @@ function LoginForm() {
                       {option.description}
                     </p>
                   </div>
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <svg className="h-5 w-5 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -286,3 +286,4 @@ export default function LoginPage() {
     </Suspense>
   )
 }
+

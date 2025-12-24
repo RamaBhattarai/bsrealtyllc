@@ -1,15 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
-import { authApi, LoginRequest, LoginResponse } from '../api';
+import { authAPI, type LoginRequest, type AuthResponse } from '../api/auth.api';
 import toast from 'react-hot-toast';
 
 export const useLogin = () => {
-  return useMutation<LoginResponse, Error, LoginRequest>({
-    mutationFn: authApi.login,
+  return useMutation<AuthResponse, Error, LoginRequest>({
+    mutationFn: authAPI.login,
     onSuccess: (data) => {
       if (data.token) {
-        // Store token in localStorage or cookie
-        localStorage.setItem('authToken', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
+        // Store token using the API utility
+        authAPI.setToken(data.token);
 
         toast.success('Login successful! Welcome back.');
 
@@ -27,7 +26,7 @@ export const useLogin = () => {
 
 export const useRegister = () => {
   return useMutation({
-    mutationFn: authApi.register,
+    mutationFn: authAPI.register,
     onSuccess: (data) => {
       console.log('Registration successful:', data);
       // Toast will be shown by the login page when redirected

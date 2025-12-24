@@ -75,7 +75,7 @@ export default function PropertySlider() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50">
+    <section className="py-20 bg-linear-to-b from-gray-50 via-white to-gray-50">
       <div className="max-w-6xl mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -86,7 +86,7 @@ export default function PropertySlider() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Featured <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Properties</span>
+            Featured <span className="bg-linear-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Properties</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Discover exceptional homes in the most desirable neighborhoods across Georgia
@@ -116,7 +116,7 @@ export default function PropertySlider() {
                     className="absolute inset-0"
                   >
                     {/* Background Image or Placeholder */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-linear-to-br from-blue-500 via-blue-600 to-blue-700 flex items-center justify-center">
                       <div className="text-center">
                         <div className="text-8xl mb-4 opacity-20">🏠</div>
                         <p className="text-white/30 text-lg">Property Image</p>
@@ -124,7 +124,7 @@ export default function PropertySlider() {
                     </div>
 
                     {/* Content Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
+                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent">
                       <div className="absolute top-6 right-6">
                         <span className={`${statusColors[slide.status]} text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg`}>
                           {slide.status}
@@ -213,7 +213,7 @@ export default function PropertySlider() {
               Property <span className="text-green-600 font-bold text-xl">{currentSlide + 1}</span> of <span className="font-bold text-lg">{slides.length}</span>
             </p>
           </div>
-          <button className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-3 rounded-lg text-base font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
+          <button className="bg-linear-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-3 rounded-lg text-base font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
             View All Properties
           </button>
         </div>
@@ -221,3 +221,4 @@ export default function PropertySlider() {
     </section>
   );
 }
+

@@ -3,9 +3,11 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaPhone, FaList, FaComments, FaPaperPlane } from 'react-icons/fa';
+import { useBookAppointment } from '../../../hooks/useAppointment';
+import type { AppointmentFormData } from '../../../lib/api/appointment.api';
 
 export default function Appointment() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<AppointmentFormData>({
     name: '',
     email: '',
     phone: '',
@@ -15,6 +17,8 @@ export default function Appointment() {
     preference: '',
     message: ''
   });
+
+  const bookAppointmentMutation = useBookAppointment();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -26,9 +30,28 @@ export default function Appointment() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Appointment data:', formData);
-    // Handle form submission here
-    alert('Appointment scheduled successfully!');
+    
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.time || !formData.category) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    bookAppointmentMutation.mutate(formData, {
+      onSuccess: () => {
+        // Reset form on success
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          date: '',
+          time: '',
+          category: '',
+          preference: '',
+          message: ''
+        });
+      }
+    });
   };
 
   const categories = [
@@ -46,7 +69,7 @@ export default function Appointment() {
   ];
 
   return (
-    <div className="py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <div className="py-20 bg-linear-to-br from-blue-50 via-white to-indigo-50">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -94,7 +117,7 @@ export default function Appointment() {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm"
+                  className="w-full px-4 py-3 !bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm !text-gray-900 placeholder:!text-gray-500"
                   placeholder="Enter your full name"
                 />
               </motion.div>
@@ -116,7 +139,7 @@ export default function Appointment() {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm"
+                  className="w-full px-4 py-3 !bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm !text-gray-900 placeholder:!text-gray-500"
                   placeholder="your@email.com"
                 />
               </motion.div>
@@ -138,7 +161,7 @@ export default function Appointment() {
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm"
+                  className="w-full px-4 py-3 bg-white! border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm !text-gray-900 placeholder:!text-gray-500"
                   placeholder="(555) 123-4567"
                 />
               </motion.div>
@@ -159,7 +182,7 @@ export default function Appointment() {
                   value={formData.category}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none bg-white text-sm"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none bg-white! text-sm text-gray-900!"
                 >
                   <option value="">Choose a service...</option>
                   {categories.map((category, index) => (
@@ -188,7 +211,7 @@ export default function Appointment() {
                   value={formData.date}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm"
+                  className="w-full px-4 py-3 !bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm !text-gray-900"
                 />
               </div>
 
@@ -203,7 +226,7 @@ export default function Appointment() {
                   value={formData.time}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm"
+                  className="w-full px-4 py-3 !bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm !text-gray-900"
                 />
               </div>
             </motion.div>
@@ -225,7 +248,7 @@ export default function Appointment() {
                 value={formData.preference}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none bg-white text-sm"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none !bg-white text-sm !text-gray-900"
               >
                 <option value="">Select your preferred meeting type...</option>
                 {preferences.map((preference, index) => (
@@ -251,7 +274,7 @@ export default function Appointment() {
                 value={formData.message}
                 onChange={handleInputChange}
                 rows={3}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none resize-none text-sm"
+                className="w-full px-4 py-3 bg-white! border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none resize-none text-sm text-gray-900! placeholder:text-gray-500!"
                 placeholder="Tell us more about your needs or any specific questions you have..."
               />
             </motion.div>
@@ -266,12 +289,13 @@ export default function Appointment() {
             >
               <motion.button
                 type="submit"
-                className="bg-green-600 text-white px-10 py-3 rounded-full font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center mx-auto"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                disabled={bookAppointmentMutation.isPending}
+                className="bg-green-600 text-white px-10 py-3 rounded-full font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={{ scale: bookAppointmentMutation.isPending ? 1 : 1.05 }}
+                whileTap={{ scale: bookAppointmentMutation.isPending ? 1 : 0.95 }}
               >
                 <FaPaperPlane className="mr-2" />
-                Schedule Appointment
+                {bookAppointmentMutation.isPending ? 'Booking...' : 'Schedule Appointment'}
               </motion.button>
             </motion.div>
           </form>
@@ -298,7 +322,7 @@ export default function Appointment() {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute inset-0 bg-gradient-to-br from-blue-200 to-indigo-300 rounded-full opacity-20"
+                className="absolute inset-0 bg-linear-to-br from-blue-200 to-indigo-300 rounded-full opacity-20"
               />
 
               {/* Person SVG Illustration */}
@@ -502,7 +526,7 @@ export default function Appointment() {
                 </motion.div>
 
                 {/* Speech bubble tail */}
-                <div className="absolute bottom-[-8px] right-8 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-white"></div>
+                <div className="absolute -bottom-2 right-8 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-white"></div>
               </motion.div>
             </div>
           </motion.div>
@@ -512,3 +536,4 @@ export default function Appointment() {
     </div>
   );
 }
+

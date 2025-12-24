@@ -146,7 +146,7 @@ export default function PropertyInquiry() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 pt-32 pb-12">
+    <div className="min-h-screen bg-linear-to-br from-green-50 to-blue-50 pt-32 pb-12">
       <div className="max-w-3xl mx-auto px-6">
         {/* Header */}
         <div className="mb-8">
@@ -575,3 +575,4 @@ export default function PropertyInquiry() {
     </div>
   );
 }
+

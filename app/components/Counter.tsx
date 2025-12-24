@@ -59,3 +59,4 @@ export default function Counter({ end, duration = 2000, className = '' }: Counte
 
   return <div ref={ref} className={className}>{count}</div>;
 }
+

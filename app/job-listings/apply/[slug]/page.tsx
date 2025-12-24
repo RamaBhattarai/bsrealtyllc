@@ -4,7 +4,7 @@ import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight, FaCheck, FaCloudUploadAlt } from 'react-icons/fa';
-import { jobs } from '@/lib/jobsData';
+import { jobs } from '../../../../lib/jobsData';
 import { useParams, useRouter } from 'next/navigation';
 
 export default function JobApplicationForm() {
@@ -178,7 +178,7 @@ export default function JobApplicationForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 pt-32 pb-12">
+    <div className="min-h-screen bg-linear-to-br from-green-50 to-blue-50 pt-32 pb-12">
       <div className="max-w-4xl mx-auto px-6">
         {/* Header */}
         <div className="mb-8">
@@ -310,8 +310,8 @@ export default function JobApplicationForm() {
                       type="text"
                       value={formData.name}
                       onChange={(e) => handleInputChange('name', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                        errors.name ? 'border-red-500' : 'border-gray-300'
+                      className={`w-full px-4 py-3 bg-white dark:bg-gray-800 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 ${
+                        errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                       }`}
                       placeholder="Enter your full name"
                     />
@@ -327,8 +327,8 @@ export default function JobApplicationForm() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                        errors.email ? 'border-red-500' : 'border-gray-300'
+                      className={`w-full px-4 py-3 bg-white dark:bg-gray-800 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 ${
+                        errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                       }`}
                       placeholder="your@email.com"
                     />
@@ -346,8 +346,8 @@ export default function JobApplicationForm() {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                        errors.phone ? 'border-red-500' : 'border-gray-300'
+                      className={`w-full px-4 py-3 bg-white dark:bg-gray-800 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 ${
+                        errors.phone ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                       }`}
                       placeholder="(123) 456-7890"
                     />

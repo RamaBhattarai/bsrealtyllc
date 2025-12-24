@@ -29,7 +29,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const variantClasses = {
-    default: 'bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 shadow-md hover:shadow-lg',
+    default: 'bg-linear-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 shadow-md hover:shadow-lg',
     secondary: 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg',
     outline: 'border-2 border-green-600 text-green-600 hover:bg-green-50 transition-colors',
     ghost: 'text-green-600 hover:bg-green-50 transition-colors',
@@ -69,3 +69,4 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
+

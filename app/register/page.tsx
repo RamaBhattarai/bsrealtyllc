@@ -277,7 +277,7 @@ export default function RegisterPage() {
                   onClick={() => setSelectedRole(option.id as 'agent' | 'client')}
                   className="w-full flex items-center p-4 border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-md transition-all duration-200 group"
                 >
-                  <div className={`flex-shrink-0 w-12 h-12 rounded-lg ${option.color} flex items-center justify-center mr-4`}>
+                  <div className={`shrink-0 w-12 h-12 rounded-lg ${option.color} flex items-center justify-center mr-4`}>
                     <IconComponent className="h-6 w-6 text-white" />
                   </div>
                   <div className="flex-1 text-left">
@@ -288,7 +288,7 @@ export default function RegisterPage() {
                       {option.description}
                     </p>
                   </div>
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <svg className="h-5 w-5 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -317,3 +317,4 @@ export default function RegisterPage() {
     </div>
   )
 }
+
