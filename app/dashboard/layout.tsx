@@ -10,7 +10,7 @@ interface DashboardLayoutProps {
   children: React.ReactNode
 }
 
-const navigation = [
+const adminNavigation = [
   { name: 'Dashboard', href: '/dashboard', icon: FaTachometerAlt },
   { name: 'Users', href: '/dashboard/users', icon: FaUsers },
   { name: 'Contacts', href: '/dashboard/contacts', icon: FaEnvelope },
@@ -19,19 +19,46 @@ const navigation = [
   { name: 'Settings', href: '/dashboard/settings', icon: FaCog },
 ]
 
+const agentNavigation = [
+  { name: 'Dashboard', href: '/dashboard', icon: FaTachometerAlt },
+  { name: 'My Appointments', href: '/dashboard/appointments', icon: FaCalendarAlt },
+  { name: 'Settings', href: '/dashboard/settings', icon: FaCog },
+]
+
+const clientNavigation = [
+  { name: 'Dashboard', href: '/dashboard', icon: FaTachometerAlt },
+  { name: 'My Appointments', href: '/dashboard/appointments', icon: FaCalendarAlt },
+  { name: 'Settings', href: '/dashboard/settings', icon: FaCog },
+]
+
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const { user, isAdmin } = useAuth()
+  const { user, isAdmin, isAgent, isClient, isLoading } = useAuth()
   const logoutMutation = useLogout()
   const router = useRouter()
 
+  // Select navigation based on user role
+  const navigation = isAdmin ? adminNavigation : isAgent ? agentNavigation : clientNavigation
+  const dashboardTitle = isAdmin ? 'Admin Dashboard' : isAgent ? 'Agent Dashboard' : 'Client Dashboard'
+
   useEffect(() => {
-    if (!isAdmin) {
+    // Only redirect if we're not loading and the user is not authenticated
+    if (!isLoading && !user) {
       router.push('/login')
     }
-  }, [isAdmin, router])
+  }, [user, isLoading, router])
 
-  if (!isAdmin) {
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    )
+  }
+
+  // Don't render anything if user is not authenticated (will redirect)
+  if (!user) {
     return null
   }
 
@@ -51,7 +78,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       {/* Sidebar */}
       <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out lg:translate-x-0`}>
         <div className="flex items-center justify-center h-16 px-4 bg-blue-600">
-          <h1 className="text-xl font-bold text-white">Admin Dashboard</h1>
+          <h1 className="text-xl font-bold text-white">{dashboardTitle}</h1>
         </div>
         <nav className="mt-4 flex-1">
           <div className="px-4 space-y-1">

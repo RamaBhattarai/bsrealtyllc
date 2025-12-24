@@ -313,7 +313,7 @@ export default function PropertyInquiry() {
                 <select
                   value={formData.budgetRange}
                   onChange={(e) => handleInputChange('budgetRange', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                  className="w-full px-4 py-2 border bg-white! text-gray-700! border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
                 >
                   <option value="">Select a range</option>
                   <option value="Under $200,000">Under $200,000</option>
@@ -331,7 +331,7 @@ export default function PropertyInquiry() {
                 <select
                   value={formData.timeline}
                   onChange={(e) => handleInputChange('timeline', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                  className="w-full px-4 py-2 border  bg-white! text-gray-700! border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
                 >
                   <option value="">Select timeline</option>
                   <option value="Immediately (within 1 month)">Immediately (within 1 month)</option>
@@ -348,7 +348,7 @@ export default function PropertyInquiry() {
                   placeholder="Enter your preferred locations"
                   value={formData.locations}
                   onChange={(e) => handleInputChange('locations', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 resize-none"
+                  className="w-full px-4 py-2 border bg-white! border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 resize-none"
                   rows={3}
                 />
               </div>
@@ -422,7 +422,7 @@ export default function PropertyInquiry() {
                   placeholder="e.g., legal issues, financing challenges, time constraints, etc."
                   value={formData.concerns}
                   onChange={(e) => handleInputChange('concerns', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 resize-none"
+                  className="w-full px-4 py-2 bg-white! border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 resize-none"
                   rows={4}
                 />
               </div>
@@ -484,7 +484,7 @@ export default function PropertyInquiry() {
                   placeholder="Please share any additional information"
                   value={formData.additionalInfo}
                   onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 resize-none"
+                  className="w-full px-4 py-2 bg-white! border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 resize-none"
                   rows={4}
                 />
               </div>

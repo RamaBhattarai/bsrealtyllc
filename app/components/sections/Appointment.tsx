@@ -182,7 +182,7 @@ export default function Appointment() {
                   value={formData.category}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none bg-white! text-sm text-gray-900!"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none bg-white! text-sm text-gray-700!"
                 >
                   <option value="">Choose a service...</option>
                   {categories.map((category, index) => (
@@ -211,7 +211,7 @@ export default function Appointment() {
                   value={formData.date}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 !bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm !text-gray-900"
+                  className="w-full px-4 py-3 bg-white! border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm text-gray-700!"
                 />
               </div>
 
@@ -226,7 +226,7 @@ export default function Appointment() {
                   value={formData.time}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 !bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm !text-gray-900"
+                  className="w-full px-4 py-3 bg-white! border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm text-gray-700!"
                 />
               </div>
             </motion.div>
@@ -248,7 +248,7 @@ export default function Appointment() {
                 value={formData.preference}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none !bg-white text-sm !text-gray-900"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none bg-white! text-sm text-gray-700!"
               >
                 <option value="">Select your preferred meeting type...</option>
                 {preferences.map((preference, index) => (

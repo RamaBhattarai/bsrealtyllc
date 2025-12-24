@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import { FaBars, FaTimes, FaChevronDown, FaIdCard } from "react-icons/fa";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +18,7 @@ export default function Navbar() {
   const [onlineCoursesDropdownOpen, setOnlineCoursesDropdownOpen] = useState(false);
   const [joinTeamDropdownOpen, setJoinTeamDropdownOpen] = useState(false);
   const [mobileJoinTeamDropdownOpen, setMobileJoinTeamDropdownOpen] = useState(false);
+  const [mobileSolutionsDropdownOpen, setMobileSolutionsDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function Navbar() {
     setIsOpen(!isOpen);
     if (!isOpen) {
       setMobileDropdownOpen(false);
+      setMobileSolutionsDropdownOpen(false);
       setSolutionsDropdownOpen(false);
       setResidentialDropdownOpen(false);
       setMortgagesDropdownOpen(false);
@@ -64,6 +66,7 @@ export default function Navbar() {
   const closeAllDropdowns = () => {
     setIsOpen(false);
     setMobileDropdownOpen(false);
+    setMobileSolutionsDropdownOpen(false);
     setSolutionsDropdownOpen(false);
     setResidentialDropdownOpen(false);
     setMortgagesDropdownOpen(false);
@@ -74,6 +77,10 @@ export default function Navbar() {
     setOnlineCoursesDropdownOpen(false);
     setJoinTeamDropdownOpen(false);
     setMobileJoinTeamDropdownOpen(false);
+  };
+
+  const toggleMobileSolutions = () => {
+    setMobileSolutionsDropdownOpen(!mobileSolutionsDropdownOpen);
   };
 
   const navLinkClass = "font-medium text-gray-700 hover:text-green-600 transition-all duration-300 relative group";
@@ -186,11 +193,11 @@ export default function Navbar() {
                     <div className="opacity-0 invisible group-hover/sub:visible group-hover/sub:opacity-100 absolute right-full top-0 w-48 bg-white rounded-md shadow-lg border-l-4 border-green-500 transition-all duration-200">
                       <ul className="py-2">
                         <li><Link href="https://www.loanfactory.com/balkhadka" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Mortgages</Link></li>
-                        <li><Link href="/mortgages/refinance" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Refinance</Link></li>
-                        <li><Link href="/mortgages/get-quote" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Get Quote</Link></li>
-                        <li><Link href="/mortgages/mortage-calculator" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Mortage Calculator</Link></li>
-                        <li><Link href="/mortgages/home-affordability" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Home Affordability</Link></li>
-                        <li><Link href="/mortgages/resources" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Resources</Link></li>
+                        <li><Link href="https://www.loanfactory.com/balkhadka" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Refinance</Link></li>
+                        <li><Link href="https://www.loanfactory.com/balkhadka" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Get Quote</Link></li>
+                        <li><Link href="https://khadkabal.georgiamls.com/real-estate-calculators/mortgage.cfm" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Mortage Calculator</Link></li>
+                        <li><Link href="https://khadkabal.georgiamls.com/real-estate-calculators/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Home Affordability</Link></li>
+                        <li><Link href="https://www.loanfactory.com/balkhadka"  target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Resources</Link></li>
                       </ul>
                     </div>
                   </li>
@@ -206,10 +213,10 @@ export default function Navbar() {
                     </button>
                     <div className="opacity-0 invisible group-hover/sub:visible group-hover/sub:opacity-100 absolute right-full top-0 w-48 bg-white rounded-md shadow-lg border-l-4 border-green-500 transition-all duration-200">
                       <ul className="py-2">
-                        <li><Link href="/insurance/auto" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Auto</Link></li>
-                        <li><Link href="/insurance/residential-property" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Residential Property</Link></li>
-                        <li><Link href="/insurance/commercial-property" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Commercial Property</Link></li>
-                        <li><Link href="/insurance/others" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Others</Link></li>
+                        <li><Link href="/insurance-quote" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Auto</Link></li>
+                        <li><Link href="/insurance-quote" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Residential Property</Link></li>
+                        <li><Link href="/insurance-quote"  target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Commercial Property</Link></li>
+                        <li><Link href="/insurance-quote"target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Others</Link></li>
                       </ul>
                     </div>
                   </li>
@@ -225,16 +232,16 @@ export default function Navbar() {
                     </button>
                     <div className="opacity-0 invisible group-hover/sub:visible group-hover/sub:opacity-100 absolute right-full top-0 w-48 bg-white rounded-md shadow-lg border-l-4 border-green-500 transition-all duration-200">
                       <ul className="py-2">
-                        <li><Link href="/commercial-properties/buy" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Office Buildings</Link></li>
-                        <li><Link href="/commercial-properties/sell" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Retail Property</Link></li>
-                        <li><Link href="/commercial-properties/lease" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Industrial Property</Link></li>
-                        <li><Link href="/commercial-properties/apartment-buildings" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Apartment Buildings</Link></li>
-                        <li><Link href="/commercial-properties/hotels-and-hospitality" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Hotels and Hospitality</Link></li>
-                        <li><Link href="/commercial-properties/mixed-use-properties" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Mixed-use Properties</Link></li>
-                        <li><Link href="/commercial-properties/healthcare-facilities" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Healthcare Facilities</Link></li>
-                        <li><Link href="/commercial-properties/land" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Land</Link></li>
-                        <li><Link href="/commercial-properties/special-purpose-properties" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Special Purpose Properties</Link></li>
-                        <li><Link href="/commercial-properties/data-centers" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Data Centers</Link></li>
+                        <li><Link href="/commercial-properties/buy" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Office Buildings</Link></li>
+                        <li><Link href="/commercial-properties/sell" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Retail Property</Link></li>
+                        <li><Link href="/commercial-properties/lease" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Industrial Property</Link></li>
+                        <li><Link href="/commercial-properties/apartment-buildings" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Apartment Buildings</Link></li>
+                        <li><Link href="/commercial-properties/hotels-and-hospitality" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Hotels and Hospitality</Link></li>
+                        <li><Link href="/commercial-properties/mixed-use-properties" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Mixed-use Properties</Link></li>
+                        <li><Link href="/commercial-properties/healthcare-facilities" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Healthcare Facilities</Link></li>
+                        <li><Link href="/commercial-properties/land" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Land</Link></li>
+                        <li><Link href="/commercial-properties/special-purpose-properties" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Special Purpose Properties</Link></li>
+                        <li><Link href="/commercial-properties/data-centers" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Data Centers</Link></li>
                       </ul>
                     </div>
                   </li>
@@ -250,14 +257,14 @@ export default function Navbar() {
                     </button>
                     <div className="opacity-0 invisible group-hover/sub:visible group-hover/sub:opacity-100 absolute right-full top-0 w-56 bg-white rounded-md shadow-lg border-l-4 border-green-500 transition-all duration-200">
                       <ul className="py-2">
-                        <li><Link href="/home-improvement/electrical" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Electrical</Link></li>
-                        <li><Link href="/home-improvement/hvac" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">HVAC</Link></li>
-                        <li><Link href="/home-improvement/plumbing" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Plumbing</Link></li>
-                        <li><Link href="/home-improvement/painting" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Painting</Link></li>
-                        <li><Link href="/home-improvement/roofing" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Roofing</Link></li>
-                        <li><Link href="/home-improvement/flooring" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Flooring</Link></li>
-                        <li><Link href="/home-improvement/landscaping" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Landscaping</Link></li>
-                        <li><Link href="/home-improvement/kitchen-bathroom" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Kitchen & Bathroom Remodeling</Link></li>
+                        <li><Link href="/home-improvement/electrical" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Electrical</Link></li>
+                        <li><Link href="/home-improvement/hvac" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">HVAC</Link></li>
+                        <li><Link href="/home-improvement/plumbing" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Plumbing</Link></li>
+                        <li><Link href="/home-improvement/painting" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Painting</Link></li>
+                        <li><Link href="/home-improvement/roofing" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Roofing</Link></li>
+                        <li><Link href="/home-improvement/flooring" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Flooring</Link></li>
+                        <li><Link href="/home-improvement/landscaping" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Landscaping</Link></li>
+                        <li><Link href="/home-improvement/kitchen-bathroom" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Kitchen & Bathroom Remodeling</Link></li>
                       </ul>
                     </div>
                   </li>
@@ -273,15 +280,15 @@ export default function Navbar() {
                     </button>
                     <div className="opacity-0 invisible group-hover/sub:visible group-hover/sub:opacity-100 absolute right-full top-0 w-64 bg-white rounded-md shadow-lg border-l-4 border-green-500 transition-all duration-200">
                       <ul className="py-2">
-                        <li><Link href="/tax-accounting/preparation" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Tax Preparation</Link></li>
-                        <li><Link href="/tax-accounting/planning" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Tax Planning</Link></li>
-                        <li><Link href="/tax-accounting/advisory" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Tax Advisory</Link></li>
-                        <li><Link href="/tax-accounting/bookkeeping" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Book Keeping</Link></li>
-                        <li><Link href="/tax-accounting/reporting" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Financial Reporting</Link></li>
-                        <li><Link href="/tax-accounting/payroll" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Payroll Accounting</Link></li>
-                        <li><Link href="/tax-accounting/auditing" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Auditing</Link></li>
-                        <li><Link href="/tax-accounting/small-business" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Small Business Accounting</Link></li>
-                        <li><Link href="/tax-accounting/self-employed" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Self-Employed Tax Accounting</Link></li>
+                        <li><Link href="/tax-accounting/preparation" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Tax Preparation</Link></li>
+                        <li><Link href="/tax-accounting/planning" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Tax Planning</Link></li>
+                        <li><Link href="/tax-accounting/advisory" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Tax Advisory</Link></li>
+                        <li><Link href="/tax-accounting/bookkeeping" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Book Keeping</Link></li>
+                        <li><Link href="/tax-accounting/reporting" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Financial Reporting</Link></li>
+                        <li><Link href="/tax-accounting/payroll" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Payroll Accounting</Link></li>
+                        <li><Link href="/tax-accounting/auditing" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Auditing</Link></li>
+                        <li><Link href="/tax-accounting/small-business" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Small Business Accounting</Link></li>
+                        <li><Link href="/tax-accounting/self-employed" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Self-Employed Tax Accounting</Link></li>
                       </ul>
                     </div>
                   </li>
@@ -297,12 +304,12 @@ export default function Navbar() {
                     </button>
                     <div className="opacity-0 invisible group-hover/sub:visible group-hover/sub:opacity-100 absolute right-full top-0 w-64 bg-white rounded-md shadow-lg border-l-4 border-green-500 transition-all duration-200">
                       <ul className="py-2">
-                        <li><Link href="/online-courses/real-estate-pre-licensing" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Real Estate Pre-Licensing</Link></li>
-                        <li><Link href="/online-courses/real-estate-exam-prep" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Real Estate Exam Preparation</Link></li>
-                        <li><Link href="/online-courses/real-estate-post-licensing" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Real Estate Post-Licensing</Link></li>
-                        <li><Link href="/online-courses/real-estate-ce" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Real Estate CE Courses</Link></li>
-                        <li><Link href="/online-courses/loan-officer-exam-prep" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Loan Officer Exam Preparation</Link></li>
-                        <li><Link href="/online-courses/loan-officer-ce" className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Loan Officer CE Courses</Link></li>
+                        <li><Link href="/online-courses/real-estate-pre-licensing" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Real Estate Pre-Licensing</Link></li>
+                        <li><Link href="/online-courses/real-estate-exam-prep" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Real Estate Exam Preparation</Link></li>
+                        <li><Link href="/online-courses/real-estate-post-licensing" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Real Estate Post-Licensing</Link></li>
+                        <li><Link href="/online-courses/real-estate-ce" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Real Estate CE Courses</Link></li>
+                        <li><Link href="/online-courses/loan-officer-exam-prep" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Loan Officer Exam Preparation</Link></li>
+                        <li><Link href="/online-courses/loan-officer-ce" onClick={e => e.preventDefault()} className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm">Loan Officer CE Courses</Link></li>
                       </ul>
                     </div>
                   </li>
@@ -327,6 +334,7 @@ export default function Navbar() {
                   <li>
                     <Link href="/become-agent" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Become an Agent</Link>
                   </li>
+                 
                 </ul>
               </div>
             </li>
@@ -340,6 +348,22 @@ export default function Navbar() {
                 Contact Us
               </Link>
             </li>
+
+            {/* Digital Card */}
+          <li>
+  <Link
+    href="/card"  target="_blank"
+  rel="noopener noreferrer"
+    className={`
+      ${navLinkClass} 
+      px-3 py-2 text-sm xl:text-base flex items-center gap-2 
+      transition-transform duration-500 hover:rotate-6
+    `}
+  >
+    Digital Card
+    <FaIdCard className="transition-transform duration-500 hover:rotate-12" />
+  </Link>
+</li>
 
             {/* Get Started hover dropdown */}
             <li className="relative group">
@@ -360,6 +384,9 @@ export default function Navbar() {
                   </li>
                   <li>
                     <Link href="/insurance-quote" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Get Insurance Quote</Link>
+                  </li>
+                  <li>
+                    <Link href="/home-improvement-quote" className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Home Improvement Quote</Link>
                   </li>
                 </ul>
               </div>
@@ -393,373 +420,303 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Backdrop */}
+
+
+      {/* Mobile Menu - Simple Dropdown */}
       {isOpen && (
-        <div 
-          className="lg:hidden fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
-          onClick={toggleMenu}
-        />
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t z-50">
+          <div className="container mx-auto px-4 py-4" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+            <ul className="flex flex-col space-y-1 pb-4">
+              {/* Home */}
+              <li>
+                <Link
+                  href="/"
+                  className="block px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-colors rounded-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Home
+                </Link>
+              </li>
+
+              {/* About */}
+              <li>
+                <Link
+                  href="/about"
+                  className="block px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-colors rounded-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  About
+                </Link>
+              </li>
+
+              {/* Services */}
+              <li>
+                <Link
+                  href="/services"
+                  className="block px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-colors rounded-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Services
+                </Link>
+              </li>
+
+              {/* Solutions */}
+              <li>
+                <button
+                  type="button"
+                  onClick={toggleMobileSolutions}
+                  className="w-full text-left px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-colors rounded-lg flex items-center justify-between"
+                >
+                  Solutions
+                  <FaChevronDown className={`text-sm transition-transform duration-200 ${mobileSolutionsDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {mobileSolutionsDropdownOpen && (
+                  <ul className="mt-1 ml-4 space-y-2 bg-green-50 rounded-lg p-3">
+                    {/* Residential Properties */}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => setResidentialDropdownOpen(!residentialDropdownOpen)}
+                        className="w-full text-left px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded flex items-center justify-between font-medium"
+                      >
+                        Residential Properties
+                        <FaChevronDown className={`text-xs transition-transform duration-200 ${residentialDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {residentialDropdownOpen && (
+                        <ul className="mt-1 ml-3 space-y-1">
+                          <li><Link href="https://khadkabal.georgiamls.com/real-estate/?styp=sale&typ=sd" target="_blank" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Property Search</Link></li>
+                          <li><Link href="https://khadkabal.georgiamls.com/real-estate-calculators/" target="_blank" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Home Affordability</Link></li>
+                          <li><Link href="https://khadkabal.georgiamls.com/local-schools/" target="_blank" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>School Information</Link></li>
+                          <li><Link href="https://dor.georgia.gov/property-records-online" target="_blank" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>County Public Records</Link></li>
+                        </ul>
+                      )}
+                    </li>
+
+                    {/* Mortgages */}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => setMortgagesDropdownOpen(!mortgagesDropdownOpen)}
+                        className="w-full text-left px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded flex items-center justify-between font-medium"
+                      >
+                        Mortgages
+                        <FaChevronDown className={`text-xs transition-transform duration-200 ${mortgagesDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {mortgagesDropdownOpen && (
+                        <ul className="mt-1 ml-3 space-y-1">
+                          <li><Link href="https://www.loanfactory.com/balkhadka" target="_blank" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Mortgages</Link></li>
+                          <li><Link href="https://www.loanfactory.com/balkhadka" target="_blank" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Refinance</Link></li>
+                          <li><Link href="https://www.loanfactory.com/balkhadka" target="_blank" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Get Quote</Link></li>
+                          <li><Link href="https://khadkabal.georgiamls.com/real-estate-calculators/mortgage.cfm" target="_blank" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Mortgage Calculator</Link></li>
+                          <li><Link href="https://khadkabal.georgiamls.com/real-estate-calculators/" target="_blank" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Home Affordability</Link></li>
+                          <li><Link href="https://www.loanfactory.com/balkhadka" target="_blank" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Resources</Link></li>
+                        </ul>
+                      )}
+                    </li>
+
+                    {/* Insurance */}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => setInsuranceDropdownOpen(!insuranceDropdownOpen)}
+                        className="w-full text-left px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded flex items-center justify-between font-medium"
+                      >
+                        Insurance
+                        <FaChevronDown className={`text-xs transition-transform duration-200 ${insuranceDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {insuranceDropdownOpen && (
+                        <ul className="mt-1 ml-3 space-y-1">
+                          <li><Link href="/insurance-quote" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Auto</Link></li>
+                          <li><Link href="/insurance-quote" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Residential Property</Link></li>
+                          <li><Link href="/insurance-quote" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Commercial Property</Link></li>
+                          <li><Link href="/insurance-quote" className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm" onClick={() => setIsOpen(false)}>Others</Link></li>
+                        </ul>
+                      )}
+                    </li>
+
+                    {/* Commercial Properties */}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => setCommercialDropdownOpen(!commercialDropdownOpen)}
+                        className="w-full text-left px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded flex items-center justify-between font-medium"
+                      >
+                        Commercial Properties
+                        <FaChevronDown className={`text-xs transition-transform duration-200 ${commercialDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {commercialDropdownOpen && (
+                        <ul className="mt-1 ml-3 space-y-1">
+                          <li><Link href="/commercial-properties/buy" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Office Buildings</Link></li>
+                          <li><Link href="/commercial-properties/sell" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Retail Property</Link></li>
+                          <li><Link href="/commercial-properties/lease" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Industrial Property</Link></li>
+                          <li><Link href="/commercial-properties/apartment-buildings" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Apartment Buildings</Link></li>
+                          <li><Link href="/commercial-properties/hotels-and-hospitality" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Hotels and Hospitality</Link></li>
+                          <li><Link href="/commercial-properties/mixed-use-properties" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Mixed-use Properties</Link></li>
+                          <li><Link href="/commercial-properties/healthcare-facilities" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Healthcare Facilities</Link></li>
+                          <li><Link href="/commercial-properties/land" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Land</Link></li>
+                          <li><Link href="/commercial-properties/special-purpose-properties" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Special Purpose Properties</Link></li>
+                          <li><Link href="/commercial-properties/data-centers" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Data Centers</Link></li>
+                        </ul>
+                      )}
+                    </li>
+
+                    {/* Home Improvement */}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => setHomeImprovementDropdownOpen(!homeImprovementDropdownOpen)}
+                        className="w-full text-left px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded flex items-center justify-between font-medium"
+                      >
+                        Home Improvement
+                        <FaChevronDown className={`text-xs transition-transform duration-200 ${homeImprovementDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {homeImprovementDropdownOpen && (
+                        <ul className="mt-1 ml-3 space-y-1">
+                          <li><Link href="/home-improvement/electrical" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Electrical</Link></li>
+                          <li><Link href="/home-improvement/hvac" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">HVAC</Link></li>
+                          <li><Link href="/home-improvement/plumbing" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Plumbing</Link></li>
+                          <li><Link href="/home-improvement/painting" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Painting</Link></li>
+                          <li><Link href="/home-improvement/roofing" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Roofing</Link></li>
+                          <li><Link href="/home-improvement/flooring" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Flooring</Link></li>
+                          <li><Link href="/home-improvement/landscaping" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Landscaping</Link></li>
+                          <li><Link href="/home-improvement/kitchen-bathroom" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Kitchen & Bathroom Remodeling</Link></li>
+                        </ul>
+                      )}
+                    </li>
+
+                    {/* Tax and Accounting */}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => setTaxAccountingDropdownOpen(!taxAccountingDropdownOpen)}
+                        className="w-full text-left px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded flex items-center justify-between font-medium"
+                      >
+                        Tax and Accounting
+                        <FaChevronDown className={`text-xs transition-transform duration-200 ${taxAccountingDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {taxAccountingDropdownOpen && (
+                        <ul className="mt-1 ml-3 space-y-1">
+                          <li><Link href="/tax-accounting/preparation" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Tax Preparation</Link></li>
+                          <li><Link href="/tax-accounting/planning" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Tax Planning</Link></li>
+                          <li><Link href="/tax-accounting/advisory" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Tax Advisory</Link></li>
+                          <li><Link href="/tax-accounting/bookkeeping" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Book Keeping</Link></li>
+                          <li><Link href="/tax-accounting/reporting" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Financial Reporting</Link></li>
+                          <li><Link href="/tax-accounting/payroll" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Payroll Accounting</Link></li>
+                          <li><Link href="/tax-accounting/auditing" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Auditing</Link></li>
+                          <li><Link href="/tax-accounting/small-business" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Small Business Accounting</Link></li>
+                          <li><Link href="/tax-accounting/self-employed" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Self-Employed Tax Accounting</Link></li>
+                        </ul>
+                      )}
+                    </li>
+
+                    {/* Online Courses */}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => setOnlineCoursesDropdownOpen(!onlineCoursesDropdownOpen)}
+                        className="w-full text-left px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded flex items-center justify-between font-medium"
+                      >
+                        Online Courses
+                        <FaChevronDown className={`text-xs transition-transform duration-200 ${onlineCoursesDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {onlineCoursesDropdownOpen && (
+                        <ul className="mt-1 ml-3 space-y-1">
+                          <li><Link href="/online-courses/real-estate-pre-licensing" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Real Estate Pre-Licensing</Link></li>
+                          <li><Link href="/online-courses/real-estate-exam-prep" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Real Estate Exam Preparation</Link></li>
+                          <li><Link href="/online-courses/real-estate-post-licensing" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Real Estate Post-Licensing</Link></li>
+                          <li><Link href="/online-courses/real-estate-ce" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Real Estate CE Courses</Link></li>
+                          <li><Link href="/online-courses/loan-officer-exam-prep" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Loan Officer Exam Preparation</Link></li>
+                          <li><Link href="/online-courses/loan-officer-ce" onClick={e => e.preventDefault()} className="block px-3 py-2 text-gray-500 hover:text-green-600 text-sm">Loan Officer CE Courses</Link></li>
+                        </ul>
+                      )}
+                    </li>
+                  </ul>
+                )}
+              </li>
+
+              {/* Join Our Team */}
+              <li>
+                <button
+                  onClick={() => setMobileJoinTeamDropdownOpen(!mobileJoinTeamDropdownOpen)}
+                  className="w-full text-left px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-colors rounded-lg flex items-center justify-between"
+                >
+                  Join Our Team
+                  <FaChevronDown className={`text-sm transition-transform duration-200 ${mobileJoinTeamDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {mobileJoinTeamDropdownOpen && (
+                  <ul className="mt-1 ml-4 space-y-1 bg-green-50 rounded-lg p-2">
+                    <li>
+                      <Link href="/job-listings" className="block px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded" onClick={() => setIsOpen(false)}>Apply for a Job</Link>
+                    </li>
+                    <li>
+                      <Link href="/become-agent" className="block px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded" onClick={() => setIsOpen(false)}>Become an Agent</Link>
+                    </li>
+                    
+                  </ul>
+                )}
+              </li>
+
+              {/* Contact Us */}
+              <li>
+                <Link
+                  href="/contact"
+                  className="block px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-colors rounded-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Contact Us
+                </Link>
+              </li>
+
+              {/* Digital Card */}
+              <li>
+                <Link
+                  href="/card"
+                  className="flex items-center gap-3 px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-colors rounded-lg group"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Digital Card
+                  <FaIdCard className="text-base transition-transform duration-300 hover:rotate-180" />
+                </Link>
+              </li>
+
+              {/* Get Started */}
+              <li>
+                <button
+                  onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                  className="w-full text-left px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-colors rounded-lg flex items-center justify-between"
+                >
+                  Get Started
+                  <FaChevronDown className={`text-sm transition-transform duration-200 ${mobileDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {mobileDropdownOpen && (
+                  <ul className="mt-1 ml-4 space-y-1 bg-green-50 rounded-lg p-2">
+                    <li>
+                      <Link href="/property-inquiry" className="block px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded" onClick={() => setIsOpen(false)}>Property Inquiry</Link>
+                    </li>
+                    <li>
+                      <Link href="https://www.loanfactory.com/balkhadka" target="_blank" className="block px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded" onClick={() => setIsOpen(false)}>Get Mortgage Quote</Link>
+                    </li>
+                    <li>
+                      <Link href="/insurance-quote" className="block px-3 py-2 text-gray-600 hover:text-green-600 text-sm rounded" onClick={() => setIsOpen(false)}>Get Insurance Quote</Link>
+                    </li>
+                  </ul>
+                )}
+              </li>
+
+              {/* Login Button */}
+              <li className="pt-3 border-t border-gray-200">
+                <Link
+                  href="/login"
+                  className="block w-full bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg font-medium transition-colors text-center"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Login
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
       )}
-
-      {/* Mobile Menu - Slides from Right */}
-      <div
-        className={`lg:hidden fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        {/* Mobile Menu Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h2 className="text-lg font-bold text-gray-900">Menu</h2>
-          <button
-            onClick={toggleMenu}
-            className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 transition-colors"
-            aria-label="Close menu"
-          >
-            <FaTimes className="text-gray-700" size={24} />
-          </button>
-        </div>
-
-        {/* Mobile Menu Content */}
-        <div className="overflow-y-auto h-[calc(100%-4rem)]">
-          <ul className="flex flex-col py-2">
-            {/* Home */}
-            <li>
-              <Link
-                href="/"
-                className="block px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-all duration-200"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </Link>
-            </li>
-
-            {/* About */}
-            <li>
-              <Link
-                href="/about"
-                className="block px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-all duration-200"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </Link>
-            </li>
-
-            {/* Services */}
-            <li>
-              <Link
-                href="/services"
-                className="block px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-all duration-200"
-                onClick={() => setIsOpen(false)}
-              >
-                Services
-              </Link>
-            </li>
-
-            {/* Solutions Mobile Dropdown */}
-            <li className="border-b border-gray-100">
-              <button
-                type="button"
-                onClick={() => setSolutionsDropdownOpen(!solutionsDropdownOpen)}
-                className="w-full text-left px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-all duration-200 flex items-center justify-between"
-              >
-                Solutions
-                <FaChevronDown className={`text-sm transition-transform duration-200 ${solutionsDropdownOpen ? '-rotate-180' : ''}`} />
-              </button>
-              
-              {/* Solutions Mobile Dropdown */}
-              <div className={`overflow-hidden transition-all duration-200 ease-in-out ${solutionsDropdownOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                <ul className="bg-gray-50 py-1">
-                  {/* Residential Properties Mobile */}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => setResidentialDropdownOpen(!residentialDropdownOpen)}
-                      className="w-full text-left flex items-center justify-between px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                    >
-                      Residential Properties
-                      <FaChevronDown className={`text-xs transition-transform duration-200 ${residentialDropdownOpen ? '-rotate-180' : ''}`} />
-                    </button>
-                    <div className={`overflow-y-auto transition-all duration-200 ease-in-out ${residentialDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <ul className="bg-gray-100 py-1">
-                        <li>
-                          <a
-                            href="https://khadkabal.georgiamls.com/real-estate/?styp=sale&typ=sd"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs"
-                            onClick={closeAllDropdowns}
-                          >
-                            Property Search
-                          </a>
-                        </li>
-                        <li><Link href="/residential-properties/home-affordability" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Home Affordability</Link></li>
-                        <li><Link href="/residential-properties/school-information" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>School Information</Link></li>
-                        <li><Link href="/residential-properties/county-public-records" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>County Public Records</Link></li>
-                      </ul>
-                    </div>
-                  </li>
-
-                  {/* Mortgages Mobile */}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => setMortgagesDropdownOpen(!mortgagesDropdownOpen)}
-                      className="w-full text-left flex items-center justify-between px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                    >
-                      Mortgages
-                      <FaChevronDown className={`text-xs transition-transform duration-200 ${mortgagesDropdownOpen ? '-rotate-180' : ''}`} />
-                    </button>
-                    <div className={`overflow-y-auto transition-all duration-200 ease-in-out ${mortgagesDropdownOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <ul className="bg-gray-100 py-1">
-                        <li><Link href="/mortgages/mortgages" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Mortgages</Link></li>
-                        <li><Link href="/mortgages/refinance" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Refinance</Link></li>
-                        <li><Link href="/mortgages/get-quote" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Get Quote</Link></li>
-                        <li><Link href="/mortgages/mortgage-calculator" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Mortgage Calculator</Link></li>
-                        <li><Link href="/mortgages/home-affordability" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Home Affordability</Link></li>
-                        <li><Link href="/mortgages/resources" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Resources</Link></li>
-                      </ul>
-                    </div>
-                  </li>
-
-                  {/* Insurance Mobile */}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => setInsuranceDropdownOpen(!insuranceDropdownOpen)}
-                      className="w-full text-left flex items-center justify-between px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                    >
-                      Insurance
-                      <FaChevronDown className={`text-xs transition-transform duration-200 ${insuranceDropdownOpen ? '-rotate-180' : ''}`} />
-                    </button>
-                    <div className={`overflow-y-auto transition-all duration-200 ease-in-out ${insuranceDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <ul className="bg-gray-100 py-1">
-                        <li><Link href="/insurance/auto" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Auto</Link></li>
-                        <li><Link href="/insurance/residential-property" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Residential Property</Link></li>
-                        <li><Link href="/insurance/commercial-property" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Commercial Property</Link></li>
-                        <li><Link href="/insurance/others" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Others</Link></li>
-                      </ul>
-                    </div>
-                  </li>
-
-                  {/* Commercial Properties Mobile */}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => setCommercialDropdownOpen(!commercialDropdownOpen)}
-                      className="w-full text-left flex items-center justify-between px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                    >
-                      Commercial Properties
-                      <FaChevronDown className={`text-xs transition-transform duration-200 ${commercialDropdownOpen ? '-rotate-180' : ''}`} />
-                    </button>
-                    <div className={`overflow-y-auto transition-all duration-200 ease-in-out ${commercialDropdownOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <ul className="bg-gray-100 py-1">
-                        <li><Link href="/commercial-properties/buy" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Office Buildings</Link></li>
-                        <li><Link href="/commercial-properties/sell" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Retail Property</Link></li>
-                        <li><Link href="/commercial-properties/lease" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Industrial Property</Link></li>
-                        <li><Link href="/commercial-properties/apartment-buildings" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Apartment Buildings</Link></li>
-                        <li><Link href="/commercial-properties/hotels-and-hospitality" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Hotels and Hospitality</Link></li>
-                        <li><Link href="/commercial-properties/mixed-use-properties" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Mixed-use Properties</Link></li>
-                        <li><Link href="/commercial-properties/healthcare-facilities" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Healthcare Facilities</Link></li>
-                        <li><Link href="/commercial-properties/land" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Land</Link></li>
-                        <li><Link href="/commercial-properties/special-purpose-properties" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Special Purpose Properties</Link></li>
-                        <li><Link href="/commercial-properties/data-centers" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Data Centers</Link></li>
-                      </ul>
-                    </div>
-                  </li>
-
-                  {/* Home Improvement Mobile */}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => setHomeImprovementDropdownOpen(!homeImprovementDropdownOpen)}
-                      className="w-full text-left flex items-center justify-between px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                    >
-                      Home Improvement
-                      <FaChevronDown className={`text-xs transition-transform duration-200 ${homeImprovementDropdownOpen ? '-rotate-180' : ''}`} />
-                    </button>
-                    <div className={`overflow-y-auto transition-all duration-200 ease-in-out ${homeImprovementDropdownOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <ul className="bg-gray-100 py-1">
-                        <li><Link href="/home-improvement/electrical" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Electrical</Link></li>
-                        <li><Link href="/home-improvement/hvac" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>HVAC</Link></li>
-                        <li><Link href="/home-improvement/plumbing" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Plumbing</Link></li>
-                        <li><Link href="/home-improvement/painting" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Painting</Link></li>
-                        <li><Link href="/home-improvement/roofing" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Roofing</Link></li>
-                        <li><Link href="/home-improvement/flooring" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Flooring</Link></li>
-                        <li><Link href="/home-improvement/landscaping" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Landscaping</Link></li>
-                        <li><Link href="/home-improvement/kitchen-bathroom" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Kitchen & Bathroom Remodeling</Link></li>
-                      </ul>
-                    </div>
-                  </li>
-
-                  {/* Tax and Accounting Mobile */}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => setTaxAccountingDropdownOpen(!taxAccountingDropdownOpen)}
-                      className="w-full text-left flex items-center justify-between px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                    >
-                      Tax and Accounting
-                      <FaChevronDown className={`text-xs transition-transform duration-200 ${taxAccountingDropdownOpen ? '-rotate-180' : ''}`} />
-                    </button>
-                    <div className={`overflow-y-auto transition-all duration-200 ease-in-out ${taxAccountingDropdownOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <ul className="bg-gray-100 py-1">
-                        <li><Link href="/tax-accounting/preparation" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Tax Preparation</Link></li>
-                        <li><Link href="/tax-accounting/planning" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Tax Planning</Link></li>
-                        <li><Link href="/tax-accounting/advisory" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Tax Advisory</Link></li>
-                        <li><Link href="/tax-accounting/bookkeeping" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Book Keeping</Link></li>
-                        <li><Link href="/tax-accounting/reporting" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Financial Reporting</Link></li>
-                        <li><Link href="/tax-accounting/payroll" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Payroll Accounting</Link></li>
-                        <li><Link href="/tax-accounting/auditing" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Auditing</Link></li>
-                        <li><Link href="/tax-accounting/small-business" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Small Business Accounting</Link></li>
-                        <li><Link href="/tax-accounting/self-employed" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Self-Employed Tax Accounting</Link></li>
-                      </ul>
-                    </div>
-                  </li>
-
-                  {/* Online Courses Mobile */}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => setOnlineCoursesDropdownOpen(!onlineCoursesDropdownOpen)}
-                      className="w-full text-left flex items-center justify-between px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                    >
-                      Online Courses
-                      <FaChevronDown className={`text-xs transition-transform duration-200 ${onlineCoursesDropdownOpen ? '-rotate-180' : ''}`} />
-                    </button>
-                    <div className={`overflow-y-auto transition-all duration-200 ease-in-out ${onlineCoursesDropdownOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <ul className="bg-gray-100 py-1">
-                        <li><Link href="/online-courses/real-estate-pre-licensing" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Real Estate Pre-Licensing</Link></li>
-                        <li><Link href="/online-courses/real-estate-exam-prep" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Real Estate Exam Preparation</Link></li>
-                        <li><Link href="/online-courses/real-estate-post-licensing" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Real Estate Post-Licensing</Link></li>
-                        <li><Link href="/online-courses/real-estate-ce" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Real Estate CE Courses</Link></li>
-                        <li><Link href="/online-courses/loan-officer-exam-prep" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Loan Officer Exam Preparation</Link></li>
-                        <li><Link href="/online-courses/loan-officer-ce" className="block px-8 py-2 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors text-xs" onClick={closeAllDropdowns}>Loan Officer CE Courses</Link></li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
-
-            {/* Join Our Team Mobile Dropdown */}
-            <li className="pt-2 mt-2">
-              <button
-                onClick={() => setMobileJoinTeamDropdownOpen(!mobileJoinTeamDropdownOpen)}
-                className="w-full text-left px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-all duration-200 flex items-center justify-between"
-              >
-                Join Our Team
-                <FaChevronDown className={`text-sm transition-transform duration-200 ${mobileJoinTeamDropdownOpen ? '-rotate-180' : ''}`} />
-              </button>
-              
-              {/* Join Team Mobile Dropdown */}
-              <div className={`overflow-hidden transition-all duration-200 ease-in-out ${mobileJoinTeamDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
-                <ul className="bg-gray-50 py-1">
-                  <li>
-                    <Link
-                      href="/job-listings"
-                      className="block px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                      onClick={() => {
-                        setIsOpen(false);
-                        setMobileJoinTeamDropdownOpen(false);
-                      }}
-                    >
-                      Apply for a Job
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/become-agent"
-                      className="block px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                      onClick={() => {
-                        setIsOpen(false);
-                        setMobileJoinTeamDropdownOpen(false);
-                      }}
-                    >
-                      Become an Agent
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </li>
-
-            {/* Contact Us */}
-            <li>
-              <Link
-                href="/contact"
-                className="block px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-all duration-200"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact Us
-              </Link>
-            </li>
-            <li className="pt-2 mt-2">
-              <button
-                onClick={toggleMobileDropdown}
-                className="w-full text-left px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-all duration-200 flex items-center justify-between"
-              >
-                Get Started
-                <FaChevronDown className={`text-sm transition-transform duration-200 ${mobileDropdownOpen ? '-rotate-180' : ''}`} />
-              </button>
-              
-              {/* Mobile Dropdown */}
-              <div className={`overflow-hidden transition-all duration-200 ease-in-out ${mobileDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
-                <ul className="bg-gray-50 py-1">
-                  <li>
-                    <Link
-                      href="/property-inquiry"
-                      className="block px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                      onClick={() => {
-                        setIsOpen(false);
-                        setMobileDropdownOpen(false);
-                      }}
-                    >
-                      Property Inquiry
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://www.loanfactory.com/balkhadka"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                      onClick={() => {
-                        setIsOpen(false);
-                        setMobileDropdownOpen(false);
-                      }}
-                    >
-                      Get Mortgage Quote
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/insurance-quote"
-                      className="block px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors text-sm"
-                      onClick={() => {
-                        setIsOpen(false);
-                        setMobileDropdownOpen(false);
-                      }}
-                    >
-                      Get Insurance Quote
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </li>
-
-            {/* Login Button Mobile */}
-            <li>
-              <Link
-                href="/login"
-                className="block px-4 py-3 text-center bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-300 mx-4 my-2"
-                onClick={() => setIsOpen(false)}
-              >
-                Login
-              </Link>
-            </li>
-          </ul>
-          
-        </div>
-      </div>
     </nav>
   );
 }

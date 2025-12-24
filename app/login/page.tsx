@@ -41,13 +41,8 @@ function LoginForm() {
     if (loginMutation.isSuccess && loginMutation.data?.token) {
       const user = loginMutation.data.user
       if (user) {
-        if (user.role === 'admin') {
-          router.push('/dashboard')
-        } else if (user.role === 'agent') {
-          router.push('/agent/dashboard')
-        } else {
-          router.push('/client/dashboard')
-        }
+        // All users go to dashboard - role-based access is handled in layout
+        router.push('/dashboard')
       }
     }
   }, [loginMutation.isSuccess, loginMutation.data, router])
@@ -124,7 +119,7 @@ function LoginForm() {
               handleLogin(selectedRole as 'agent' | 'client' | 'admin', email, password)
             }}>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground">
+                <label htmlFor="email" className="block text-sm font-medium text-foreground dark:text-gray-700">
                   Email address
                 </label>
                 <div className="mt-1">
@@ -141,7 +136,7 @@ function LoginForm() {
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-foreground">
+                <label htmlFor="password" className="block text-sm font-medium text-foreground dark:text-gray-700">
                   Password
                 </label>
                 <div className="mt-1">
@@ -165,7 +160,7 @@ function LoginForm() {
                     type="checkbox"
                     className="h-4 w-4 text-primary focus:ring-ring border-border rounded"
                   />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-foreground">
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-foreground dark:text-gray-700">
                     Remember me
                   </label>
                 </div>

@@ -5,9 +5,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
-    { title: "Company", links: [{ label: "About Us", href: "/about" }, { label: "Services", href: "/services" }, { label: "Join Our Team", href: "/joins" }] },
-    { title: "Products", links: [{ label: "Properties", href: "/properties" }, { label: "Solutions", href: "/solutions" }, { label: "Get Started", href: "/get-started" }] },
-    { title: "Contact", links: [{ label: "Call Us", href: "tel:+17062618948" }, { label: "Email Us", href: "mailto:bsrealtyllc@gmail.com" }, { label: "Open 24/7", href: "#" }] },
+    { title: "Company", links: [{ label: "About Us", href: "/about" }, { label: "Services", href: "/services" }, { label: "Join Our Team", href: "/job-listings" }] },
+    { title: "Products", links: [{ label: "Property Inquiry", href: "/property-inquiry" }, { label: "Insurance Quote", href: "/insurance-quote" }, { label: "Become Agent", href: "/become-agent" }] },
+    { title: "Contact", links: [{ label: "Call Us", href: "tel:+17062618948" }, { label: "Email Us", href: "mailto:bsrealtyllc@gmail.com" }, { label: "Contact Us", href: "/contact" }] },
   ];
 
   const socialLinks = [
@@ -21,40 +21,44 @@ export default function Footer() {
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 lg:px-8 py-16">
         {/* Top Section: Logo and Description */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-6 mb-12">
           {/* Brand Section */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-4 hover:opacity-80 transition-opacity">
-              <Image
-                src="/images/logo/logo_bbg.png"
-                alt="BS Realty LLC"
-                width={200}
-                height={60}
-                className="h-12 w-auto"
-              />
-            </Link>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Providing comprehensive real estate solutions and professional services across the country.
-            </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((social) => (
-                <Link
-                  key={social.label}
-                  href="#"
-                  className="w-10 h-10 rounded-lg bg-gray-700 hover:bg-green-600 flex items-center justify-center transition-all duration-300 transform hover:scale-110"
-                  aria-label={social.label}
-                >
-                  <svg className="w-5 h-5 text-gray-200" fill="currentColor" viewBox="0 0 24 24">
-                    <path d={social.icon} />
-                  </svg>
-                </Link>
-              ))}
+          <div className="col-span-2 sm:col-span-4 lg:col-span-1">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:space-x-4 lg:flex-col lg:space-x-0">
+              <Link href="/" className="inline-block mb-4 hover:opacity-80 transition-opacity shrink-0">
+                <Image
+                  src="/images/logo/logo_bbg.png"
+                  alt="BS Realty LLC"
+                  width={200}
+                  height={60}
+                  className="h-12 w-auto"
+                />
+              </Link>
+              <div className="flex-1">
+                <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                  Providing comprehensive real estate solutions and professional services across the country.
+                </p>
+                <div className="flex space-x-4">
+                  {socialLinks.map((social) => (
+                    <Link
+                      key={social.label}
+                      href="#"
+                      className="w-10 h-10 rounded-lg bg-gray-700 hover:bg-green-600 flex items-center justify-center transition-all duration-300 transform hover:scale-110"
+                      aria-label={social.label}
+                    >
+                      <svg className="w-5 h-5 text-gray-200" fill="currentColor" viewBox="0 0 24 24">
+                        <path d={social.icon} />
+                      </svg>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Links Sections */}
           {footerLinks.map((section) => (
-            <div key={section.title}>
+            <div key={section.title} className="col-span-1 sm:col-span-1 lg:col-span-1">
               <h4 className="text-white font-semibold text-lg mb-6 relative inline-block">
                 {section.title}
                 <span className="absolute left-0 bottom-0 w-12 h-0.5 bg-linear-to-r from-green-500 to-green-600 rounded-full"></span>
@@ -73,8 +77,6 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-
-
         </div>
 
         {/* Divider */}

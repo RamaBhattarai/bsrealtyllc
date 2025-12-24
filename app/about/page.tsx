@@ -36,11 +36,11 @@ export default function AboutPage() {
   return (
     <div className="-mt-16">
       {/* Hero Section */}
-      <section className="relative pt-48 pb-32 bg-gray-900 overflow-hidden">
+      <section className="relative pt-48 pb-32 bg-gray-900 dark:bg-gray-900 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <Image 
-            src="/realestate.jpg" 
-            alt="About BS Realty" 
+          <Image
+            src="/realestate.jpg"
+            alt="About BS Realty"
             fill
             className="object-cover"
             priority
@@ -53,14 +53,14 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="text-green-400 font-semibold text-sm uppercase tracking-wider mb-4 block">
+            <span className="text-green-400 dark:text-green-400 font-semibold text-sm uppercase tracking-wider mb-4 block">
               About Us
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white dark:text-white mb-6">
               Your Trusted Real Estate Partner
             </h1>
-            <p className="text-gray-300 text-lg">
-              At BS Realty LLC, we&apos;re dedicated to helping you achieve your real estate dreams with 
+            <p className="text-gray-300 dark:text-gray-300 text-lg">
+              At BS Realty LLC, we&apos;re dedicated to helping you achieve your real estate dreams with
               comprehensive services and personalized attention.
             </p>
           </motion.div>
@@ -68,7 +68,7 @@ export default function AboutPage() {
       </section>
 
       {/* About Content */}
-      <section ref={ref} className="py-20 md:py-28">
+      <section ref={ref} className="py-20 md:py-28 bg-gray-50 dark:bg-gray-100">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -97,21 +97,21 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="space-y-6"
             >
-              <span className="text-green-600 font-semibold text-sm uppercase tracking-wider">
+              <span className="text-green-600 dark:text-green-600 font-semibold text-sm uppercase tracking-wider">
                 Our Story
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-900">
                 Building Dreams, One Property at a Time
               </h2>
-              <p className="text-gray-600 text-base leading-relaxed">
-                BS Realty LLC was founded with a vision to provide comprehensive real estate and 
-                financial services under one roof. Our team brings together expertise in real estate, 
+              <p className="text-gray-600 dark:text-gray-700 text-base leading-relaxed">
+                BS Realty LLC was founded with a vision to provide comprehensive real estate and
+                financial services under one roof. Our team brings together expertise in real estate,
                 mortgage lending, tax & accounting, and home improvement to serve all your property needs.
               </p>
-              <p className="text-gray-600 text-base leading-relaxed">
-                We believe in building lasting relationships with our clients through trust, 
-                transparency, and exceptional service. Whether you&apos;re buying your first home, 
-                investing in property, or seeking financial guidance, we&apos;re here to help you 
+              <p className="text-gray-600 dark:text-gray-700 text-base leading-relaxed">
+                We believe in building lasting relationships with our clients through trust,
+                transparency, and exceptional service. Whether you&apos;re buying your first home,
+                investing in property, or seeking financial guidance, we&apos;re here to help you
                 every step of the way.
               </p>
               <Button size="lg" href="/contact">
@@ -123,7 +123,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white dark:bg-gray-50">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -132,10 +132,10 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-2xl mx-auto mb-16"
           >
-            <span className="text-green-600 font-semibold text-sm uppercase tracking-wider mb-4 block">
+            <span className="text-green-600 dark:text-green-600 font-semibold text-sm uppercase tracking-wider mb-4 block">
               Our Values
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">What Drives Us</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-900">What Drives Us</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -150,13 +150,13 @@ export default function AboutPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-green-200 flex items-center justify-center mx-auto mb-4">
-                    <IconComponent className="w-8 h-8 text-green-700" />
+                  <div className="w-16 h-16 rounded-2xl bg-green-200 dark:bg-green-200 flex items-center justify-center mx-auto mb-4">
+                    <IconComponent className="w-8 h-8 text-green-700 dark:text-green-700" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-900 mb-2">
                     {value.title}
                   </h3>
-                  <p className="text-gray-600 text-sm">{value.description}</p>
+                  <p className="text-gray-600 dark:text-gray-700 text-sm">{value.description}</p>
                 </motion.div>
               );
             })}

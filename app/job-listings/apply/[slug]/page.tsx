@@ -390,7 +390,7 @@ export default function JobApplicationForm() {
                   </label>
                   <div className="space-y-2">
                     {['Yes', 'No'].map((option) => (
-                      <label key={option} className="flex items-center">
+                      <label key={option} className="flex items-center text-gray-700 dark:text-gray-900">
                         <input
                           type="radio"
                           name="timeZones"
@@ -412,7 +412,7 @@ export default function JobApplicationForm() {
                   </label>
                   <div className="space-y-2">
                     {['Yes', 'No'].map((option) => (
-                      <label key={option} className="flex items-center">
+                      <label key={option} className="flex items-center text-gray-700 dark:text-gray-900">
                         <input
                           type="radio"
                           name="startupExperience"
@@ -436,7 +436,7 @@ export default function JobApplicationForm() {
                     <select
                       value={formData.workArrangement}
                       onChange={(e) => handleInputChange('workArrangement', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                      className={`w-full px-4 py-3 bg-white! border text-gray-900! border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                         errors.workArrangement ? 'border-red-500' : 'border-gray-300'
                       }`}
                     >
@@ -456,7 +456,7 @@ export default function JobApplicationForm() {
                     <select
                       value={formData.workSetting}
                       onChange={(e) => handleInputChange('workSetting', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                      className={`w-full px-4 py-3 bg-white! border text-gray-900! border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                         errors.workSetting ? 'border-red-500' : 'border-gray-300'
                       }`}
                     >
@@ -475,7 +475,7 @@ export default function JobApplicationForm() {
                     <select
                       value={formData.availability}
                       onChange={(e) => handleInputChange('availability', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                      className={`w-full px-4 py-3 border bg-white! text-gray-900! border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                         errors.availability ? 'border-red-500' : 'border-gray-300'
                       }`}
                     >
@@ -529,7 +529,7 @@ export default function JobApplicationForm() {
                   <select
                     value={formData.yearsExperience}
                     onChange={(e) => handleInputChange('yearsExperience', e.target.value)}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                    className={`w-full px-4 py-3 border bg-white! text-gray-900! border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                       errors.yearsExperience ? 'border-red-500' : 'border-gray-300'
                     }`}
                   >
@@ -559,7 +559,7 @@ export default function JobApplicationForm() {
                       'Quality Assurance',
                       'Other'
                     ].map((skill) => (
-                      <label key={skill} className="flex items-center">
+                      <label key={skill} className="flex items-center text-gray-700 dark:text-gray-900">
                         <input
                           type="checkbox"
                           checked={formData.technicalSkills.includes(skill)}
@@ -584,7 +584,7 @@ export default function JobApplicationForm() {
                       'MongoDB', 'MySQL', 'PostgreSQL', 'AWS', 'Firebase', 'Figma', 'Jira',
                       'API Development', 'Cloud Development', 'CI/CD', 'Version Control', 'Other'
                     ].map((lang) => (
-                      <label key={lang} className="flex items-center">
+                      <label key={lang} className="flex items-center text-gray-700 dark:text-gray-900">
                         <input
                           type="checkbox"
                           checked={formData.programmingLanguages.includes(lang)}
@@ -622,7 +622,7 @@ export default function JobApplicationForm() {
                     value={formData.portfolioLinks}
                     onChange={(e) => handleInputChange('portfolioLinks', e.target.value)}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-3  bg-white! border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     placeholder="https://github.com/username, https://portfolio.com"
                   />
                 </div>
@@ -635,7 +635,7 @@ export default function JobApplicationForm() {
                     value={formData.pastProjects}
                     onChange={(e) => handleInputChange('pastProjects', e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-white! border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     placeholder="Describe your relevant experience and projects..."
                   />
                 </div>
@@ -648,7 +648,7 @@ export default function JobApplicationForm() {
                     value={formData.certifications}
                     onChange={(e) => handleInputChange('certifications', e.target.value)}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-3  bg-white! border border-gray-300rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     placeholder="List any relevant certifications..."
                   />
                 </div>
@@ -661,7 +661,7 @@ export default function JobApplicationForm() {
                     value={formData.recentProject}
                     onChange={(e) => handleInputChange('recentProject', e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-3  bg-white! border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     placeholder="Describe your most recent project and your role..."
                   />
                 </div>
@@ -674,7 +674,7 @@ export default function JobApplicationForm() {
                     value={formData.whyWorkHere}
                     onChange={(e) => handleInputChange('whyWorkHere', e.target.value)}
                     rows={4}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                    className={`w-full px-4 py-3 bg-white! border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                       errors.whyWorkHere ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder="Tell us why you're interested in joining our team..."
@@ -690,7 +690,7 @@ export default function JobApplicationForm() {
                     value={formData.referral}
                     onChange={(e) => handleInputChange('referral', e.target.value)}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-white! border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     placeholder="Were you referred by someone? How did you hear about us?"
                   />
                 </div>
