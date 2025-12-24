@@ -37,6 +37,16 @@ export default function Appointment() {
       return;
     }
 
+    // Validate date is not in the past
+    const selectedDate = new Date(formData.date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to start of day
+    
+    if (selectedDate < today) {
+      alert('Please select a date that is today or in the future');
+      return;
+    }
+
     bookAppointmentMutation.mutate(formData, {
       onSuccess: () => {
         // Reset form on success
@@ -210,6 +220,7 @@ export default function Appointment() {
                   name="date"
                   value={formData.date}
                   onChange={handleInputChange}
+                  min={new Date().toISOString().split('T')[0]}
                   required
                   className="w-full px-4 py-3 bg-white! border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none text-sm text-gray-700!"
                 />
