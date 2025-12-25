@@ -129,7 +129,8 @@ const heroSlides = [
               className="w-full px-4 py-3 md:px-6 md:py-4 text-sm md:text-lg bg-white/95 backdrop-blur-md border-0 rounded-full shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-400/50 focus:bg-white transition-all duration-300 placeholder-gray-500"
             />
             <button
-              type="submit"
+              type="button"
+              onClick={() => window.open('https://www.zillow.com/', '_blank')}
               className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 bg-green-600 hover:bg-green-700 rounded-full flex items-center justify-center text-white transition-colors duration-300 shadow-lg"
             >
               <svg className="w-3 h-3 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

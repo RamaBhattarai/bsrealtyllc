@@ -341,9 +341,9 @@ export default function InsuranceQuote() {
                         value={option}
                         checked={formData.gender === option}
                         onChange={(e) => handleInputChange('gender', e.target.value)}
-                        className="w-4 h-4 text-primary focus:ring-ring"
+                        className="w-4 h-4 text-primary focus:ring-ring dark: text-gray-700"
                       />
-                      <span className="ml-2 text-foreground">{option}</span>
+                      <span className="ml-2 text-foreground dark:text-gray-700">{option}</span>
                     </label>
                   ))}
                 </div>
@@ -420,7 +420,7 @@ export default function InsuranceQuote() {
                     placeholder="Age"
                     value={formData.ageLicensed}
                     onChange={(e) => handleInputChange('ageLicensed', e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white! border border-gray-300 text-gray-900!"
                   />
                 </div>
               </div>
@@ -500,7 +500,7 @@ export default function InsuranceQuote() {
                     placeholder="Years"
                     value={formData.yearsAtAddress}
                     onChange={(e) => handleInputChange('yearsAtAddress', e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                     required
                   />
                   {errors.yearsAtAddress && <p className="text-red-500 text-sm mt-1">{errors.yearsAtAddress}</p>}
@@ -512,7 +512,7 @@ export default function InsuranceQuote() {
                     placeholder="Months"
                     value={formData.monthsAtAddress}
                     onChange={(e) => handleInputChange('monthsAtAddress', e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2 border border-gray-300  bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 </div>
               </div>
@@ -527,7 +527,7 @@ export default function InsuranceQuote() {
                   placeholder="Enter previous address if applicable"
                   value={formData.previousAddress}
                   onChange={(e) => handleInputChange('previousAddress', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg  bg-white! text-gray-900! focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
@@ -638,7 +638,7 @@ export default function InsuranceQuote() {
                 <select
                   value={formData.coApplicantRelationship}
                   onChange={(e) => handleInputChange('coApplicantRelationship', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 >
                   <option value="">Select relationship</option>
                   {['Spouse', 'Child', 'Parent', 'Domestic Partner', 'Relative', 'Others'].map((rel) => (
@@ -733,7 +733,7 @@ export default function InsuranceQuote() {
                   placeholder="Enter your previous insurance carrier"
                   value={formData.priorCarrier}
                   onChange={(e) => handleInputChange('priorCarrier', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
@@ -745,7 +745,7 @@ export default function InsuranceQuote() {
                   placeholder="Years"
                   value={formData.yearsWithPrior}
                   onChange={(e) => handleInputChange('yearsWithPrior', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white! text-gray-900! focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
@@ -759,7 +759,7 @@ export default function InsuranceQuote() {
                   placeholder="Enter VIN"
                   value={formData.vin}
                   onChange={(e) => handleInputChange('vin', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                   required
                 />
                 {errors.vin && <p className="text-red-500 text-sm mt-1">{errors.vin}</p>}
@@ -774,7 +774,7 @@ export default function InsuranceQuote() {
                   type="date"
                   value={formData.datePurchased}
                   onChange={(e) => handleInputChange('datePurchased', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white! text-gray-900!   focus:outline-none focus:ring-2 focus:ring-blue-600"
                   required
                 />
                 {errors.datePurchased && <p className="text-red-500 text-sm mt-1">{errors.datePurchased}</p>}
@@ -790,7 +790,7 @@ export default function InsuranceQuote() {
                   placeholder="e.g., Commute, Business, Pleasure"
                   value={formData.vehicleUse}
                   onChange={(e) => handleInputChange('vehicleUse', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border bg-white! text-gray-900! border-gray-300  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                   required
                 />
                 {errors.vehicleUse && <p className="text-red-500 text-sm mt-1">{errors.vehicleUse}</p>}
@@ -804,7 +804,7 @@ export default function InsuranceQuote() {
                   placeholder="Average miles"
                   value={formData.milesPerDay}
                   onChange={(e) => handleInputChange('milesPerDay', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
@@ -814,7 +814,7 @@ export default function InsuranceQuote() {
                 <select
                   value={formData.bodilyInjury}
                   onChange={(e) => handleInputChange('bodilyInjury', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 >
                   <option value="">Select coverage</option>
                   {['State Minimum', '25/50', '50/100', '100/300'].map((cov) => (
@@ -830,7 +830,7 @@ export default function InsuranceQuote() {
                 <select
                   value={formData.propertyDamage}
                   onChange={(e) => handleInputChange('propertyDamage', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 >
                   <option value="">Select coverage</option>
                   {['State Minimum', '25000', '50000', '100000', '250000'].map((cov) => (
@@ -865,7 +865,7 @@ export default function InsuranceQuote() {
                 <select
                   value={formData.comprehensiveDeduction}
                   onChange={(e) => handleInputChange('comprehensiveDeduction', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 >
                   <option value="">Select deduction</option>
                   {['No coverage', '$0', '$50', '$100', '$200', '$500', '$1000', '$2000', '$2500'].map((ded) => (
@@ -881,7 +881,7 @@ export default function InsuranceQuote() {
                 <select
                   value={formData.collisionDeduction}
                   onChange={(e) => handleInputChange('collisionDeduction', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white! text-gray-900!  focus:outline-none focus:ring-2 focus:ring-blue-600"
                 >
                   <option value="">Select deduction</option>
                   {['No coverage', '$0', '$50', '$100', '$200', '$500', '$1000', '$2000', '$2500'].map((ded) => (
@@ -954,7 +954,7 @@ export default function InsuranceQuote() {
                 <select
                   value={formData.dwellingUsage}
                   onChange={(e) => handleInputChange('dwellingUsage', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                   required
                 >
                   <option value="">Select usage</option>
@@ -975,7 +975,7 @@ export default function InsuranceQuote() {
                 <select
                   value={formData.occupancyType}
                   onChange={(e) => handleInputChange('occupancyType', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300 bg-white! text-gray-900!rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                   required
                 >
                   <option value="">Select occupancy type</option>
@@ -996,7 +996,7 @@ export default function InsuranceQuote() {
                 <select
                   value={formData.foundationType}
                   onChange={(e) => handleInputChange('foundationType', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300  bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                   required
                 >
                   <option value="">Select foundation type</option>
@@ -1028,7 +1028,7 @@ export default function InsuranceQuote() {
                 <select
                   value={formData.roofType}
                   onChange={(e) => handleInputChange('roofType', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 border border-gray-300  bg-white! text-gray-900! rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                   required
                 >
                   <option value="">Select roof type</option>
@@ -1064,7 +1064,7 @@ export default function InsuranceQuote() {
                   placeholder="Updates, Year Built, Construction Style, endorsement, coverage, etc."
                   value={formData.additionalInfo}
                   onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 resize-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg  bg-white! text-gray-900! focus:outline-none focus:ring-2 focus:ring-blue-600 resize-none"
                   rows={4}
                 />
               </div>

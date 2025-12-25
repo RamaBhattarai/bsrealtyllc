@@ -115,7 +115,7 @@ export default function AboutPage() {
                 investing in property, or seeking financial guidance, we&apos;re here to help you
                 every step of the way.
               </p>
-              <Button size="lg" href="/contact">
+              <Button size="lg" href="/card">
                 Get in Touch
               </Button>
             </motion.div>

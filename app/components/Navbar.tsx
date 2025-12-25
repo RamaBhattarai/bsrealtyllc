@@ -349,21 +349,6 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* Digital Card */}
-          <li>
-  <Link
-    href="/card"  target="_blank"
-  rel="noopener noreferrer"
-    className={`
-      ${navLinkClass} 
-      px-3 py-2 text-sm xl:text-base flex items-center gap-2 
-      transition-transform duration-500 hover:rotate-6
-    `}
-  >
-    Digital Card
-    <FaIdCard className="transition-transform duration-500 hover:rotate-12" />
-  </Link>
-</li>
 
             {/* Get Started hover dropdown */}
             <li className="relative group">
@@ -667,17 +652,7 @@ export default function Navbar() {
                 </Link>
               </li>
 
-              {/* Digital Card */}
-              <li>
-                <Link
-                  href="/card"
-                  className="flex items-center gap-3 px-4 py-3 text-gray-700 font-medium hover:bg-green-50 hover:text-green-600 transition-colors rounded-lg group"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Digital Card
-                  <FaIdCard className="text-base transition-transform duration-300 hover:rotate-180" />
-                </Link>
-              </li>
+              
 
               {/* Get Started */}
               <li>
