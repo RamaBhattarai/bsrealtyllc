@@ -2,13 +2,11 @@ import ServiceDetailClient from '../ServiceDetailClient';
 
 const allServices = [
   'Real Estate Services',
-  'Sales',
-  'Rentals',
-  'Property Management',
-  'Investment Consulting',
-  'Home Staging',
-  'Mortgage Assistance',
-  'Market Analysis',
+  'Mortgage Solutions',
+  'Tax & Accounting',
+  'Home Improvement',
+  'Insurance P & C',
+  'Online Courses',
 ];
 
 function slugify(title: string) {

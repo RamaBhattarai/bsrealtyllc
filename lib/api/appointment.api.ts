@@ -13,7 +13,8 @@ export interface AppointmentFormData {
 
 export interface Appointment extends AppointmentFormData {
   id: string;
-  status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+  _id?: string;
+  status: 'new' | 'pending' | 'confirmed' | 'cancelled' | 'completed';
   createdAt: string;
   updatedAt: string;
 }
@@ -61,7 +62,7 @@ export const appointmentAPI = {
   // Update appointment status (admin only)
   updateAppointmentStatus: async (
     id: string,
-    status: 'pending' | 'confirmed' | 'cancelled' | 'completed'
+    status: 'new' | 'pending' | 'confirmed' | 'cancelled' | 'completed'
   ): Promise<{ appointment: Appointment; message: string }> => {
     const response = await apiClient.patch(`/appointments/${id}/status`, { status });
     return response.data as { appointment: Appointment; message: string };

@@ -18,12 +18,13 @@ export interface ContactSubmissionResponse {
 
 export interface Contact {
   id: string;
+  _id?: string;
   name: string;
   email: string;
   phone: string;
   subject: string;
   message: string;
-  status: 'pending' | 'responded' | 'closed';
+  status: 'new' | 'pending' | 'responded' | 'closed';
   createdAt: string;
   updatedAt: string;
 }
@@ -85,7 +86,7 @@ export const contactAPI = {
   // Update contact status (admin only)
   updateStatus: async (
     id: string,
-    status: 'pending' | 'responded' | 'closed'
+    status: 'new' | 'pending' | 'responded' | 'closed'
   ): Promise<{ contact: Contact; message: string }> => {
     try {
       return await apiMethods.patch(`/contacts/${id}/status`, { status });

@@ -108,13 +108,15 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
           </div>
 
           {/* Learn More Button */}
-          <motion.button
-            whileHover={{ x: 5 }}
-            className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300"
-          >
-            Learn More
-            <ArrowRight className="w-4 h-4" />
-          </motion.button>
+          <Link href={`/services/${slugify(service.title)}`}>
+            <motion.button
+              whileHover={{ x: 5 }}
+              className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300"
+            >
+              Learn More
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
+          </Link>
 
           {/* Hover Effect Line */}
           <motion.div

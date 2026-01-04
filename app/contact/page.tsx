@@ -36,7 +36,7 @@ export default function Contact() {
 
   const [recaptchaToken, setRecaptchaToken] = useState('');
 
-  // React Query mutation hook for contact submission
+  // React Query mutation hook from hooks folder for contact submission
   const submitContactMutation = useSubmitContact();
 
   // Define reCAPTCHA callback functions
@@ -149,7 +149,7 @@ export default function Contact() {
       return;
     }
 
-    // Prepare data for backend API
+    // Prepare data for backend API coming from contact.api.ts
     const submitData: ContactFormData = {
       name: formData.name.trim(),
       email: formData.email.trim(),

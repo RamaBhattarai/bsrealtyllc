@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight, FaCheck, FaCloudUploadAlt } from 'react-icons/fa';
 import Link from 'next/link';
+import { useSubmitAgentApplication } from '../../hooks/useAgentApplication';
 
 const stepVariants = {
   initial: { opacity: 0, x: 50 },
@@ -38,6 +39,8 @@ export default function BecomeAgentPage() {
     idCard: null as File | null,
   });
 
+  const submitApplicationMutation = useSubmitAgentApplication();
+
   const handleInputChange = (field: keyof typeof formData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) {
@@ -56,6 +59,7 @@ export default function BecomeAgentPage() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, field: 'resume' | 'license' | 'idCard') => {
     const file = e.target.files?.[0];
+
     if (file) {
       setFormData(prev => ({ ...prev, [field]: file }));
       if (errors[field]) {
@@ -97,17 +101,55 @@ export default function BecomeAgentPage() {
     setCurrentStep(prev => prev - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateStep(3)) return;
 
-    console.log('Agent application submitted:', formData);
-    setShowSuccess(true);
+    console.log('Starting agent application submission...');
 
-    // Redirect after showing success message
-    setTimeout(() => {
-      window.location.href = '/job-listings';
-    }, 3000);
+    // Create FormData for file uploads
+    const submitData = new FormData();
+
+    // Add all form data - handle arrays like job applications do
+    Object.entries(formData).forEach(([key, value]) => {
+      if (key === 'areasOfExpertise') {
+        // Try sending as separate fields like original implementation
+        (value as string[]).forEach(area => submitData.append(key, area));
+        console.log(`Added ${key} array:`, value);
+      } else if ((key === 'resume' || key === 'license' || key === 'idCard') && value instanceof File) {
+        submitData.append(key, value);
+        console.log(`Added file ${key}:`, value.name);
+      } else if (value !== null && value !== undefined && value !== '') {
+        submitData.append(key, String(value));
+        console.log(`Added ${key}:`, String(value));
+      }
+    });
+     // Add this debug logging here
+  console.log('Final FormData contents:');
+  for (let [key, value] of submitData.entries()) {
+    if (value instanceof File) {
+      console.log(`${key}: File(${value.name}, ${value.size} bytes, ${value.type})`);
+    } else {
+      console.log(`${key}: ${value}`);
+    }
+  }
+
+
+    console.log('FormData created, calling API...');
+
+    try {
+      const result = await submitApplicationMutation.mutateAsync(submitData);
+      console.log('API call successful, result:', result);
+      setShowSuccess(true);
+
+      // Redirect after showing success message
+      setTimeout(() => {
+        window.location.href = '/job-listings';
+      }, 3000);
+    } catch (error) {
+      console.error('Submission error:', error);
+      // Error is handled by the mutation hook with toast
+    }
   };
 
   return (

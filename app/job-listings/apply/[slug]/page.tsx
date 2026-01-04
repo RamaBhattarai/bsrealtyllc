@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight, FaCheck, FaCloudUploadAlt } from 'react-icons/fa';
 import { jobs } from '../../../../lib/jobsData';
 import { useParams, useRouter } from 'next/navigation';
+import { useSubmitJobApplication } from '../../../../hooks/useJobApplication';
 
 export default function JobApplicationForm() {
   const params = useParams();
@@ -13,6 +14,7 @@ export default function JobApplicationForm() {
   const slug = params?.slug as string;
 
   const job = jobs.find(j => j.slug === slug);
+  const submitApplicationMutation = useSubmitJobApplication();
 
   const [currentStep, setCurrentStep] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -144,17 +146,40 @@ export default function JobApplicationForm() {
     if (currentStep > 0) setCurrentStep(currentStep - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateStep(3)) return;
     
-    console.log('Job application submitted:', formData);
-    setShowSuccess(true);
+    // Create FormData for file upload
+    const submissionData = new FormData();
     
-    // Redirect to job listings page after showing success message
-    setTimeout(() => {
-      router.push('/job-listings');
-    }, 3000); // 3 seconds delay
+    // Add all form data
+    Object.entries(formData).forEach(([key, value]) => {
+      if (key === 'technicalSkills' || key === 'programmingLanguages') {
+        // Send arrays as JSON strings
+        submissionData.append(key, JSON.stringify(value));
+      } else if (key === 'resume' && value instanceof File) {
+        submissionData.append('resume', value);
+      } else if (value !== null && value !== undefined) {
+        submissionData.append(key, String(value));
+      }
+    });
+    
+    // Add job slug
+    submissionData.append('jobSlug', slug);
+    
+    try {
+      await submitApplicationMutation.mutateAsync(submissionData);
+      setShowSuccess(true);
+      
+      // Redirect to job listings page after showing success message
+      setTimeout(() => {
+        router.push('/job-listings');
+      }, 3000);
+    } catch (error) {
+      // Error is handled by the mutation
+      console.error('Submission failed:', error);
+    }
   };
 
   const stepVariants = {

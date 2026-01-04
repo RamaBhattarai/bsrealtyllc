@@ -4,9 +4,12 @@ import toast from 'react-hot-toast';
 
 // Hook for booking appointment
 export const useBookAppointment = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (data: AppointmentFormData) => appointmentAPI.bookAppointment(data),
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['notifications'] });
       toast.success(data.message || 'Appointment booked successfully!');
     },
     onError: (error: any) => {
@@ -27,6 +30,9 @@ export const useAppointments = (params?: {
     queryKey: ['appointments', params],
     queryFn: () => appointmentAPI.getAppointments(params),
     enabled: true,
+    staleTime: 30 * 1000, // 30 seconds
+    refetchInterval: 5000, // Refetch every 5 seconds
+    refetchOnWindowFocus: true,
   });
 };
 
@@ -44,11 +50,12 @@ export const useUpdateAppointmentStatus = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, status }: { id: string; status: 'pending' | 'confirmed' | 'cancelled' | 'completed' }) =>
+    mutationFn: ({ id, status }: { id: string; status: 'new' | 'pending' | 'confirmed' | 'cancelled' | 'completed' }) =>
       appointmentAPI.updateAppointmentStatus(id, status),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['appointments'] });
       queryClient.invalidateQueries({ queryKey: ['appointment-stats'] });
+      queryClient.invalidateQueries({ queryKey: ['notifications'] });
       toast.success(data.message || 'Appointment status updated successfully!');
     },
     onError: (error: any) => {

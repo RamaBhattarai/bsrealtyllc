@@ -4,6 +4,8 @@ import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight, FaCheck } from 'react-icons/fa';
+import { propertyInquiryAPI, PropertyInquiryFormData } from '../../lib/api/propertyInquiry.api';
+import toast from 'react-hot-toast';
 
 export default function PropertyInquiry() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -16,29 +18,29 @@ export default function PropertyInquiry() {
   const preferredContactRef = useRef<HTMLDivElement>(null);
   const purchaseTypeRef = useRef<HTMLDivElement>(null);
   const loanOfficerRef = useRef<HTMLDivElement>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<PropertyInquiryFormData>({
     // Step 1: Personal Info & Real Estate Needs
     name: '',
     phone: '',
     email: '',
-    preferredContact: '',
-    realEstateNeeds: [] as string[],
-    propertyType: [] as string[],
+    preferredContact: 'Phone call',
+    realEstateNeeds: [],
+    propertyType: [],
     budgetRange: '',
     timeline: '',
     locations: '',
     // Step 2: Mortgage & Financing
-    purchaseType: '',
-    loanOfficerAssistance: '',
+    purchaseType: 'Cash purchase',
+    loanOfficerAssistance: 'Yes',
     concerns: '',
     // Step 3: Insurance Needs
-    investmentInterest: [] as string[],
-    insuranceInterest: [] as string[],
+    investmentInterest: [],
+    insuranceInterest: [],
     additionalInfo: '',
   });
 
   const handleInputChange = (field: string, value: any) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value } as PropertyInquiryFormData));
     // Clear error for this field when user starts typing
     if (errors[field]) {
       setErrors((prev) => {
@@ -57,7 +59,7 @@ export default function PropertyInquiry() {
         [field]: current.includes(value)
           ? current.filter((item) => item !== value)
           : [...current, value],
-      };
+      } as PropertyInquiryFormData;
     });
   };
 
@@ -109,34 +111,41 @@ export default function PropertyInquiry() {
     if (currentStep > 0) setCurrentStep(currentStep - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateStep(2)) return;
     
-    console.log('Form submitted:', formData);
-    setShowSuccess(true);
-    setTimeout(() => {
-      setShowSuccess(false);
-      setCurrentStep(0);
-      setErrors({});
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        preferredContact: '',
-        realEstateNeeds: [] as string[],
-        propertyType: [] as string[],
-        budgetRange: '',
-        timeline: '',
-        locations: '',
-        purchaseType: '',
-        loanOfficerAssistance: '',
-        concerns: '',
-        investmentInterest: [] as string[],
-        insuranceInterest: [] as string[],
-        additionalInfo: '',
-      });
-    }, 3000);
+    try {
+      console.log('Form submitted:', formData);
+      await propertyInquiryAPI.submit(formData);
+      toast.success('Property inquiry submitted successfully!');
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false);
+        setCurrentStep(0);
+        setErrors({});
+        setFormData({
+          name: '',
+          phone: '',
+          email: '',
+          preferredContact: 'Phone call',
+          realEstateNeeds: [],
+          propertyType: [],
+          budgetRange: '',
+          timeline: '',
+          locations: '',
+          purchaseType: 'Cash purchase',
+          loanOfficerAssistance: 'Yes',
+          concerns: '',
+          investmentInterest: [],
+          insuranceInterest: [],
+          additionalInfo: '',
+        });
+      }, 3000);
+    } catch (error: any) {
+      console.error('Submission error:', error);
+      toast.error(error.message || 'Failed to submit property inquiry');
+    }
   };
 
   const stepVariants = {

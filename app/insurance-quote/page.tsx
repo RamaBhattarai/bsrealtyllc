@@ -4,6 +4,8 @@ import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight, FaCheck } from 'react-icons/fa';
+import { insuranceQuoteAPI, InsuranceQuoteFormData } from '../../lib/api/insuranceQuote.api';
+import toast from 'react-hot-toast';
 
 export default function InsuranceQuote() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -162,70 +164,133 @@ export default function InsuranceQuote() {
     if (currentStep > 0) setCurrentStep(currentStep - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateStep(3)) return;
-
-    console.log('Insurance Quote submitted:', formData);
-    setShowSuccess(true);
-    setTimeout(() => {
-      setShowSuccess(false);
-      setCurrentStep(0);
-      setErrors({});
-      setFormData({
-        fullName: '',
-        dateOfBirth: '',
-        gender: '',
-        email: '',
-        phone: '',
-        dlNumber: '',
-        dlState: '',
-        ageLicensed: '',
-        dlStatus: '',
-        licenseSuspendedYears: '',
-        primaryAddress: '',
-        yearsAtAddress: '',
-        monthsAtAddress: '',
-        previousAddress: '',
-        maritalStatus: '',
-        occupation: '',
-        military: '',
-        paperless: '',
-        coApplicantRelationship: '',
-        coApplicantFullName: '',
-        coApplicantDOB: '',
-        coApplicantDLNumber: '',
-        coApplicantMilitary: '',
-        priorCarrier: '',
-        yearsWithPrior: '',
-        priorExpirationDate: '',
-        newEffectiveDate: '',
-        vin: '',
-        datePurchased: '',
-        vehicleUse: '',
-        milesPerDay: '',
-        ownershipType: '',
-        bodilyInjury: '',
-        propertyDamage: '',
-        uninsuredMotor: '',
-        comprehensiveDeduction: '',
-        collisionDeduction: '',
-        towingCoverage: '',
-        rentalCoverage: '',
-        propertyAddress: '',
-        propertyPriorCarrier: '',
-        propertyPurchaseDate: '',
-        currentPolicyExpiration: '',
-        yearsWithPriorPolicy: '',
-        yearsContinuousPolicy: '',
-        newPropertyEffectiveDate: '',
-        dwellingUsage: '',
-        occupancyType: '',
-        foundationType: '',
-        roofType: '',
-        additionalInfo: '',
-      });
-    }, 3000);
+    
+    try {
+      console.log('Insurance Quote submitted:', formData);
+      
+      // Transform form data to match API interface
+      const transformedData: InsuranceQuoteFormData = {
+        fullName: formData.fullName,
+        dateOfBirth: formData.dateOfBirth,
+        gender: formData.gender as 'Male' | 'Female' | 'Not Specified',
+        email: formData.email,
+        phone: formData.phone,
+        dlNumber: formData.dlNumber,
+        dlState: formData.dlState || undefined,
+        ageLicensed: formData.ageLicensed ? parseInt(formData.ageLicensed) : undefined,
+        dlStatus: formData.dlStatus as 'Valid' | 'Permit' | 'Expired' | 'Suspended' | 'Cancelled' | 'Permanently Revoked',
+        licenseSuspendedYears: formData.licenseSuspendedYears as 'Yes' | 'No',
+        primaryAddress: formData.primaryAddress,
+        yearsAtAddress: parseInt(formData.yearsAtAddress),
+        monthsAtAddress: formData.monthsAtAddress ? parseInt(formData.monthsAtAddress) : undefined,
+        previousAddress: formData.previousAddress || undefined,
+        maritalStatus: formData.maritalStatus as 'Single' | 'Married' | 'Domestic Partner' | 'Divorced' | 'Widowed' | 'Separated',
+        occupation: formData.occupation,
+        military: formData.military as 'Yes' | 'No',
+        paperless: formData.paperless as 'Yes' | 'No',
+        coApplicantRelationship: (formData.coApplicantRelationship as 'Spouse' | 'Child' | 'Parent' | 'Domestic Partner' | 'Relative' | 'Others') || undefined,
+        coApplicantFullName: formData.coApplicantFullName || undefined,
+        coApplicantDOB: formData.coApplicantDOB || undefined,
+        coApplicantDLNumber: formData.coApplicantDLNumber || undefined,
+        coApplicantMilitary: (formData.coApplicantMilitary as 'Yes' | 'No') || undefined,
+        priorCarrier: formData.priorCarrier || undefined,
+        yearsWithPrior: formData.yearsWithPrior ? parseInt(formData.yearsWithPrior) : undefined,
+        priorExpirationDate: formData.priorExpirationDate || undefined,
+        newEffectiveDate: formData.newEffectiveDate || undefined,
+        vin: formData.vin,
+        datePurchased: formData.datePurchased,
+        vehicleUse: formData.vehicleUse,
+        milesPerDay: formData.milesPerDay ? parseInt(formData.milesPerDay) : undefined,
+        ownershipType: formData.ownershipType || undefined,
+        bodilyInjury: (formData.bodilyInjury as 'State Minimum' | '25/50' | '50/100' | '100/300') || undefined,
+        propertyDamage: (formData.propertyDamage as 'State Minimum' | '25000' | '50000' | '100000' | '250000') || undefined,
+        uninsuredMotor: (formData.uninsuredMotor as 'Yes' | 'No') || undefined,
+        comprehensiveDeduction: (formData.comprehensiveDeduction as 'No coverage' | '$0' | '$50' | '$100' | '$200' | '$500' | '$1000' | '$2000' | '$2500') || undefined,
+        collisionDeduction: (formData.collisionDeduction as 'No coverage' | '$0' | '$50' | '$100' | '$200' | '$500' | '$1000' | '$2000' | '$2500') || undefined,
+        towingCoverage: formData.towingCoverage || undefined,
+        rentalCoverage: formData.rentalCoverage || undefined,
+        propertyAddress: formData.propertyAddress,
+        propertyPriorCarrier: formData.propertyPriorCarrier || undefined,
+        propertyPurchaseDate: formData.propertyPurchaseDate || undefined,
+        currentPolicyExpiration: formData.currentPolicyExpiration || undefined,
+        yearsWithPriorPolicy: formData.yearsWithPriorPolicy ? parseInt(formData.yearsWithPriorPolicy) : undefined,
+        yearsContinuousPolicy: formData.yearsContinuousPolicy ? parseInt(formData.yearsContinuousPolicy) : undefined,
+        newPropertyEffectiveDate: formData.newPropertyEffectiveDate || undefined,
+        dwellingUsage: formData.dwellingUsage as 'Primary Home' | 'Secondary Home' | 'Seasonal Home' | 'Farm' | 'Rental Property' | 'Commercial Property',
+        occupancyType: formData.occupancyType as 'Owner Occupied' | 'Renter Occupied' | 'Unoccupied' | 'Vacant' | 'Business',
+        foundationType: formData.foundationType as 'Basement - Finished' | 'Basement - Partially Finished' | 'Basement - Unfinished' | 'Crawl Space - Enclosed' | 'Crawl Space - Open' | 'Slab' | 'Piers' | 'Pilings/stilts' | 'Hillside Foundation' | 'Other',
+        roofType: formData.roofType as 'Architectural Shingles' | 'Asphalt Shingles' | 'Composition' | 'Copper' | 'Corrugated Steel' | 'Fiberglass' | 'Foam' | 'Gravel' | 'Metal' | 'Plastic' | 'Tar' | 'Slate' | 'Other',
+        additionalInfo: formData.additionalInfo || undefined,
+      };
+      
+      await insuranceQuoteAPI.submit(transformedData);
+      toast.success('Insurance quote submitted successfully!');
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false);
+        setCurrentStep(0);
+        setErrors({});
+        setFormData({
+          fullName: '',
+          dateOfBirth: '',
+          gender: '',
+          email: '',
+          phone: '',
+          dlNumber: '',
+          dlState: '',
+          ageLicensed: '',
+          dlStatus: '',
+          licenseSuspendedYears: '',
+          primaryAddress: '',
+          yearsAtAddress: '',
+          monthsAtAddress: '',
+          previousAddress: '',
+          maritalStatus: '',
+          occupation: '',
+          military: '',
+          paperless: '',
+          coApplicantRelationship: '',
+          coApplicantFullName: '',
+          coApplicantDOB: '',
+          coApplicantDLNumber: '',
+          coApplicantMilitary: '',
+          priorCarrier: '',
+          yearsWithPrior: '',
+          priorExpirationDate: '',
+          newEffectiveDate: '',
+          vin: '',
+          datePurchased: '',
+          vehicleUse: '',
+          milesPerDay: '',
+          ownershipType: '',
+          bodilyInjury: '',
+          propertyDamage: '',
+          uninsuredMotor: '',
+          comprehensiveDeduction: '',
+          collisionDeduction: '',
+          towingCoverage: '',
+          rentalCoverage: '',
+          propertyAddress: '',
+          propertyPriorCarrier: '',
+          propertyPurchaseDate: '',
+          currentPolicyExpiration: '',
+          yearsWithPriorPolicy: '',
+          yearsContinuousPolicy: '',
+          newPropertyEffectiveDate: '',
+          dwellingUsage: '',
+          occupancyType: '',
+          foundationType: '',
+          roofType: '',
+          additionalInfo: '',
+        });
+      }, 3000);
+    } catch (error: any) {
+      console.error('Submission error:', error);
+      toast.error(error.message || 'Failed to submit insurance quote');
+    }
   };
 
   const stepVariants = {

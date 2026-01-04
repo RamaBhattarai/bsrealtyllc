@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { FaSearch, FaEye, FaEdit, FaTrash, FaDownload, FaChevronLeft, FaChevronRight, FaCalendarAlt, FaClock, FaUser } from 'react-icons/fa'
 import { useAppointments, useUpdateAppointmentStatus, useDeleteAppointment, useExportAppointments } from '../../../hooks/useAppointment'
+import { useSearchParams } from 'next/navigation'
 import type { Appointment } from '../../../lib/api/appointment.api'
 
 interface AppointmentModalProps {
@@ -16,115 +17,119 @@ function AppointmentModal({ appointment, isOpen, onClose, onStatusUpdate }: Appo
   if (!isOpen || !appointment) return null
 
   const handleStatusChange = (status: 'pending' | 'confirmed' | 'cancelled' | 'completed') => {
-    onStatusUpdate(appointment.id, status)
+    const id = appointment._id || appointment.id;
+    if (!id) {
+      console.error('Invalid appointment ID');
+      return;
+    }
+    onStatusUpdate(id, status)
     onClose()
   }
 
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'confirmed': return 'bg-green-100 text-green-800'
+      case 'pending': return 'bg-yellow-100 text-yellow-800'
+      case 'completed': return 'bg-blue-100 text-blue-800'
+      case 'cancelled': return 'bg-red-100 text-red-800'
+      default: return 'bg-gray-100 text-gray-800'
+    }
+  }
+
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onClick={onClose} />
-
-        <div className="inline-block w-full max-w-3xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-bold text-gray-900">Appointment Details</h3>
-            <button
-              onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-xl"
-            >
-              ×
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Client Name</label>
-                <p className="mt-1 text-sm text-gray-900 flex items-center">
-                  <FaUser className="w-4 h-4 mr-2 text-gray-400" />
-                  {appointment.name}
-                </p>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Email</label>
-                <p className="mt-1 text-sm text-gray-900">{appointment.email}</p>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Phone</label>
-                <p className="mt-1 text-sm text-gray-900">{appointment.phone}</p>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Category</label>
-                <p className="mt-1 text-sm text-gray-900">{appointment.category}</p>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Preference</label>
-                <p className="mt-1 text-sm text-gray-900">{appointment.preference}</p>
-              </div>
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-white" style={{ zIndex: 9999 }}>
+      <div className="min-h-screen">
+        <div className="w-full p-6 bg-white">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">Appointment Details</h2>
+              <button
+                onClick={onClose}
+                className="text-gray-400 hover:text-gray-600 text-2xl"
+              >
+                ×
+              </button>
             </div>
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Date & Time</label>
-                <p className="mt-1 text-sm text-gray-900 flex items-center">
-                  <FaCalendarAlt className="w-4 h-4 mr-2 text-gray-400" />
-                  {new Date(appointment.date).toLocaleDateString()} at {appointment.time}
-                </p>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Current Status</label>
-                <span className={`mt-1 inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                  appointment.status === 'confirmed' ? 'bg-green-100 text-green-800' :
-                  appointment.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                  appointment.status === 'completed' ? 'bg-blue-100 text-blue-800' :
-                  'bg-red-100 text-red-800'
-                }`}>
-                  {appointment.status}
-                </span>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Update Status</label>
-                <div className="space-y-2">
-                  {(['pending', 'confirmed', 'completed', 'cancelled'] as const).map((status) => (
-                    <button
-                      key={status}
-                      onClick={() => handleStatusChange(status)}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                        appointment.status === status
-                          ? 'bg-blue-100 text-blue-800 cursor-default'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                      disabled={appointment.status === status}
-                    >
-                      {status.charAt(0).toUpperCase() + status.slice(1)}
-                    </button>
-                  ))}
+            <div className="bg-gray-50 rounded-lg p-6 mb-6">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900">{appointment.name}</h3>
+                  <p className="text-gray-600">{appointment.email}</p>
+                  <p className="text-gray-600">{appointment.phone}</p>
+                </div>
+                <div className="text-right">
+                  <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(appointment.status)}`}>
+                    {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
+                  </span>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Booked: {new Date(appointment.createdAt).toLocaleDateString()}
+                  </p>
                 </div>
               </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Booked On</label>
-                <p className="mt-1 text-sm text-gray-900">
-                  {new Date(appointment.createdAt).toLocaleString()}
-                </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Appointment Information */}
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-700 mb-3">Appointment Information</h4>
+                  <div className="space-y-2 text-sm dark:text-gray-700">
+                    <p><span className="font-medium">Name:</span> {appointment.name}</p>
+                    <p><span className="font-medium">Email:</span> {appointment.email}</p>
+                    <p><span className="font-medium">Phone:</span> {appointment.phone}</p>
+                    <p><span className="font-medium">Category:</span> {appointment.category}</p>
+                    <p><span className="font-medium">Preference:</span> {appointment.preference}</p>
+                    <p><span className="font-medium">Date & Time:</span> {new Date(appointment.date).toLocaleDateString()} at {appointment.time}</p>
+                  </div>
+                </div>
+
+                {/* Message */}
+                {appointment.message && (
+                  <div className="bg-white p-4 rounded-lg border">
+                    <h4 className="font-semibold text-gray-900 mb-3 dark:text-gray-700">Message</h4>
+                    <div className="text-sm bg-gray-50 p-3 rounded dark:text-gray-700">
+                      {appointment.message}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
 
-          {appointment.message && (
-            <div className="mt-6">
-              <label className="block text-sm font-medium text-gray-700">Message</label>
-              <p className="mt-2 p-3 bg-gray-50 rounded-md text-sm text-gray-900">
-                {appointment.message}
-              </p>
+            {/* Status Update Actions */}
+            <div className="flex justify-between items-center">
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => handleStatusChange('pending')}
+                  className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+                >
+                  Mark as Pending
+                </button>
+                <button
+                  onClick={() => handleStatusChange('confirmed')}
+                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+                >
+                  Mark as Confirmed
+                </button>
+                <button
+                  onClick={() => handleStatusChange('completed')}
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                >
+                  Mark as Completed
+                </button>
+                <button
+                  onClick={() => handleStatusChange('cancelled')}
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                >
+                  Mark as Cancelled
+                </button>
+              </div>
+              <button
+                onClick={onClose}
+                className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+              >
+                Close
+              </button>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
@@ -140,6 +145,9 @@ export default function AppointmentsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const itemsPerPage = 10
 
+  const searchParams = useSearchParams()
+  const highlightId = searchParams.get('id')
+
   const { data: appointmentsData, isLoading } = useAppointments({
     page: currentPage,
     limit: itemsPerPage,
@@ -150,6 +158,17 @@ export default function AppointmentsPage() {
   const updateStatusMutation = useUpdateAppointmentStatus()
   const deleteMutation = useDeleteAppointment()
   const exportMutation = useExportAppointments()
+
+  useEffect(() => {
+    if (highlightId && appointmentsData?.appointments) {
+      const row = document.getElementById(`appointment-${highlightId}`)
+      if (row) {
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        row.classList.add('bg-blue-100')
+        setTimeout(() => row.classList.remove('bg-blue-100'), 1000)
+      }
+    }
+  }, [appointmentsData, highlightId])
 
   // Filter appointments based on search term
   const filteredAppointments = useMemo(() => {
@@ -169,13 +188,21 @@ export default function AppointmentsPage() {
     setIsModalOpen(true)
   }
 
-  const handleStatusUpdate = (id: string, status: 'pending' | 'confirmed' | 'cancelled' | 'completed') => {
-    updateStatusMutation.mutate({ id, status })
+  const handleStatusUpdate = (id: string | undefined, status: 'pending' | 'confirmed' | 'cancelled' | 'completed') => {
+    if (!id) {
+      console.error('Invalid appointment ID');
+      return;
+    }
+    updateStatusMutation.mutate({ id: id as string, status })
   }
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: string | undefined) => {
+    if (!id) {
+      console.error('Invalid appointment ID');
+      return;
+    }
     if (confirm('Are you sure you want to delete this appointment?')) {
-      deleteMutation.mutate(id)
+      deleteMutation.mutate(id as string)
     }
   }
 
@@ -278,7 +305,7 @@ export default function AppointmentsPage() {
                 </tr>
               ) : filteredAppointments?.length ? (
                 filteredAppointments.map((appointment, index) => (
-                  <tr key={appointment.id || `appointment-${index}`} className="hover:bg-gray-50">
+                  <tr key={appointment.id || `appointment-${index}`} id={`appointment-${appointment.id || appointment._id}`} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="text-sm font-medium text-gray-900">{appointment.name}</div>
@@ -321,7 +348,7 @@ export default function AppointmentsPage() {
                         <FaEye className="w-4 h-4" />
                       </button>
                       <button
-                        onClick={() => handleDelete(appointment.id)}
+                        onClick={() => handleDelete(appointment._id || appointment.id)}
                         className="text-red-600 hover:text-red-900"
                         title="Delete"
                       >

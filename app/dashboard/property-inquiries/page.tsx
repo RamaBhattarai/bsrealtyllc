@@ -4,23 +4,23 @@ import { useState, useMemo, useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 import { FaSearch, FaFilter, FaEye, FaEdit, FaTrash, FaDownload, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { contactAPI } from '../../../lib/api/contact.api'
+import { propertyInquiryAPI } from '../../../lib/api/propertyInquiry.api'
 import toast from 'react-hot-toast'
 
-interface ContactModalProps {
-  contact: any
+interface PropertyInquiryModalProps {
+  inquiry: any
   isOpen: boolean
   onClose: () => void
   onStatusUpdate: (id: string, status: string) => void
 }
 
-function ContactModal({ contact, isOpen, onClose, onStatusUpdate }: ContactModalProps) {
-  if (!isOpen || !contact) return null
+function PropertyInquiryModal({ inquiry, isOpen, onClose, onStatusUpdate }: PropertyInquiryModalProps) {
+  if (!isOpen || !inquiry) return null
 
   const handleStatusChange = (status: 'pending' | 'responded' | 'closed') => {
-    const id = contact.id || contact._id;
+    const id = inquiry.id || inquiry._id;
     if (!id) {
-      toast.error('Invalid contact ID');
+      toast.error('Invalid inquiry ID');
       return;
     }
     onStatusUpdate(id, status)
@@ -40,9 +40,9 @@ function ContactModal({ contact, isOpen, onClose, onStatusUpdate }: ContactModal
     <div className="fixed inset-0 z-50 overflow-y-auto bg-white" style={{ zIndex: 9999 }}>
       <div className="min-h-screen">
         <div className="w-full p-6 bg-white">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Contact Details</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Property Inquiry Details</h2>
               <button
                 onClick={onClose}
                 className="text-gray-400 hover:text-gray-600 text-2xl"
@@ -54,40 +54,73 @@ function ContactModal({ contact, isOpen, onClose, onStatusUpdate }: ContactModal
             <div className="bg-gray-50 rounded-lg p-6 mb-6">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900">{contact.name}</h3>
-                  <p className="text-gray-600">{contact.email}</p>
-                  <p className="text-gray-600">{contact.phone}</p>
+                  <h3 className="text-xl font-semibold text-gray-900">{inquiry.name}</h3>
+                  <p className="text-gray-600">{inquiry.email}</p>
+                  <p className="text-gray-600">{inquiry.phone}</p>
                 </div>
                 <div className="text-right">
-                  <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(contact.status)}`}>
-                    {contact.status.charAt(0).toUpperCase() + contact.status.slice(1)}
+                  <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(inquiry.status)}`}>
+                    {inquiry.status.charAt(0).toUpperCase() + inquiry.status.slice(1)}
                   </span>
                   <p className="text-sm text-gray-500 mt-1">
-                    Submitted: {new Date(contact.createdAt).toLocaleDateString()}
+                    Submitted: {new Date(inquiry.createdAt).toLocaleDateString()}
                   </p>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Contact Information */}
+                {/* Personal Information */}
                 <div className="bg-white p-4 rounded-lg border">
-                  <h4 className="font-semibold text-gray-900 dark:text-gray-700 mb-3">Contact Information</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-700 mb-3">Personal Information</h4>
                   <div className="space-y-2 text-sm dark:text-gray-700">
-                    <p><span className="font-medium">Name:</span> {contact.name}</p>
-                    <p><span className="font-medium">Email:</span> {contact.email}</p>
-                    <p><span className="font-medium">Phone:</span> {contact.phone}</p>
-                    <p><span className="font-medium">Subject:</span> {contact.subject}</p>
+                    <p><span className="font-medium">Name:</span> {inquiry.name}</p>
+                    <p><span className="font-medium">Email:</span> {inquiry.email || 'N/A'}</p>
+                    <p><span className="font-medium">Phone:</span> {inquiry.phone}</p>
+                    <p><span className="font-medium">Preferred Contact:</span> {inquiry.preferredContact}</p>
                   </div>
                 </div>
 
-                {/* Message */}
+                {/* Property Details */}
                 <div className="bg-white p-4 rounded-lg border">
-                  <h4 className="font-semibold text-gray-900 mb-3 dark:text-gray-700">Message</h4>
-                  <div className="text-sm bg-gray-50 p-3 rounded dark:text-gray-700">
-                    {contact.message}
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-700 mb-3">Property Details</h4>
+                  <div className="space-y-2 text-sm dark:text-gray-700">
+                    <p><span className="font-medium">Real Estate Needs:</span> {inquiry.realEstateNeeds?.join(', ') || 'N/A'}</p>
+                    <p><span className="font-medium">Property Type:</span> {inquiry.propertyType?.join(', ') || 'N/A'}</p>
+                    <p><span className="font-medium">Budget Range:</span> {inquiry.budgetRange || 'N/A'}</p>
+                    <p><span className="font-medium">Timeline:</span> {inquiry.timeline || 'N/A'}</p>
+                    <p><span className="font-medium">Locations:</span> {inquiry.locations || 'N/A'}</p>
+                  </div>
+                </div>
+
+                {/* Financing Information */}
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-700 mb-3">Financing Information</h4>
+                  <div className="space-y-2 text-sm dark:text-gray-700">
+                    <p><span className="font-medium">Purchase Type:</span> {inquiry.purchaseType}</p>
+                    <p><span className="font-medium">Loan Officer Assistance:</span> {inquiry.loanOfficerAssistance}</p>
+                    <p><span className="font-medium">Concerns:</span> {inquiry.concerns || 'N/A'}</p>
+                  </div>
+                </div>
+
+                {/* Investment & Insurance */}
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-700 mb-3">Investment & Insurance</h4>
+                  <div className="space-y-2 text-sm dark:text-gray-700">
+                    <p><span className="font-medium">Investment Interest:</span> {inquiry.investmentInterest?.join(', ') || 'N/A'}</p>
+                    <p><span className="font-medium">Insurance Interest:</span> {inquiry.insuranceInterest?.join(', ') || 'N/A'}</p>
                   </div>
                 </div>
               </div>
+
+              {/* Additional Info */}
+              {inquiry.additionalInfo && (
+                <div className="bg-white p-4 rounded-lg border mt-6">
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-700 mb-3">Additional Information</h4>
+                  <div className="text-sm bg-gray-50 p-3 rounded dark:text-gray-700">
+                    {inquiry.additionalInfo}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Status Update Actions */}
@@ -126,11 +159,13 @@ function ContactModal({ contact, isOpen, onClose, onStatusUpdate }: ContactModal
   )
 }
 
-export default function ContactsPage() {
+export default function PropertyInquiriesPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('')
+  const [purchaseTypeFilter, setPurchaseTypeFilter] = useState('')
+  const [preferredContactFilter, setPreferredContactFilter] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const [selectedContact, setSelectedContact] = useState<any>(null)
+  const [selectedInquiry, setSelectedInquiry] = useState<any>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const itemsPerPage = 10
 
@@ -138,61 +173,70 @@ export default function ContactsPage() {
   const searchParams = useSearchParams()
   const highlightId = searchParams.get('id')
 
-  // Fetch contacts with pagination and filters
-  const { data: contactsData, isLoading } = useQuery({
-    queryKey: ['contacts', { page: currentPage, limit: itemsPerPage, status: statusFilter, search: searchTerm }],
-    queryFn: () => contactAPI.getAll({
+  // Fetch property inquiries with pagination and filters
+  const { data: inquiriesData, isLoading } = useQuery({
+    queryKey: ['property-inquiries', {
+      page: currentPage,
+      limit: itemsPerPage,
+      status: statusFilter,
+      purchaseType: purchaseTypeFilter,
+      preferredContact: preferredContactFilter,
+      search: searchTerm
+    }],
+    queryFn: () => propertyInquiryAPI.getAll({
       page: currentPage,
       limit: itemsPerPage,
       status: statusFilter || undefined,
+      purchaseType: purchaseTypeFilter || undefined,
+      preferredContact: preferredContactFilter || undefined,
       search: searchTerm || undefined,
     }),
   })
 
+  // Update inquiry status mutation
+  const updateStatusMutation = useMutation({
+    mutationFn: ({ id, status }: { id: string; status: 'pending' | 'responded' | 'closed' }) =>
+      propertyInquiryAPI.updateStatus(id, status),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['property-inquiries'] })
+      toast.success('Property inquiry status updated successfully')
+    },
+    onError: (error: any) => {
+      toast.error(error.message || 'Failed to update property inquiry status')
+    },
+  })
+
+  // Delete inquiry mutation
+  const deleteMutation = useMutation({
+    mutationFn: propertyInquiryAPI.delete,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['property-inquiries'] })
+      toast.success('Property inquiry deleted successfully')
+    },
+    onError: (error: any) => {
+      toast.error(error.message || 'Failed to delete property inquiry')
+    },
+  })
+
   useEffect(() => {
-    if (highlightId && contactsData?.contacts) {
-      const row = document.getElementById(`contact-${highlightId}`)
+    if (highlightId && inquiriesData?.inquiries) {
+      const row = document.getElementById(`inquiry-${highlightId}`)
       if (row) {
         row.scrollIntoView({ behavior: 'smooth', block: 'center' })
         row.classList.add('bg-blue-100')
-        setTimeout(() => row.classList.remove('bg-blue-100'), 5000)
+        setTimeout(() => row.classList.remove('bg-blue-100'), 1000)
       }
     }
-  }, [contactsData, highlightId])
+  }, [inquiriesData, highlightId])
 
-  // Update contact status mutation
-  const updateStatusMutation = useMutation({
-    mutationFn: ({ id, status }: { id: string; status: 'pending' | 'responded' | 'closed' }) =>
-      contactAPI.updateStatus(id, status),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contacts'] })
-      toast.success('Contact status updated successfully')
-    },
-    onError: (error: any) => {
-      toast.error(error.message || 'Failed to update contact status')
-    },
-  })
-
-  // Delete contact mutation
-  const deleteMutation = useMutation({
-    mutationFn: contactAPI.delete,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contacts'] })
-      toast.success('Contact deleted successfully')
-    },
-    onError: (error: any) => {
-      toast.error(error.message || 'Failed to delete contact')
-    },
-  })
-
-  const handleViewContact = (contact: any) => {
-    setSelectedContact(contact)
+  const handleViewInquiry = (inquiry: any) => {
+    setSelectedInquiry(inquiry)
     setIsModalOpen(true)
   }
 
   const handleStatusUpdate = (id: string | undefined, status: string) => {
     if (!id) {
-      toast.error('Invalid contact ID');
+      toast.error('Invalid inquiry ID');
       return;
     }
     updateStatusMutation.mutate({ id: id as string, status: status as 'pending' | 'responded' | 'closed' })
@@ -200,10 +244,10 @@ export default function ContactsPage() {
 
   const handleDelete = (id: string | undefined) => {
     if (!id) {
-      toast.error('Invalid contact ID');
+      toast.error('Invalid inquiry ID');
       return;
     }
-    if (confirm('Are you sure you want to delete this contact?')) {
+    if (confirm('Are you sure you want to delete this property inquiry?')) {
       deleteMutation.mutate(id as string)
     }
   }
@@ -217,12 +261,12 @@ export default function ContactsPage() {
     }
   }
 
-  const totalPages = contactsData?.totalPages || 1
+  const totalPages = inquiriesData?.pagination?.pages || 1
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Contacts</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Property Inquiries</h1>
         <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
           <FaDownload className="w-4 h-4 mr-2" />
           Export CSV
@@ -231,20 +275,20 @@ export default function ContactsPage() {
 
       {/* Filters */}
       <div className="bg-white rounded-lg shadow p-6">
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div>
             <div className="relative">
               <FaSearch className="absolute left-3 top-3 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search contacts..."
+                placeholder="Search inquiries..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
           </div>
-          <div className="sm:w-48">
+          <div>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
@@ -256,19 +300,43 @@ export default function ContactsPage() {
               <option value="closed">Closed</option>
             </select>
           </div>
+          <div>
+            <select
+              value={purchaseTypeFilter}
+              onChange={(e) => setPurchaseTypeFilter(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value="">All Purchase Types</option>
+              <option value="Cash purchase">Cash Purchase</option>
+              <option value="Mortgage loan">Mortgage Loan</option>
+              <option value="Refinance">Refinance</option>
+            </select>
+          </div>
+          <div>
+            <select
+              value={preferredContactFilter}
+              onChange={(e) => setPreferredContactFilter(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value="">All Contact Methods</option>
+              <option value="Phone call">Phone Call</option>
+              <option value="Text message">Text Message</option>
+              <option value="Email">Email</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      {/* Contacts Table */}
+      {/* Property Inquiries Table */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purchase Type</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Budget Range</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
@@ -278,41 +346,41 @@ export default function ContactsPage() {
               {isLoading ? (
                 <tr key="loading">
                   <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
-                    Loading contacts...
+                    Loading property inquiries...
                   </td>
                 </tr>
-              ) : contactsData?.contacts?.length ? (
-                contactsData.contacts.map((contact, index) => (
-                  <tr key={contact.id || `contact-${index}`} id={`contact-${contact.id || contact._id}`} className="hover:bg-gray-50">
+              ) : inquiriesData?.inquiries?.length ? (
+                inquiriesData.inquiries.map((inquiry, index) => (
+                  <tr key={inquiry.id || `inquiry-${index}`} id={`inquiry-${inquiry.id || inquiry._id}`} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {contact.name}
+                      {inquiry.name}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {contact.email}
+                      {inquiry.phone}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {contact.phone}
+                      {inquiry.purchaseType}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {contact.subject}
+                      {inquiry.budgetRange || 'N/A'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(contact.status)}`}>
-                        {contact.status}
+                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(inquiry.status)}`}>
+                        {inquiry.status}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(contact.createdAt).toLocaleDateString()}
+                      {new Date(inquiry.createdAt).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                       <button
-                        onClick={() => handleViewContact(contact)}
+                        onClick={() => handleViewInquiry(inquiry)}
                         className="text-blue-600 hover:text-blue-900"
                       >
                         <FaEye className="w-4 h-4" />
                       </button>
                       <button
-                        onClick={() => handleDelete(contact.id || contact._id)}
+                        onClick={() => handleDelete(inquiry.id || inquiry._id)}
                         className="text-red-600 hover:text-red-900"
                       >
                         <FaTrash className="w-4 h-4" />
@@ -323,7 +391,7 @@ export default function ContactsPage() {
               ) : (
                 <tr key="empty">
                   <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
-                    No contacts found
+                    No property inquiries found
                   </td>
                 </tr>
               )}
@@ -396,9 +464,9 @@ export default function ContactsPage() {
         )}
       </div>
 
-      {/* Contact Modal */}
-      <ContactModal
-        contact={selectedContact}
+      {/* Property Inquiry Modal */}
+      <PropertyInquiryModal
+        inquiry={selectedInquiry}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onStatusUpdate={handleStatusUpdate}

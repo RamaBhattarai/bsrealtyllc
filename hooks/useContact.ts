@@ -14,9 +14,12 @@ export const CONTACT_QUERY_KEYS = {
 
 // Submit contact form mutation hook
 export const useSubmitContact = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: contactAPI.submit,
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['notifications'] });
       toast.success(data.message || 'Message sent successfully! We\'ll get back to you soon.');
     },
     onError: (error: any) => {
@@ -35,8 +38,10 @@ export const useContacts = (params?: {
   return useQuery({
     queryKey: CONTACT_QUERY_KEYS.list(params),
     queryFn: () => contactAPI.getAll(params),
-    staleTime: 2 * 60 * 1000, // 2 minutes
+    staleTime: 30 * 1000, // 30 seconds
     gcTime: 5 * 60 * 1000, // 5 minutes
+    refetchInterval: 5000, // Refetch every 5 seconds
+    refetchOnWindowFocus: true,
   });
 };
 
@@ -55,7 +60,7 @@ export const useUpdateContactStatus = () => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: ({ id, status }: { id: string; status: 'pending' | 'responded' | 'closed' }) =>
+    mutationFn: ({ id, status }: { id: string; status: 'new' | 'pending' | 'responded' | 'closed' }) =>
       contactAPI.updateStatus(id, status),
     onSuccess: (data, variables) => {
       // Update the contact in cache
@@ -72,6 +77,11 @@ export const useUpdateContactStatus = () => {
       // Invalidate stats
       queryClient.invalidateQueries({
         queryKey: CONTACT_QUERY_KEYS.stats()
+      });
+      
+      // Invalidate notifications
+      queryClient.invalidateQueries({
+        queryKey: ['notifications']
       });
       
       toast.success(data.message || 'Contact status updated successfully');

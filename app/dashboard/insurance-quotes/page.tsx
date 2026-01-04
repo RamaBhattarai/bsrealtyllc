@@ -3,24 +3,24 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
-import { FaSearch, FaFilter, FaEye, FaEdit, FaTrash, FaDownload, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { contactAPI } from '../../../lib/api/contact.api'
+import { FaSearch, FaFilter, FaEye, FaTrash, FaDownload, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { insuranceQuoteAPI } from '../../../lib/api/insuranceQuote.api'
 import toast from 'react-hot-toast'
 
-interface ContactModalProps {
-  contact: any
+interface InsuranceQuoteModalProps {
+  quote: any
   isOpen: boolean
   onClose: () => void
   onStatusUpdate: (id: string, status: string) => void
 }
 
-function ContactModal({ contact, isOpen, onClose, onStatusUpdate }: ContactModalProps) {
-  if (!isOpen || !contact) return null
+function InsuranceQuoteModal({ quote, isOpen, onClose, onStatusUpdate }: InsuranceQuoteModalProps) {
+  if (!isOpen || !quote) return null
 
   const handleStatusChange = (status: 'pending' | 'responded' | 'closed') => {
-    const id = contact.id || contact._id;
+    const id = quote.id || quote._id;
     if (!id) {
-      toast.error('Invalid contact ID');
+      toast.error('Invalid quote ID');
       return;
     }
     onStatusUpdate(id, status)
@@ -35,14 +35,14 @@ function ContactModal({ contact, isOpen, onClose, onStatusUpdate }: ContactModal
       default: return 'bg-gray-100 text-gray-800'
     }
   }
-
+ //view modal
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-white" style={{ zIndex: 9999 }}>
       <div className="min-h-screen">
         <div className="w-full p-6 bg-white">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Contact Details</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Insurance Quote Details</h2>
               <button
                 onClick={onClose}
                 className="text-gray-400 hover:text-gray-600 text-2xl"
@@ -54,37 +54,84 @@ function ContactModal({ contact, isOpen, onClose, onStatusUpdate }: ContactModal
             <div className="bg-gray-50 rounded-lg p-6 mb-6">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900">{contact.name}</h3>
-                  <p className="text-gray-600">{contact.email}</p>
-                  <p className="text-gray-600">{contact.phone}</p>
+                  <h3 className="text-xl font-semibold text-gray-900">{quote.fullName}</h3>
+                  <p className="text-gray-600">{quote.email}</p>
+                  <p className="text-gray-600">{quote.phone}</p>
                 </div>
                 <div className="text-right">
-                  <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(contact.status)}`}>
-                    {contact.status.charAt(0).toUpperCase() + contact.status.slice(1)}
+                  <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(quote.status)}`}>
+                    {quote.status.charAt(0).toUpperCase() + quote.status.slice(1)}
                   </span>
                   <p className="text-sm text-gray-500 mt-1">
-                    Submitted: {new Date(contact.createdAt).toLocaleDateString()}
+                    Submitted: {new Date(quote.createdAt).toLocaleDateString()}
                   </p>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Contact Information */}
-                <div className="bg-white p-4 rounded-lg border">
-                  <h4 className="font-semibold text-gray-900 dark:text-gray-700 mb-3">Contact Information</h4>
-                  <div className="space-y-2 text-sm dark:text-gray-700">
-                    <p><span className="font-medium">Name:</span> {contact.name}</p>
-                    <p><span className="font-medium">Email:</span> {contact.email}</p>
-                    <p><span className="font-medium">Phone:</span> {contact.phone}</p>
-                    <p><span className="font-medium">Subject:</span> {contact.subject}</p>
+                {/* Personal Information */}
+                <div className="bg-white dark:text-gray-700 p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-3">Personal Information</h4>
+                  <div className="space-y-2 text-sm">
+                    <p><span className="font-medium">Full Name:</span> {quote.fullName}</p>
+                    <p><span className="font-medium">Date of Birth:</span> {new Date(quote.dateOfBirth).toLocaleDateString()}</p>
+                    <p><span className="font-medium">Gender:</span> {quote.gender}</p>
+                    <p><span className="font-medium">Email:</span> {quote.email}</p>
+                    <p><span className="font-medium">Phone:</span> {quote.phone}</p>
+                    <p><span className="font-medium">DL Number:</span> {quote.dlNumber}</p>
+                    <p><span className="font-medium">DL Status:</span> {quote.dlStatus}</p>
+                    <p><span className="font-medium">Marital Status:</span> {quote.maritalStatus}</p>
+                    <p><span className="font-medium">Occupation:</span> {quote.occupation}</p>
                   </div>
                 </div>
 
-                {/* Message */}
+                {/* Co-Applicant Information */}
                 <div className="bg-white p-4 rounded-lg border">
-                  <h4 className="font-semibold text-gray-900 mb-3 dark:text-gray-700">Message</h4>
-                  <div className="text-sm bg-gray-50 p-3 rounded dark:text-gray-700">
-                    {contact.message}
+                  <h4 className="font-semibold text-gray-900 mb-3">Co-Applicant Information</h4>
+                  <div className="space-y-2 text-sm dark:text-gray-700">
+                    {quote.coApplicantFullName ? (
+                      <>
+                        <p><span className="font-medium">Full Name:</span> {quote.coApplicantFullName}</p>
+                        {quote.coApplicantDOB && <p><span className="font-medium">Date of Birth:</span> {new Date(quote.coApplicantDOB).toLocaleDateString()}</p>}
+                        {quote.coApplicantDLNumber && <p><span className="font-medium">DL Number:</span> {quote.coApplicantDLNumber}</p>}
+                        {quote.coApplicantRelationship && <p><span className="font-medium">Relationship:</span> {quote.coApplicantRelationship}</p>}
+                        {quote.coApplicantMilitary && <p><span className="font-medium">Military:</span> {quote.coApplicantMilitary}</p>}
+                      </>
+                    ) : (
+                      <p className="text-gray-500">No co-applicant information provided.</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Property Information */}
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-3">Property Information</h4>
+                  <div className="space-y-2 dark:text-gray-700 text-sm">
+                    <p><span className="font-medium">Property Address:</span> {quote.propertyAddress}</p>
+                    <p><span className="font-medium">Dwelling Usage:</span> {quote.dwellingUsage}</p>
+                    <p><span className="font-medium">Occupancy Type:</span> {quote.occupancyType}</p>
+                    <p><span className="font-medium">Foundation Type:</span> {quote.foundationType}</p>
+                    <p><span className="font-medium">Roof Type:</span> {quote.roofType}</p>
+                  </div>
+                </div>
+
+                {/* Auto Information */}
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-700 mb-3">Auto Information</h4>
+                  <div className="space-y-2  dark:text-gray-700 text-sm">
+                    <p><span className="font-medium">VIN:</span> {quote.vin}</p>
+                    <p><span className="font-medium">Vehicle Use:</span> {quote.vehicleUse}</p>
+                    <p><span className="font-medium">Date Purchased:</span> {new Date(quote.datePurchased).toLocaleDateString()}</p>
+                    {quote.bodilyInjury && <p><span className="font-medium">Bodily Injury:</span> {quote.bodilyInjury}</p>}
+                    {quote.propertyDamage && <p><span className="font-medium">Property Damage:</span> {quote.propertyDamage}</p>}
+                  </div>
+                </div>
+
+                {/* Additional Info */}
+                <div className="bg-white p-4 rounded-lg border md:col-span-2">
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-700 mb-3">Additional Information</h4>
+                  <div className="text-sm dark:text-gray-700">
+                    {quote.additionalInfo || 'No additional information provided.'}
                   </div>
                 </div>
               </div>
@@ -126,11 +173,13 @@ function ContactModal({ contact, isOpen, onClose, onStatusUpdate }: ContactModal
   )
 }
 
-export default function ContactsPage() {
+export default function InsuranceQuotesPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('')
+  const [dwellingUsageFilter, setDwellingUsageFilter] = useState('')
+  const [occupancyTypeFilter, setOccupancyTypeFilter] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const [selectedContact, setSelectedContact] = useState<any>(null)
+  const [selectedQuote, setSelectedQuote] = useState<any>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const itemsPerPage = 10
 
@@ -138,61 +187,63 @@ export default function ContactsPage() {
   const searchParams = useSearchParams()
   const highlightId = searchParams.get('id')
 
-  // Fetch contacts with pagination and filters
-  const { data: contactsData, isLoading } = useQuery({
-    queryKey: ['contacts', { page: currentPage, limit: itemsPerPage, status: statusFilter, search: searchTerm }],
-    queryFn: () => contactAPI.getAll({
+  // Fetch insurance quotes with pagination and filters
+  const { data: quotesData, isLoading } = useQuery({
+    queryKey: ['insurance-quotes', { page: currentPage, limit: itemsPerPage, status: statusFilter, dwellingUsage: dwellingUsageFilter, occupancyType: occupancyTypeFilter, search: searchTerm }],
+    queryFn: () => insuranceQuoteAPI.getAll({
       page: currentPage,
       limit: itemsPerPage,
       status: statusFilter || undefined,
+      dwellingUsage: dwellingUsageFilter || undefined,
+      occupancyType: occupancyTypeFilter || undefined,
       search: searchTerm || undefined,
     }),
   })
 
   useEffect(() => {
-    if (highlightId && contactsData?.contacts) {
-      const row = document.getElementById(`contact-${highlightId}`)
+    if (highlightId && quotesData?.quotes) {
+      const row = document.getElementById(`quote-${highlightId}`)
       if (row) {
         row.scrollIntoView({ behavior: 'smooth', block: 'center' })
         row.classList.add('bg-blue-100')
-        setTimeout(() => row.classList.remove('bg-blue-100'), 5000)
+        setTimeout(() => row.classList.remove('bg-blue-100'), 1000)
       }
     }
-  }, [contactsData, highlightId])
+  }, [quotesData, highlightId])
 
-  // Update contact status mutation
+  // Update quote status mutation
   const updateStatusMutation = useMutation({
     mutationFn: ({ id, status }: { id: string; status: 'pending' | 'responded' | 'closed' }) =>
-      contactAPI.updateStatus(id, status),
+      insuranceQuoteAPI.updateStatus(id, status),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contacts'] })
-      toast.success('Contact status updated successfully')
+      queryClient.invalidateQueries({ queryKey: ['insurance-quotes'] })
+      toast.success('Quote status updated successfully')
     },
     onError: (error: any) => {
-      toast.error(error.message || 'Failed to update contact status')
+      toast.error(error.message || 'Failed to update quote status')
     },
   })
 
-  // Delete contact mutation
+  // Delete quote mutation
   const deleteMutation = useMutation({
-    mutationFn: contactAPI.delete,
+    mutationFn: insuranceQuoteAPI.delete,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contacts'] })
-      toast.success('Contact deleted successfully')
+      queryClient.invalidateQueries({ queryKey: ['insurance-quotes'] })
+      toast.success('Quote deleted successfully')
     },
     onError: (error: any) => {
-      toast.error(error.message || 'Failed to delete contact')
+      toast.error(error.message || 'Failed to delete quote')
     },
   })
 
-  const handleViewContact = (contact: any) => {
-    setSelectedContact(contact)
+  const handleViewQuote = (quote: any) => {
+    setSelectedQuote(quote)
     setIsModalOpen(true)
   }
 
   const handleStatusUpdate = (id: string | undefined, status: string) => {
     if (!id) {
-      toast.error('Invalid contact ID');
+      toast.error('Invalid quote ID');
       return;
     }
     updateStatusMutation.mutate({ id: id as string, status: status as 'pending' | 'responded' | 'closed' })
@@ -200,10 +251,10 @@ export default function ContactsPage() {
 
   const handleDelete = (id: string | undefined) => {
     if (!id) {
-      toast.error('Invalid contact ID');
+      toast.error('Invalid quote ID');
       return;
     }
-    if (confirm('Are you sure you want to delete this contact?')) {
+    if (confirm('Are you sure you want to delete this quote?')) {
       deleteMutation.mutate(id as string)
     }
   }
@@ -217,12 +268,12 @@ export default function ContactsPage() {
     }
   }
 
-  const totalPages = contactsData?.totalPages || 1
+  const totalPages = quotesData?.pagination?.pages || 1
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Contacts</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Insurance Quotes</h1>
         <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
           <FaDownload className="w-4 h-4 mr-2" />
           Export CSV
@@ -231,24 +282,24 @@ export default function ContactsPage() {
 
       {/* Filters */}
       <div className="bg-white rounded-lg shadow p-6">
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="lg:col-span-2">
             <div className="relative">
               <FaSearch className="absolute left-3 top-3 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search contacts..."
+                placeholder="Search quotes..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
           </div>
-          <div className="sm:w-48">
+          <div>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300  bg-white! text-gray-900! rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="">All Status</option>
               <option value="pending">Pending</option>
@@ -256,10 +307,39 @@ export default function ContactsPage() {
               <option value="closed">Closed</option>
             </select>
           </div>
+          <div>
+            <select
+              value={dwellingUsageFilter}
+              onChange={(e) => setDwellingUsageFilter(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value="">All Dwelling Usage</option>
+              <option value="Primary Home">Primary Home</option>
+              <option value="Secondary Home">Secondary Home</option>
+              <option value="Seasonal Home">Seasonal Home</option>
+              <option value="Farm">Farm</option>
+              <option value="Rental Property">Rental Property</option>
+              <option value="Commercial Property">Commercial Property</option>
+            </select>
+          </div>
+          <div>
+            <select
+              value={occupancyTypeFilter}
+              onChange={(e) => setOccupancyTypeFilter(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 bg-white! text-gray-900! rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value="">All Occupancy Type</option>
+              <option value="Owner Occupied">Owner Occupied</option>
+              <option value="Renter Occupied">Renter Occupied</option>
+              <option value="Unoccupied">Unoccupied</option>
+              <option value="Vacant">Vacant</option>
+              <option value="Business">Business</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      {/* Contacts Table */}
+      {/* Quotes Table */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -268,7 +348,8 @@ export default function ContactsPage() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Property Address</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dwelling Usage</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
@@ -277,42 +358,45 @@ export default function ContactsPage() {
             <tbody className="bg-white divide-y divide-gray-200">
               {isLoading ? (
                 <tr key="loading">
-                  <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
-                    Loading contacts...
+                  <td colSpan={8} className="px-6 py-4 text-center text-gray-500">
+                    Loading insurance quotes...
                   </td>
                 </tr>
-              ) : contactsData?.contacts?.length ? (
-                contactsData.contacts.map((contact, index) => (
-                  <tr key={contact.id || `contact-${index}`} id={`contact-${contact.id || contact._id}`} className="hover:bg-gray-50">
+              ) : quotesData?.quotes?.length ? (
+                quotesData.quotes.map((quote, index) => (
+                  <tr key={quote.id || `quote-${index}`} id={`quote-${quote.id || quote._id}`} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {contact.name}
+                      {quote.fullName}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {contact.email}
+                      {quote.email}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {contact.phone}
+                      {quote.phone}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {contact.subject}
+                      {quote.propertyAddress}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {quote.dwellingUsage}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(contact.status)}`}>
-                        {contact.status}
+                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(quote.status)}`}>
+                        {quote.status}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(contact.createdAt).toLocaleDateString()}
+                      {new Date(quote.createdAt).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                       <button
-                        onClick={() => handleViewContact(contact)}
+                        onClick={() => handleViewQuote(quote)}
                         className="text-blue-600 hover:text-blue-900"
                       >
                         <FaEye className="w-4 h-4" />
                       </button>
                       <button
-                        onClick={() => handleDelete(contact.id || contact._id)}
+                        onClick={() => handleDelete(quote.id || quote._id)}
                         className="text-red-600 hover:text-red-900"
                       >
                         <FaTrash className="w-4 h-4" />
@@ -322,8 +406,8 @@ export default function ContactsPage() {
                 ))
               ) : (
                 <tr key="empty">
-                  <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
-                    No contacts found
+                  <td colSpan={8} className="px-6 py-4 text-center text-gray-500">
+                    No insurance quotes found
                   </td>
                 </tr>
               )}
@@ -396,9 +480,9 @@ export default function ContactsPage() {
         )}
       </div>
 
-      {/* Contact Modal */}
-      <ContactModal
-        contact={selectedContact}
+      {/* Insurance Quote Modal */}
+      <InsuranceQuoteModal
+        quote={selectedQuote}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onStatusUpdate={handleStatusUpdate}
