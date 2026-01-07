@@ -5,7 +5,10 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 import { FaSearch, FaFilter, FaEye, FaTrash, FaDownload, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { insuranceQuoteAPI } from '../../../lib/api/insuranceQuote.api'
+<<<<<<< HEAD
 import { formatPhone } from '../../../lib/utils/common'
+=======
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
 import toast from 'react-hot-toast'
 
 interface InsuranceQuoteModalProps {
@@ -57,7 +60,11 @@ function InsuranceQuoteModal({ quote, isOpen, onClose, onStatusUpdate }: Insuran
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900">{quote.fullName}</h3>
                   <p className="text-gray-600">{quote.email}</p>
+<<<<<<< HEAD
                   <p className="text-gray-600">{formatPhone(quote.phone)}</p>
+=======
+                  <p className="text-gray-600">{quote.phone}</p>
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
                 </div>
                 <div className="text-right">
                   <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(quote.status)}`}>
@@ -78,7 +85,11 @@ function InsuranceQuoteModal({ quote, isOpen, onClose, onStatusUpdate }: Insuran
                     <p><span className="font-medium">Date of Birth:</span> {new Date(quote.dateOfBirth).toLocaleDateString()}</p>
                     <p><span className="font-medium">Gender:</span> {quote.gender}</p>
                     <p><span className="font-medium">Email:</span> {quote.email}</p>
+<<<<<<< HEAD
                     <p><span className="font-medium">Phone:</span> {formatPhone(quote.phone)}</p>
+=======
+                    <p><span className="font-medium">Phone:</span> {quote.phone}</p>
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
                     <p><span className="font-medium">DL Number:</span> {quote.dlNumber}</p>
                     <p><span className="font-medium">DL Status:</span> {quote.dlStatus}</p>
                     <p><span className="font-medium">Marital Status:</span> {quote.maritalStatus}</p>
@@ -373,7 +384,11 @@ export default function InsuranceQuotesPage() {
                       {quote.email}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+<<<<<<< HEAD
                       {formatPhone(quote.phone)}
+=======
+                      {quote.phone}
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {quote.propertyAddress}

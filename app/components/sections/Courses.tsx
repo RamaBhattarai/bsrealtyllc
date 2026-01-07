@@ -9,21 +9,33 @@ const courses = [
   {
     icon: GraduationCap,
     title: 'Licensing Exam Prep',
+<<<<<<< HEAD
     
+=======
+    price: '$149',
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
     description: 'We offer expert prelicensing exam preparation and counseling for aspiring real estate professionals and mortgage loan officers. Our courses are designed to help you succeed in your licensing exams and provide comprehensive guidance to ensure you are fully equipped for a successful career in the real estate and mortgage industries.',
     balance: '50/65'
   },
   {
     icon: Briefcase,
     title: 'Business Counseling',
+<<<<<<< HEAD
     
+=======
+    price: '$139',
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
     description: 'We offer comprehensive business counseling services, including business establishment, tax preparation, bookkeeping, payroll, and financial reporting. Our goal is to help individuals and businesses stay financially organized and compliant, allowing them to focus on growth and success.',
     balance: '35/42'
   },
   {
     icon: TrendingUp,
     title: 'Investment Strategies',
+<<<<<<< HEAD
     
+=======
+    price: '$99',
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
     description: 'We offer specialized training to help individuals in varieties of investment strategies, such as stocks, forex, ETFs, bonds, notes, money market, REITs, MLPs, real estate, and more. Our courses are designed for beginners and experienced investors alike, providing the knowledge and tools needed to make informed decisions in the financial markets.',
     balance: ''
   }
@@ -100,7 +112,14 @@ export default function Courses() {
               {/* Title and Price */}
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-gray-600 mb-2">{course.title}</h3>
+<<<<<<< HEAD
             
+=======
+                <div className="text-3xl font-bold text-green-600">{course.price}</div>
+                {course.balance && (
+                  <div className="text-sm text-gray-500 mt-2">Bal</div>
+                )}
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
               </div>
 
               {/* Description */}

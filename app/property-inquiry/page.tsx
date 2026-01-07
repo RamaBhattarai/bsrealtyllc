@@ -5,7 +5,10 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight, FaCheck } from 'react-icons/fa';
 import { propertyInquiryAPI, PropertyInquiryFormData } from '../../lib/api/propertyInquiry.api';
+<<<<<<< HEAD
 import { formatPhone } from '../../lib/utils/common';
+=======
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
 import toast from 'react-hot-toast';
 
 export default function PropertyInquiry() {
@@ -41,9 +44,13 @@ export default function PropertyInquiry() {
   });
 
   const handleInputChange = (field: string, value: any) => {
+<<<<<<< HEAD
     // Format phone number if the field is phone
     const formattedValue = field === 'phone' ? formatPhone(value) : value;
     setFormData((prev) => ({ ...prev, [field]: formattedValue } as PropertyInquiryFormData));
+=======
+    setFormData((prev) => ({ ...prev, [field]: value } as PropertyInquiryFormData));
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
     // Clear error for this field when user starts typing
     if (errors[field]) {
       setErrors((prev) => {

@@ -3,7 +3,10 @@
 import { useState, useMemo } from 'react'
 import { FaSearch, FaEye, FaTrash, FaDownload, FaCalendarAlt, FaUser, FaBriefcase, FaFilter, FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { useJobApplications, useUpdateJobApplicationStatus, useDeleteJobApplication, useDownloadResume, useExportJobApplications } from '../../../hooks/useJobApplication'
+<<<<<<< HEAD
 import { formatPhone } from '../../../lib/utils/common'
+=======
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
 import type { JobApplication } from '../../../lib/api/jobApplication.api'
 
 interface JobApplicationModalProps {
@@ -76,7 +79,11 @@ function JobApplicationModal({ application, isOpen, onClose, onStatusUpdate, onD
 
               <div>
                 <label className="block text-sm font-medium text-gray-700">Phone</label>
+<<<<<<< HEAD
                 <p className="mt-1 text-sm text-gray-900">{formatPhone(application.phone)}</p>
+=======
+                <p className="mt-1 text-sm text-gray-900">{application.phone}</p>
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
               </div>
 
               <div>

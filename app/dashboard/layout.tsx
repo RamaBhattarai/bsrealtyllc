@@ -24,7 +24,10 @@ const adminNavigation = [
   { name: 'Contacts', href: '/dashboard/contacts', icon: FaEnvelope },
   { name: 'Property Inquiries', href: '/dashboard/property-inquiries', icon: FaHome },
   { name: 'Insurance Quotes', href: '/dashboard/insurance-quotes', icon: FaShieldAlt },
+<<<<<<< HEAD
   { name: 'Home Improvement Quotes', href: '/dashboard/home-improvement-quotes', icon: FaHome },
+=======
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
   { name: 'Appointments', href: '/dashboard/appointments', icon: FaCalendarAlt },
   { name: 'Job Applications', href: '/dashboard/job-applications', icon: FaBriefcase },
   { name: 'Agent Applications', href: '/dashboard/agent-applications', icon: FaUserTie },

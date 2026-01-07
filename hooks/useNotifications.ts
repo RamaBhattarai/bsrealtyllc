@@ -4,7 +4,11 @@ import { contactAPI } from '../lib/api/contact.api';
 import { propertyInquiryAPI } from '../lib/api/propertyInquiry.api';
 import { insuranceQuoteAPI } from '../lib/api/insuranceQuote.api';
 import { appointmentAPI } from '../lib/api/appointment.api';
+<<<<<<< HEAD
  import { jobApplicationAPI } from '../lib/api/jobApplication.api';
+=======
+import { jobApplicationAPI } from '../lib/api/jobApplication.api';
+>>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
 import { agentApplicationAPI } from '../lib/api/agentApplication.api';
 
 interface NotificationItem {
