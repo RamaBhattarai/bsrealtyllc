@@ -4,12 +4,9 @@ import { contactAPI } from '../lib/api/contact.api';
 import { propertyInquiryAPI } from '../lib/api/propertyInquiry.api';
 import { insuranceQuoteAPI } from '../lib/api/insuranceQuote.api';
 import { appointmentAPI } from '../lib/api/appointment.api';
-<<<<<<< HEAD
  import { jobApplicationAPI } from '../lib/api/jobApplication.api';
-=======
-import { jobApplicationAPI } from '../lib/api/jobApplication.api';
->>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
 import { agentApplicationAPI } from '../lib/api/agentApplication.api';
+import { homeImprovementQuoteAPI } from '../lib/api/homeImprovementQuote.api';
 
 interface NotificationItem {
   id: string;
@@ -23,7 +20,7 @@ export const useNotifications = (enabled: boolean = true) => {
   return useQuery({
     queryKey: ['notifications'],
     queryFn: async () => {
-      const [contacts, inquiries, quotes, appointments, jobApplications, agentApplications, recentContacts, recentInquiries, recentQuotes, recentAppointments, recentJobApplications, recentAgentApplications] = await Promise.all([
+      const [contacts, inquiries, quotes, appointments, jobApplications, agentApplications, homeImprovementQuotes, recentContacts, recentInquiries, recentQuotes, recentAppointments, recentJobApplications, recentAgentApplications, recentHomeImprovementQuotes] = await Promise.all([
         contactAPI.getStats(),
         propertyInquiryAPI.getStats(),
         insuranceQuoteAPI.getStats(),
@@ -32,12 +29,14 @@ export const useNotifications = (enabled: boolean = true) => {
         // agentApplicationAPI.getStats(), // Mocked
         Promise.resolve({ total: 0, pending: 0, reviewed: 0, accepted: 0, rejected: 0 }), // Placeholder for job applications
         agentApplicationAPI.getStats(),
+        homeImprovementQuoteAPI.getStats(),
         contactAPI.getAll({ limit: 5, status: 'new' }),
         propertyInquiryAPI.getAll({ limit: 5, status: 'new' }),
         insuranceQuoteAPI.getAll({ limit: 5, status: 'new' }),
         appointmentAPI.getAppointments({ limit: 5, status: 'new' }),
         jobApplicationAPI.getApplications({ limit: 5, status: 'new' }),
         agentApplicationAPI.getApplications({ limit: 5, status: 'new' }),
+        homeImprovementQuoteAPI.getAll({ limit: 5, status: 'new' }),
       ]);
       
       const recentItems: NotificationItem[] = [
@@ -83,6 +82,13 @@ export const useNotifications = (enabled: boolean = true) => {
           message: item.licenseStatus,
           timestamp: item.createdAt
         })),
+        ...(recentHomeImprovementQuotes.quotes || []).map(item => ({
+          id: item._id || '',
+          type: 'home-improvement-quote' as const,
+          title: item.name,
+          message: item.helpType?.join(', ') || 'Home improvement quote',
+          timestamp: item.createdAt
+        })),
       ].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()).slice(0, 10);
       
       return {
@@ -92,6 +98,7 @@ export const useNotifications = (enabled: boolean = true) => {
         appointments: appointments.pendingAppointments || 0,
         jobApplications: jobApplications.pending || 0,
         agentApplications: agentApplications.pending || 0,
+        homeImprovementQuotes: homeImprovementQuotes.pending || 0,
         total: recentItems.length,
         recent: recentItems,
       };

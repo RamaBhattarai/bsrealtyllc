@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useHomeImprovementQuotes, useDeleteHomeImprovementQuote } from '../../../hooks/useHomeImprovementQuote';
+import { useSearchParams } from 'next/navigation';
+import { useHomeImprovementQuotes, useDeleteHomeImprovementQuote, useUpdateHomeImprovementQuoteStatus } from '../../../hooks/useHomeImprovementQuote';
 import { formatPhone } from '../../../lib/utils/common';
 
 interface Quote {
@@ -19,13 +20,164 @@ interface Quote {
   projectDescription: string;
   textUpdates: boolean;
   projectUpdates: boolean;
+  status: 'new' | 'pending' | 'responded' | 'closed';
   createdAt: string;
+}
+
+interface QuoteModalProps {
+  quote: Quote;
+  isOpen: boolean;
+  onClose: () => void;
+  onStatusUpdate: (id: string, status: 'new' | 'pending' | 'responded' | 'closed') => void;
+}
+
+function QuoteModal({ quote, isOpen, onClose, onStatusUpdate }: QuoteModalProps) {
+  if (!isOpen || !quote) return null
+
+  const handleStatusChange = (status: 'pending' | 'responded' | 'closed') => {
+    onStatusUpdate(quote._id, status)
+    onClose()
+  }
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'new': return 'bg-red-100 text-red-800'
+      case 'pending': return 'bg-yellow-100 text-yellow-800'
+      case 'responded': return 'bg-blue-100 text-blue-800'
+      case 'closed': return 'bg-green-100 text-green-800'
+      default: return 'bg-gray-100 text-gray-800'
+    }
+  }
+//  view model
+  return (
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-white" style={{ zIndex: 9999 }}>
+      <div className="min-h-screen">
+        <div className="w-full p-6 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">Home Improvement Quote Details</h2>
+              <button
+                onClick={onClose}
+                className="text-gray-400 hover:text-gray-600 text-2xl"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6 mb-6 dark:text-gray-700">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900">{quote.name}</h3>
+                  <p className="text-gray-600">{quote.email}</p>
+                  <p className="text-gray-600">{formatPhone(quote.phoneNumber)}</p>
+                </div>
+                <div className="text-right">
+                  <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(quote.status)}`}>
+                    {quote.status.charAt(0).toUpperCase() + quote.status.slice(1)}
+                  </span>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Submitted: {new Date(quote.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Personal Information */}
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-3">Personal Information</h4>
+                  <div className="space-y-2 text-sm">
+                    <p><span className="font-medium">Name:</span> {quote.name}</p>
+                    <p><span className="font-medium">Email:</span> {quote.email}</p>
+                    <p><span className="font-medium">Phone:</span> {formatPhone(quote.phoneNumber)}</p>
+                    <p><span className="font-medium">Address:</span> {quote.address}</p>
+                  </div>
+                </div>
+
+                {/* Project Details */}
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-3">Project Details</h4>
+                  <div className="space-y-2 text-sm">
+                    <p><span className="font-medium">Property Type:</span> {quote.propertyType}</p>
+                    <p><span className="font-medium">Timeline:</span> {quote.timeline.replace('_', ' ')}</p>
+                    <p><span className="font-medium">Help Type:</span> {quote.helpType.join(', ')}</p>
+                    <p><span className="font-medium">Install/Replace:</span> {quote.installReplaceItem.join(', ')}</p>
+                  </div>
+                </div>
+
+                {/* Areas of Work */}
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-3">Areas of Work</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {quote.areasOfWork.map((area, idx) => (
+                      <span key={idx} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                        {area}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Communication Preferences */}
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-3">Communication Preferences</h4>
+                  <div className="space-y-2 text-sm">
+                    <p><span className="font-medium">Text Updates:</span> {quote.textUpdates ? 'Yes' : 'No'}</p>
+                    <p><span className="font-medium">Project Updates:</span> {quote.projectUpdates ? 'Yes' : 'No'}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Project Description */}
+              {quote.projectDescription && (
+                <div className="bg-white p-4 rounded-lg border mt-6">
+                  <h4 className="font-semibold text-gray-900 mb-3">Project Description</h4>
+                  <div className="text-sm bg-gray-50 p-3 rounded">
+                    {quote.projectDescription}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Status Update Actions */}
+            <div className="flex justify-between items-center">
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => handleStatusChange('pending')}
+                  className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+                >
+                  Mark as Pending
+                </button>
+                <button
+                  onClick={() => handleStatusChange('responded')}
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                >
+                  Mark as Responded
+                </button>
+                <button
+                  onClick={() => handleStatusChange('closed')}
+                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+                >
+                  Mark as Closed
+                </button>
+              </div>
+              <button
+                onClick={onClose}
+                className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default function HomeImprovementQuotesPage() {
   const [filters, setFilters] = useState({
     propertyType: '',
     timeline: '',
+    status: '',
     page: 1,
     limit: 10
   });
@@ -33,9 +185,34 @@ export default function HomeImprovementQuotesPage() {
 
   const { data: quotesData, isLoading: loading } = useHomeImprovementQuotes(filters);
   const deleteQuoteMutation = useDeleteHomeImprovementQuote();
+  const updateStatusMutation = useUpdateHomeImprovementQuoteStatus();
+
+  const searchParams = useSearchParams();
+  const highlightId = searchParams.get('id');
 
   const quotes = quotesData?.quotes || [];
   const total = quotesData?.pagination?.total || 0;
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'new': return 'bg-red-100 text-red-800'
+      case 'pending': return 'bg-yellow-100 text-yellow-800'
+      case 'responded': return 'bg-blue-100 text-blue-800'
+      case 'closed': return 'bg-green-100 text-green-800'
+      default: return 'bg-gray-100 text-gray-800'
+    }
+  };
+
+  useEffect(() => {
+    if (highlightId && quotes.length > 0) {
+      const row = document.getElementById(`quote-${highlightId}`)
+      if (row) {
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        row.classList.add('bg-blue-100')
+        setTimeout(() => row.classList.remove('bg-blue-100'), 1000)
+      }
+    }
+  }, [quotes, highlightId])
 
   const deleteQuote = async (id: string) => {
     if (confirm('Are you sure you want to delete this quote?')) {
@@ -43,10 +220,15 @@ export default function HomeImprovementQuotesPage() {
     }
   };
 
+  const handleStatusUpdate = (id: string, status: 'new' | 'pending' | 'responded' | 'closed') => {
+    updateStatusMutation.mutate({ id, status });
+  };
+
   const resetFilters = () => {
     setFilters({
       propertyType: '',
       timeline: '',
+      status: '',
       page: 1,
       limit: 10
     });
@@ -78,7 +260,7 @@ export default function HomeImprovementQuotesPage() {
       {/* Filters */}
       <div className="bg-white rounded-lg shadow p-6 mb-6">
         <h2 className="text-lg dark:text-gray-700 font-semibold mb-4">Filters</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Property Type
@@ -108,6 +290,23 @@ export default function HomeImprovementQuotesPage() {
               <option value="soon">Soon</option>
               <option value="few_weeks">Few Weeks</option>
               <option value="researching">Researching</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Status
+            </label>
+            <select
+              value={filters.status}
+              onChange={(e) => setFilters({ ...filters, status: e.target.value, page: 1 })}
+              className="w-full border border-gray-300 bg-white! text-gray-900! rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">All Statuses</option>
+              <option value="new">New</option>
+              <option value="pending">Pending</option>
+              <option value="responded">Responded</option>
+              <option value="closed">Closed</option>
             </select>
           </div>
 
@@ -176,6 +375,9 @@ export default function HomeImprovementQuotesPage() {
                   Timeline
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Date
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -185,7 +387,7 @@ export default function HomeImprovementQuotesPage() {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {quotes.map((quote) => (
-                <tr key={quote._id} className="hover:bg-gray-50">
+                <tr key={quote._id} id={`quote-${quote._id}`} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">{quote.name}</div>
                     <div className="text-sm text-gray-500">{quote.email}</div>
@@ -204,6 +406,11 @@ export default function HomeImprovementQuotesPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {quote.timeline.replace('_', ' ')}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(quote.status)}`}>
+                      {quote.status}
+                    </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {new Date(quote.createdAt).toLocaleDateString()}
@@ -234,6 +441,16 @@ export default function HomeImprovementQuotesPage() {
           </div>
         )}
       </div>
+
+      {/* Modal for quote details */}
+      {selectedQuote && (
+        <QuoteModal
+          quote={selectedQuote}
+          isOpen={!!selectedQuote}
+          onClose={() => setSelectedQuote(null)}
+          onStatusUpdate={handleStatusUpdate}
+        />
+      )}
 
       {/* Pagination */}
       {total > filters.limit && (
@@ -278,27 +495,27 @@ export default function HomeImprovementQuotesPage() {
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Name</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">Name</label>
                     <p className="text-sm text-gray-900">{selectedQuote.name}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Email</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">Email</label>
                     <p className="text-sm text-gray-900">{selectedQuote.email}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Phone</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">Phone</label>
                     <p className="text-sm text-gray-900">{formatPhone(selectedQuote.phoneNumber)}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Property Type</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">Property Type</label>
                     <p className="text-sm text-gray-900 capitalize">{selectedQuote.propertyType}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Timeline</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">Timeline</label>
                     <p className="text-sm text-gray-900">{selectedQuote.timeline.replace('_', ' ')}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Address</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">Address</label>
                     <p className="text-sm text-gray-900">{selectedQuote.address}</p>
                   </div>
                 </div>
@@ -357,6 +574,42 @@ export default function HomeImprovementQuotesPage() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Submitted</label>
                   <p className="text-sm text-gray-900">{new Date(selectedQuote.createdAt).toLocaleString()}</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleStatusUpdate(selectedQuote._id, 'pending')}
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        selectedQuote.status === 'pending'
+                          ? 'bg-yellow-100 text-yellow-800 border-2 border-yellow-300'
+                          : 'bg-gray-100 text-gray-800 hover:bg-yellow-100 hover:text-yellow-800'
+                      }`}
+                    >
+                      Pending
+                    </button>
+                    <button
+                      onClick={() => handleStatusUpdate(selectedQuote._id, 'responded')}
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        selectedQuote.status === 'responded'
+                          ? 'bg-blue-100 text-blue-800 border-2 border-blue-300'
+                          : 'bg-gray-100 text-gray-800 hover:bg-blue-100 hover:text-blue-800'
+                      }`}
+                    >
+                      Responded
+                    </button>
+                    <button
+                      onClick={() => handleStatusUpdate(selectedQuote._id, 'closed')}
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        selectedQuote.status === 'closed'
+                          ? 'bg-green-100 text-green-800 border-2 border-green-300'
+                          : 'bg-gray-100 text-gray-800 hover:bg-green-100 hover:text-green-800'
+                      }`}
+                    >
+                      Closed
+                    </button>
+                  </div>
                 </div>
               </div>
 

@@ -70,3 +70,20 @@ export const useDeleteHomeImprovementQuote = () => {
     },
   });
 };
+
+// Update home improvement quote status mutation hook (admin only)
+export const useUpdateHomeImprovementQuoteStatus = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<HomeImprovementQuote, Error, { id: string; status: 'new' | 'pending' | 'responded' | 'closed' }>({
+    mutationFn: ({ id, status }) => homeImprovementQuoteAPI.updateStatus(id, status),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: HOME_IMPROVEMENT_QUOTE_QUERY_KEYS.all });
+      queryClient.invalidateQueries({ queryKey: ['notifications'] });
+      toast.success(`Quote status updated to ${variables.status}`);
+    },
+    onError: (error: any) => {
+      toast.error(error.response?.data?.message || 'Failed to update quote status');
+    },
+  });
+};

@@ -9,6 +9,7 @@ import { useUpdateInsuranceQuoteStatus } from '../../hooks/useInsuranceQuote';
 import { useUpdateAppointmentStatus } from '../../hooks/useAppointment';
 import { useUpdateJobApplicationStatus } from '../../hooks/useJobApplication';
 import { useUpdateAgentApplicationStatus } from '../../hooks/useAgentApplication';
+import { useUpdateHomeImprovementQuoteStatus } from '../../hooks/useHomeImprovementQuote';
 import { useAuth, useLogout } from '../../hooks/useAuth';
 import { useNotifications } from '../../hooks/useNotifications';
 import Link from 'next/link'
@@ -24,10 +25,7 @@ const adminNavigation = [
   { name: 'Contacts', href: '/dashboard/contacts', icon: FaEnvelope },
   { name: 'Property Inquiries', href: '/dashboard/property-inquiries', icon: FaHome },
   { name: 'Insurance Quotes', href: '/dashboard/insurance-quotes', icon: FaShieldAlt },
-<<<<<<< HEAD
   { name: 'Home Improvement Quotes', href: '/dashboard/home-improvement-quotes', icon: FaHome },
-=======
->>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
   { name: 'Appointments', href: '/dashboard/appointments', icon: FaCalendarAlt },
   { name: 'Job Applications', href: '/dashboard/job-applications', icon: FaBriefcase },
   { name: 'Agent Applications', href: '/dashboard/agent-applications', icon: FaUserTie },
@@ -61,6 +59,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const appointmentUpdater = useUpdateAppointmentStatus()
   const jobApplicationUpdater = useUpdateJobApplicationStatus()
   const agentApplicationUpdater = useUpdateAgentApplicationStatus()
+  const homeImprovementQuoteUpdater = useUpdateHomeImprovementQuoteStatus()
   const updateContactStatus = useUpdateContactStatus()
 
   // Select navigation based on user role
@@ -220,6 +219,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                                 } catch (error) {
                                   console.warn('Failed to update agent application status:', error);
                                 }
+                              } else if (item.type === 'home-improvement-quote') {
+                                try {
+                                  await homeImprovementQuoteUpdater.mutateAsync({ id: item.id, status: 'pending' });
+                                } catch (error) {
+                                  console.warn('Failed to update home improvement quote status:', error);
+                                }
                               }
                               
                               // Navigate to the respective page
@@ -235,6 +240,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                                 router.push(`/dashboard/job-applications?id=${item.id}`);
                               } else if (item.type === 'agent-application') {
                                 router.push(`/dashboard/agent-applications?id=${item.id}`);
+                              } else if (item.type === 'home-improvement-quote') {
+                                router.push(`/dashboard/home-improvement-quotes?id=${item.id}`);
                               }
                             }}>
                               <p className="text-sm text-gray-900">

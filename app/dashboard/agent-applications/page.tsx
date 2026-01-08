@@ -3,10 +3,7 @@
 import { useState, useMemo } from 'react'
 import { FaSearch, FaEye, FaTrash, FaDownload, FaCalendarAlt, FaUser, FaBriefcase, FaFilter, FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { useAgentApplications, useUpdateAgentApplicationStatus, useDeleteAgentApplication, useDownloadAgentResume, useDownloadAgentLicense, useDownloadAgentIdCard, useAgentApplicationFilters } from '../../../hooks/useAgentApplication'
-<<<<<<< HEAD
 import { formatPhone } from '../../../lib/utils/common'
-=======
->>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
 import type { AgentApplication } from '../../../lib/api/agentApplication.api'
 
 interface AgentApplicationModalProps {
@@ -69,11 +66,7 @@ function AgentApplicationModal({ application, isOpen, onClose, onStatusUpdate, o
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900">{application.name}</h3>
                   <p className="text-gray-600">{application.email}</p>
-<<<<<<< HEAD
                   <p className="text-gray-600">{formatPhone(application.phone)}</p>
-=======
-                  <p className="text-gray-600">{application.phone}</p>
->>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
                 </div>
                 <div className="text-right">
                   <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(application.status)}`}>
@@ -95,11 +88,7 @@ function AgentApplicationModal({ application, isOpen, onClose, onStatusUpdate, o
                   <div className="space-y-2 text-sm dark:text-gray-700">
                     <p><span className="font-medium">Name:</span> {application.name}</p>
                     <p><span className="font-medium">Email:</span> {application.email}</p>
-<<<<<<< HEAD
                     <p><span className="font-medium">Phone:</span> {formatPhone(application.phone)}</p>
-=======
-                    <p><span className="font-medium">Phone:</span> {application.phone}</p>
->>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
                   </div>
                 </div>
 
@@ -383,11 +372,7 @@ export default function AgentApplicationsPage() {
                     <div>
                       <div className="text-sm font-medium text-gray-900">{application.name}</div>
                       <div className="text-sm text-gray-500">{application.email}</div>
-<<<<<<< HEAD
                       <div className="text-sm text-gray-500">{formatPhone(application.phone)}</div>
-=======
-                      <div className="text-sm text-gray-500">{application.phone}</div>
->>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

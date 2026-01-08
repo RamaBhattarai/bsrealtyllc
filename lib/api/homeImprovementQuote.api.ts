@@ -15,6 +15,7 @@ export const homeImprovementQuoteAPI = {
     limit?: number;
     propertyType?: string;
     timeline?: string;
+    status?: string;
   }): Promise<QuotesResponse> => {
     const response = await apiClient.get('/home-improvement-quotes', { params });
     return response.data as QuotesResponse;
@@ -29,6 +30,18 @@ export const homeImprovementQuoteAPI = {
   // Delete quote (admin only)
   delete: async (id: string): Promise<void> => {
     await apiClient.delete(`/home-improvement-quotes/${id}`);
+  },
+
+  // Get stats (admin only)
+  getStats: async (): Promise<HomeImprovementQuoteStats> => {
+    const response = await apiClient.get('/home-improvement-quotes/stats');
+    return response.data as HomeImprovementQuoteStats;
+  },
+
+  // Update quote status (admin only)
+  updateStatus: async (id: string, status: 'new' | 'pending' | 'responded' | 'closed'): Promise<HomeImprovementQuote> => {
+    const response = await apiClient.patch(`/home-improvement-quotes/${id}/status`, { status });
+    return response.data as HomeImprovementQuote;
   },
 };
 
@@ -62,6 +75,7 @@ export interface HomeImprovementQuote {
   name: string;
   email: string;
   projectUpdates: boolean;
+  status: 'new' | 'pending' | 'responded' | 'closed';
   createdAt: string;
   updatedAt: string;
 }
@@ -80,4 +94,12 @@ export interface QuotesResponse {
     limit: number;
     pages: number;
   };
+}
+
+export interface HomeImprovementQuoteStats {
+  total: number;
+  pending: number;
+  responded: number;
+  closed: number;
+  recent: number;
 }
