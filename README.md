@@ -106,7 +106,7 @@ Before running this project, ensure you have the following installed:
 
 6. **Open your browser**:
    - Frontend: [http://localhost:3000](http://localhost:3000)
-   - Backend API: [http://localhost:3001](http://localhost:5000) (if running separately)
+   - Backend API: [http://localhost:5000](http://localhost:5000) (if running separately)
 
 ## Configuration
 
@@ -115,31 +115,31 @@ Before running this project, ensure you have the following installed:
 Create a .env file in the root directory with the following variables:
 
 `env
-# Database
+### Database
 MONGODB_URI=mongodb://localhost:27017/bsrealty
-# or for MongoDB Atlas:
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/bsrealty
+### or for MongoDB Atlas:
+### MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/bsrealty
 
-# JWT
+### JWT
 JWT_SECRET=your-super-secret-jwt-key-here
 JWT_EXPIRES_IN=7d
 
-# Email Configuration (for notifications)
+### Email Configuration (for notifications)
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USER=your-email@gmail.com
 EMAIL_PASS=your-app-password
 EMAIL_FROM=noreply@bsrealty.com
 
-# File Upload
+### File Upload
 UPLOAD_PATH=./uploads
 MAX_FILE_SIZE=5242880  # 5MB in bytes
 
-# API Configuration
-API_BASE_URL=http://localhost:3001/api
-NEXT_PUBLIC_API_URL=http://localhost:3001/api
+### API Configuration
+API_BASE_URL=http://localhost:5000/api
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
 
-# Admin Credentials (for initial setup)
+### Admin Credentials (for initial setup)
 ADMIN_EMAIL=admin@bsrealty.com
 ADMIN_PASSWORD=secure-admin-password
 `
@@ -202,7 +202,7 @@ The application uses MongoDB with the following main collections:
 ### Data Models
 
 #### User
-`	ypescript
+`	typescript
 {
   _id: string;
   name: string;
@@ -214,7 +214,7 @@ The application uses MongoDB with the following main collections:
 `
 
 #### Contact Submission
-`	ypescript
+`	typescript
 {
   _id: string;
   name: string;
@@ -227,78 +227,23 @@ The application uses MongoDB with the following main collections:
 }
 `
 
-## Project Structure
 
-`
-bsrealty-web/
- app/                          # Next.js app directory
-    (auth)/                   # Authentication pages
-    dashboard/                # Admin dashboard
-    api/                      # API routes (if using Next.js API)
-    ...                       # Other pages
- components/                   # Reusable React components
-    ui/                       # UI components
-    sections/                 # Page sections
- hooks/                        # Custom React hooks
- lib/                          # Utility libraries
-    api/                      # API client functions
-    types/                    # TypeScript type definitions
-    utils/                    # Helper functions
- public/                       # Static assets
- styles/                       # Global styles
- .env.local                    # Environment variables
- next.config.ts               # Next.js configuration
- tailwind.config.js           # Tailwind CSS configuration
- tsconfig.json                 # TypeScript configuration
- package.json                  # Dependencies and scripts
-`
 
 ## Available Scripts
 
 - 
-pm run dev - Start development server
+npm run dev - Start development server
 - 
-pm run build - Build for production
+npm run build - Build for production
 - 
-pm run start - Start production server
+npm run start - Start production server
 - 
-pm run lint - Run ESLint
+npm run lint - Run ESLint
 - 
-pm run type-check - Run TypeScript type checking
+npm run type-check - Run TypeScript type checking
 - 
-pm test - Run tests
+npm test - Run tests
 
-## Deployment
-
-### Frontend (Next.js)
-1. Build the application:
-   `ash
-   npm run build
-   `
-
-2. Deploy to Vercel:
-   - Connect your GitHub repository to Vercel
-   - Configure environment variables in Vercel dashboard
-   - Deploy automatically on push
-
-### Backend (Express.js)
-1. Set up a server (Railway, Heroku, DigitalOcean, etc.)
-2. Configure environment variables
-3. Deploy the backend application
-4. Update frontend API URLs to point to deployed backend
-
-### Database
-- Use MongoDB Atlas for cloud database
-- Configure network access and security rules
-- Set up database user with appropriate permissions
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch: git checkout -b feature/your-feature-name
-3. Commit your changes: git commit -m 'Add some feature'
-4. Push to the branch: git push origin feature/your-feature-name
-5. Open a Pull Request
 
 ### Code Standards
 - Use TypeScript for all new code
