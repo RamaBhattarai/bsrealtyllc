@@ -1,13 +1,10 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
-import { FaSearch, FaEye, FaEdit, FaTrash, FaDownload, FaChevronLeft, FaChevronRight, FaCalendarAlt, FaClock, FaUser } from 'react-icons/fa'
+import { FaSearch, FaEye, FaTrash, FaDownload, FaChevronLeft, FaChevronRight, FaCalendarAlt, FaClock, FaUser } from 'react-icons/fa'
 import { useAppointments, useUpdateAppointmentStatus, useDeleteAppointment, useExportAppointments } from '../../../hooks/useAppointment'
 import { useSearchParams } from 'next/navigation'
-<<<<<<< HEAD
 import { formatPhone } from '../../../lib/utils/common'
-=======
->>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
 import type { Appointment } from '../../../lib/api/appointment.api'
 
 interface AppointmentModalProps {
@@ -60,11 +57,7 @@ function AppointmentModal({ appointment, isOpen, onClose, onStatusUpdate }: Appo
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900">{appointment.name}</h3>
                   <p className="text-gray-600">{appointment.email}</p>
-<<<<<<< HEAD
                   <p className="text-gray-600">{formatPhone(appointment.phone)}</p>
-=======
-                  <p className="text-gray-600">{appointment.phone}</p>
->>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
                 </div>
                 <div className="text-right">
                   <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(appointment.status)}`}>
@@ -83,11 +76,7 @@ function AppointmentModal({ appointment, isOpen, onClose, onStatusUpdate }: Appo
                   <div className="space-y-2 text-sm dark:text-gray-700">
                     <p><span className="font-medium">Name:</span> {appointment.name}</p>
                     <p><span className="font-medium">Email:</span> {appointment.email}</p>
-<<<<<<< HEAD
                     <p><span className="font-medium">Phone:</span> {formatPhone(appointment.phone)}</p>
-=======
-                    <p><span className="font-medium">Phone:</span> {appointment.phone}</p>
->>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
                     <p><span className="font-medium">Category:</span> {appointment.category}</p>
                     <p><span className="font-medium">Preference:</span> {appointment.preference}</p>
                     <p><span className="font-medium">Date & Time:</span> {new Date(appointment.date).toLocaleDateString()} at {appointment.time}</p>
@@ -183,6 +172,7 @@ export default function AppointmentsPage() {
   }, [appointmentsData, highlightId])
 
   // Filter appointments based on search term
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const filteredAppointments = useMemo(() => {
     if (!appointmentsData?.appointments) return []
     
@@ -326,11 +316,7 @@ export default function AppointmentsPage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">{appointment.email}</div>
-<<<<<<< HEAD
                       <div className="text-sm text-gray-500">{formatPhone(appointment.phone)}</div>
-=======
-                      <div className="text-sm text-gray-500">{appointment.phone}</div>
->>>>>>> 4425388098c5463f38228bd7572a2ef8fe333abf
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center text-sm text-gray-900">
